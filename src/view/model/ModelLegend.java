@@ -1,0 +1,39 @@
+package view.model;
+
+import java.awt.*;
+
+/**
+ *
+ * @author hectoracevedo
+ */
+public class ModelLegend {
+    
+    private String name;
+    private Color color;
+    
+    public ModelLegend(){
+        
+    }
+    
+    public ModelLegend(String name, Color color){
+        this.name = name;
+        this.color = color;
+    }
+    
+    public void setName(String name){
+        this.name = name;
+    }
+    
+    public void setColor(Color color){
+        this.color = color;
+    }
+    
+    public String getName(){
+        return name;
+    }
+    
+    public Color getColor(){
+        return color;
+    }
+    
+}
