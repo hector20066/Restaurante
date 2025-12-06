@@ -1,16 +1,15 @@
 # Restaurante
-Credenciales para acceder como administrador:
-	- Usuario: Admin123
-	- Contraseña: Admin
 
-Indicaciones del guardado de la informacion:
-	- Base de datos remota. No se tiene que configurar localmente
-	- Archivos locales (.txt)
+App para el manejo de la informacion de un restaurante, y controlar los pedidos por parte de los usuarios
+El restaurante cuenta con tres tipos de comidas (italiana, colombiana y china), se incluyen bebidas y platos.
 
-APIS Usadas
-	- EmailJs: Envia correos de confirmacion al realizar un pedido o compra.
-		   Se debe iniciar como cliente y se ingresan los datos solicitados.
-	- ip-api: api para obtener la ubicacion
-	- OpenWeather: Se obtiene el clima de la ubicacion encontrada con ip-api
+La app se divide en dos partes:
+	- Parte administrativa
+		Se gestionan toda la informacion interna del restaurante, se gestionan los platos y bebidas
+		disponibles para la venta; se muestran los datos de las ventas realizadas y demas informacion importante del restaurante.
 
-Para realizar una calificacion debe por lo menos haber realizado una compra
+	- Parte de los Clientes
+		Esta es la parte que ven los clientes, en esta se pueden realizar los pedidos, y calificar platos.
+		asi como ver reseñas de algunos platos.
+
+Para el guardado de la informacion se hace uso de una base de datos remota, asi como archivos de texto (.txt)
