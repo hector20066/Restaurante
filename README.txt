@@ -15,9 +15,3 @@ APIS Usadas
 	- OpenWeather: Se obtiene el clima de la ubicacion encontrada con ip-api
 
 Para realizar una calificacion debe por lo menos haber realizado una compra
-
-
-Autores:
-Hector Acevedo Contreras
-Juan Bohorquez Guerra
-Andres Cardenas Ramos
