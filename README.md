@@ -4,6 +4,7 @@ App para el manejo de la informacion de un restaurante, y controlar los pedidos 
 El restaurante cuenta con tres tipos de comidas (italiana, colombiana y china), se incluyen bebidas y platos.
 
 La app se divide en dos partes:
+
 	- Parte administrativa
 		Se gestionan toda la informacion interna del restaurante, se gestionan los platos y bebidas
 		disponibles para la venta; se muestran los datos de las ventas realizadas y demas informacion importante del restaurante.
