@@ -1,0 +1,15 @@
+/build/
+*.class
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### IntelliJ IDEA ###
+out/
