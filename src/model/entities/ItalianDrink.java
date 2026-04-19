@@ -2,7 +2,7 @@ package model.entities;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class ItalianDrink extends Drink {
 

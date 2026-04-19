@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class ControllerAdminPanel {
 
@@ -26,7 +26,6 @@ public class ControllerAdminPanel {
     private final RegisterDish registerDish;
     private final RegisterDrink registerDrink;
     private final ViewLogsDB viewLogsDB;
-    private final ViewLogsFile viewLogsFile;
     private final ControllerRegisterDish controllerRegisterDish;
     private final ControllerRegisterDrink controllerRegisterDrink;
 
@@ -37,7 +36,6 @@ public class ControllerAdminPanel {
         this.registerDish = builder.getRegisterDish();
         this.registerDrink = builder.getRegisterDrink();
         this.viewLogsDB = builder.getViewLogsDB();
-        this.viewLogsFile = builder.getViewLogsFile();
         this.controllerRegisterDish = builder.getControllerRegisterDish();
         this.controllerRegisterDrink = builder.getControllerRegisterDrink();
 
@@ -49,7 +47,6 @@ public class ControllerAdminPanel {
         adminPanel.setControllerRegisterDish(e -> showRegisterDish());
         adminPanel.setControllerRegisterDrink(e -> showRegisterDrink());
         adminPanel.setControllerSeeAvailableMeals(e -> seeAvailableMeals());
-        adminPanel.setControllerSeeInternalRecords(e -> seeInternalRecords());
         adminPanel.setControllerMenu(e -> actionMenu());
         adminPanel.setControllerExit(e -> logout());
     }
@@ -99,7 +96,6 @@ public class ControllerAdminPanel {
         adminPanel.getBtn_registerDish().setText(expandedMenu ? "  REGISTRAR PLATOS" : "");
         adminPanel.getBtn_registerDrinks().setText(expandedMenu ? "  REGISTRAR BEBIDAS" : "");
         adminPanel.getBtn_seeAvailableMeals().setText(expandedMenu ? "  COMIDAS DISPONIBLES" : "");
-        adminPanel.getBtn_seeInternalRecords().setText(expandedMenu ? "  REGISTROS INTERNOS" : "");
         adminPanel.getBtn_exit().setText(expandedMenu ? "  SALIR" : "");
     }
 
@@ -157,23 +153,12 @@ public class ControllerAdminPanel {
         adminPanel.getBtn_seeAvailableMeals().setForeground(new Color(0, 49, 245));
     }
 
-    private void seeInternalRecords() {
-        resetColors();
-        resetIcons();
-        resetForeground();
-        NavigatorUtils.showFormManagement(AdminPanel.getJpl_content(), viewLogsFile);
-        adminPanel.getBtn_seeInternalRecords().setIcon(new ImageIcon(getClass().getResource("/view/image/fileSelected.png")));
-        adminPanel.getBtn_seeInternalRecords().setBackground(new Color(187,222,251));
-        adminPanel.getBtn_seeInternalRecords().setForeground(new Color(0, 49, 245));
-    }
-
     private void resetColors() {
         Color normal = new Color(255,255,255);
         adminPanel.getBtn_dashboard().setBackground(normal);
         adminPanel.getBtn_registerDish().setBackground(normal);
         adminPanel.getBtn_registerDrinks().setBackground(normal);
         adminPanel.getBtn_seeAvailableMeals().setBackground(normal);
-        adminPanel.getBtn_seeInternalRecords().setBackground(normal);
         adminPanel.getBtn_exit().setBackground(normal);
     }
 
@@ -182,7 +167,6 @@ public class ControllerAdminPanel {
         adminPanel.getBtn_registerDish().setIcon(new ImageIcon(getClass().getResource("/view/image/salad.png")));
         adminPanel.getBtn_registerDrinks().setIcon(new ImageIcon(getClass().getResource("/view/image/wine.png")));
         adminPanel.getBtn_seeAvailableMeals().setIcon(new ImageIcon(getClass().getResource("/view/image/database.png")));
-        adminPanel.getBtn_seeInternalRecords().setIcon(new ImageIcon(getClass().getResource("/view/image/file.png")));
         adminPanel.getBtn_exit().setIcon(new ImageIcon(getClass().getResource("/view/image/log-out.png")));
     }
 
@@ -192,7 +176,6 @@ public class ControllerAdminPanel {
         adminPanel.getBtn_registerDish().setForeground(normal);
         adminPanel.getBtn_registerDrinks().setForeground(normal);
         adminPanel.getBtn_seeAvailableMeals().setForeground(normal);
-        adminPanel.getBtn_seeInternalRecords().setForeground(normal);
         adminPanel.getBtn_exit().setForeground(normal);
     }
 

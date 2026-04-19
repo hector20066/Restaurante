@@ -16,7 +16,7 @@ import java.awt.event.MouseEvent;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class ControllerLogin {
 
@@ -109,8 +109,6 @@ public class ControllerLogin {
         userPanel.setLocationRelativeTo(null);
         userPanel.setResizable(false);
         controllerUsersPanel.showDashboard();
-        controllerUsersPanel.loadUserLocation();
-        login.dispose();
     }
 
     private void mousePressedUser() {

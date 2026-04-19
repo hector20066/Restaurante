@@ -6,7 +6,7 @@ import java.awt.*;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class Card extends javax.swing.JPanel {
 

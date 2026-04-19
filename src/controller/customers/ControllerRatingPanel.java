@@ -1,13 +1,11 @@
 package controller.customers;
 
-import factory.FactoryMethod;
 import model.dao.interfaces.DAORestaurantDb;
 import model.dao.interfaces.IDAO;
 import model.entities.Customer;
 import model.entities.Dish;
 import model.entities.Drink;
 import model.entities.Qualification;
-import model.enums.InstanceTypeDB;
 import observer.Subject;
 import utils.MessageUtils;
 import view.customers.RatingsPanel;
@@ -16,10 +14,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDate;
 import java.util.List;
+import model.dao.impl.IDAOCustomersImpl;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class ControllerRatingPanel {
 
@@ -40,7 +39,7 @@ public class ControllerRatingPanel {
         this.ratingsPanel = ratingsPanel;
         this.subject = subject;
 
-        this.daoQualification = FactoryMethod.getInstanceDB(InstanceTypeDB.QUALIFICATIONDB);
+        this.daoQualification =IDAOCustomersImpl.getInstance;
         this.daoCustomer = FactoryMethod.getInstanceDB(InstanceTypeDB.CUSTOMERDB);
         this.daoDish = FactoryMethod.getInstanceDB(InstanceTypeDB.DAODISHDB);
         this.daoDrink = FactoryMethod.getInstanceDB(InstanceTypeDB.DAODRINKDB);

@@ -10,7 +10,7 @@ import view.swing.ButtonAction;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class RatingsPanel extends javax.swing.JPanel {
 

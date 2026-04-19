@@ -10,7 +10,7 @@ import java.awt.event.MouseEvent;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class AdminPanel extends javax.swing.JFrame {
 
@@ -41,7 +41,6 @@ public class AdminPanel extends javax.swing.JFrame {
         btn_registerDrinks = new view.swing.ButtonAction();
         btn_seeAvailableMeals = new view.swing.ButtonAction();
         btn_exit = new view.swing.ButtonAction();
-        btn_seeInternalRecords = new view.swing.ButtonAction();
         btn_menu = new view.swing.ButtonAction();
         jpl_content = new javax.swing.JPanel();
 
@@ -103,12 +102,6 @@ public class AdminPanel extends javax.swing.JFrame {
         btn_exit.setText("  SALIR");
         btn_exit.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
 
-        btn_seeInternalRecords.setBackground(new java.awt.Color(255, 255, 255));
-        btn_seeInternalRecords.setForeground(new java.awt.Color(33, 37, 41));
-        btn_seeInternalRecords.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/file.png"))); // NOI18N
-        btn_seeInternalRecords.setText("  REGISTROS INTERNOS");
-        btn_seeInternalRecords.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
-
         btn_menu.setBackground(new java.awt.Color(255, 255, 255));
         btn_menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/menu.png"))); // NOI18N
 
@@ -124,7 +117,6 @@ public class AdminPanel extends javax.swing.JFrame {
                     .addComponent(btn_registerDrinks, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_seeAvailableMeals, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_exit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_seeInternalRecords, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jpl_menuLayout.createSequentialGroup()
                         .addComponent(btn_menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -143,8 +135,6 @@ public class AdminPanel extends javax.swing.JFrame {
                 .addComponent(btn_registerDrinks, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btn_seeAvailableMeals, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(btn_seeInternalRecords, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_exit, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -246,10 +236,6 @@ public class AdminPanel extends javax.swing.JFrame {
         btn_seeAvailableMeals.addActionListener(action);
     }
 
-    public void setControllerSeeInternalRecords(ActionListener action) {
-        btn_seeInternalRecords.addActionListener(action);
-    }
-
     public ButtonAction getBtn_dashboard() {
         return btn_dashboard;
     }
@@ -272,10 +258,6 @@ public class AdminPanel extends javax.swing.JFrame {
 
     public ButtonAction getBtn_seeAvailableMeals() {
         return btn_seeAvailableMeals;
-    }
-
-    public ButtonAction getBtn_seeInternalRecords() {
-        return btn_seeInternalRecords;
     }
 
     public JPanel getJpl_body() {
@@ -305,7 +287,6 @@ public class AdminPanel extends javax.swing.JFrame {
     private view.swing.ButtonAction btn_registerDish;
     private view.swing.ButtonAction btn_registerDrinks;
     private view.swing.ButtonAction btn_seeAvailableMeals;
-    private view.swing.ButtonAction btn_seeInternalRecords;
     private javax.swing.JPanel jpl_body;
     private static javax.swing.JPanel jpl_content;
     private javax.swing.JPanel jpl_head;

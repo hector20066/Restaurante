@@ -2,7 +2,7 @@ package observer;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public interface Observer {
     

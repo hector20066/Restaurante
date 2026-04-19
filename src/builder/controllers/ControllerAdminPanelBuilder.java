@@ -8,7 +8,7 @@ import view.administrators.*;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class ControllerAdminPanelBuilder {
 
@@ -17,7 +17,6 @@ public class ControllerAdminPanelBuilder {
     private LogIn login;
     private RegisterDish registerDish;
     private RegisterDrink registerDrink;
-    private ViewLogsFile viewLogsFile;
     private ViewLogsDB viewLogsDB;
     private ControllerRegisterDish controllerRegisterDish;
     private ControllerRegisterDrink controllerRegisterDrink;
@@ -44,11 +43,6 @@ public class ControllerAdminPanelBuilder {
 
     public ControllerAdminPanelBuilder withViewRegisterDrink(RegisterDrink registerDrink) {
         this.registerDrink = registerDrink;
-        return this;
-    }
-
-    public ControllerAdminPanelBuilder withViewLogsFile(ViewLogsFile viewLogsFile) {
-        this.viewLogsFile = viewLogsFile;
         return this;
     }
 
@@ -89,10 +83,6 @@ public class ControllerAdminPanelBuilder {
 
     public RegisterDrink getRegisterDrink() {
         return registerDrink;
-    }
-
-    public ViewLogsFile getViewLogsFile() {
-        return viewLogsFile;
     }
 
     public ViewLogsDB getViewLogsDB() {

@@ -4,7 +4,7 @@ import view.model.ModelLegend;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class LegendItem extends javax.swing.JPanel {
 

@@ -5,7 +5,7 @@ import java.awt.*;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class LabelColor extends JLabel {
     

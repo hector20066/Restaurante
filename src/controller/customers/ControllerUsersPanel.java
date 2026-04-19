@@ -1,7 +1,6 @@
 package controller.customers;
 
 import builder.controllers.ControllerUserPanelBuilder;
-import service.ServiceLocation;
 import service.ServiceOpenWeather;
 import utils.ExtractJsonValuesUtils;
 import utils.MessageUtils;
@@ -16,7 +15,7 @@ import java.awt.event.ActionListener;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class ControllerUsersPanel {
 
@@ -91,20 +90,6 @@ public class ControllerUsersPanel {
         }catch(Exception e){
             MessageUtils.errorMessage("Ha ocurrido un error al ocultar el menu");
         }
-    }
-
-    public void loadUserLocation() {
-        new Thread(() -> {
-            ServiceLocation serviceLocation = new ServiceLocation();
-            String json = serviceLocation.getLocation();
-            String country = ExtractJsonValuesUtils.extractJsonValues(json, "country");
-            String city = ExtractJsonValuesUtils.extractJsonValues(json, "city");
-
-            SwingUtilities.invokeLater(() -> {
-                userPanel.getJlb_location().setText("Ubicacion: " + country + " - " + city);
-                loadWeather(city);
-            });
-        }).start();
     }
 
     private void loadWeather(String city) {

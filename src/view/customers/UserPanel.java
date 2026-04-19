@@ -10,7 +10,7 @@ import java.awt.event.MouseEvent;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class UserPanel extends javax.swing.JFrame {
 
@@ -35,7 +35,6 @@ public class UserPanel extends javax.swing.JFrame {
         jpl_body = new javax.swing.JPanel();
         jpl_head = new javax.swing.JPanel();
         winButton1 = new view.swing.WinButton();
-        jlb_location = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jlb_climateDescription = new javax.swing.JLabel();
         jlb_temperature = new javax.swing.JLabel();
@@ -60,10 +59,6 @@ public class UserPanel extends javax.swing.JFrame {
 
         winButton1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jlb_location.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
-        jlb_location.setForeground(new java.awt.Color(0, 119, 182));
-        jlb_location.setText("Ubicacion:");
-
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/cloud-sun.png"))); // NOI18N
 
         jlb_climateDescription.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
@@ -79,9 +74,7 @@ public class UserPanel extends javax.swing.JFrame {
         jpl_headLayout.setHorizontalGroup(
             jpl_headLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpl_headLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jlb_location)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(659, Short.MAX_VALUE)
                 .addGroup(jpl_headLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlb_climateDescription, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlb_temperature, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -97,9 +90,8 @@ public class UserPanel extends javax.swing.JFrame {
                 .addGap(8, 8, 8)
                 .addGroup(jpl_headLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpl_headLayout.createSequentialGroup()
-                        .addGroup(jpl_headLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jlb_location, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(winButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(5, 5, 5)
+                        .addComponent(winButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(13, Short.MAX_VALUE))
                     .addGroup(jpl_headLayout.createSequentialGroup()
                         .addComponent(jlb_climateDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -336,10 +328,6 @@ public class UserPanel extends javax.swing.JFrame {
         return jpl_body;
     }
 
-    public JLabel getJlb_location() {
-        return jlb_location;
-    }
-
     public JLabel getJlb_climateDescription() {
         return jlb_climateDescription;
     }
@@ -379,7 +367,6 @@ public class UserPanel extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel jlb_climateDescription;
-    private javax.swing.JLabel jlb_location;
     private javax.swing.JLabel jlb_subtitle;
     private javax.swing.JLabel jlb_temperature;
     private javax.swing.JPanel jpl_body;

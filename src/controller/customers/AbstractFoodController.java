@@ -20,7 +20,7 @@ import java.util.List;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public abstract class AbstractFoodController implements Observer {
 

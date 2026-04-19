@@ -5,7 +5,7 @@ import model.entities.Drink;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public interface AbstractFactory {
 

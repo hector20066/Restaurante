@@ -1,12 +1,10 @@
 package controller.admin;
 
-import factory.FactoryMethod;
 import model.dao.interfaces.DAORestaurantDb;
 import model.dao.interfaces.IDAO;
 import model.entities.Dish;
 import model.entities.Drink;
 import model.entities.Sale;
-import model.enums.InstanceTypeDB;
 import observer.Observer;
 import observer.Subject;
 import view.administrators.DashboardAdmin;
@@ -18,10 +16,13 @@ import java.time.Month;
 import java.time.format.TextStyle;
 import java.util.List;
 import java.util.Locale;
+import model.dao.impl.DAODishDBImpl;
+import model.dao.impl.DAODrinkDBImpl;
+import model.dao.impl.IDAOSalesImpl;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class ControllerDashboard implements Observer {
 
@@ -36,9 +37,9 @@ public class ControllerDashboard implements Observer {
         this.dashboard = dashboard;
         this.subject = subject;
 
-        this.daoSale = FactoryMethod.getInstanceDB(InstanceTypeDB.SALEDB);
-        this.daoDish = FactoryMethod.getInstanceDB(InstanceTypeDB.DAODISHDB);
-        this.daoDrink = FactoryMethod.getInstanceDB(InstanceTypeDB.DAODRINKDB);
+        this.daoSale = IDAOSalesImpl.getInstance();
+        this.daoDish = DAODishDBImpl.getInstance();
+        this.daoDrink = DAODrinkDBImpl.getInstance();
 
         this.subject.register(this);
     }

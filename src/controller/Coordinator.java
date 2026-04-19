@@ -6,11 +6,8 @@ import builder.controllers.ControllerUserPanelBuilder;
 import builder.controllers.ControllerViewLogsDbBuilder;
 import controller.admin.*;
 import controller.customers.*;
-import factory.FactoryMethod;
-import model.dao.interfaces.DAORestaurantFile;
 import model.entities.Dish;
 import model.entities.Drink;
-import model.enums.InstanceTypeFile;
 import observer.ConcreteSubject;
 import view.LogIn;
 import view.administrators.*;
@@ -18,7 +15,7 @@ import view.customers.*;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class Coordinator {
 
@@ -33,8 +30,7 @@ public class Coordinator {
     private RegisterDish registerDish;
     private RegisterDrink registerDrink;
     private ViewLogsDB viewLogsDB;
-    private ViewLogsFile viewLogsFile;
-
+    
     // Users Panels
     private DashboardCustomers dashboardCustomers;
     private ChineseFood chineseFood;
@@ -48,7 +44,6 @@ public class Coordinator {
     private ControllerRegisterDish controllerRegisterDish;
     private ControllerRegisterDrink controllerRegisterDrink;
     private ControllerViewLogsDB controllerViewLogsDB;
-    private ControllerViewLogsFile controllerViewLogsFile;
     private ControllerDashboard controllerDashboard;
 
     // Drivers Users
@@ -60,7 +55,6 @@ public class Coordinator {
     private ControllerRatingPanel controllerRatingPanel;
 
     public void startApp() {
-        createFiles();
         startObserver();
         startViews();
         startDrivers();
@@ -85,7 +79,6 @@ public class Coordinator {
         registerDish = new RegisterDish();
         registerDrink = new RegisterDrink();
         viewLogsDB = new ViewLogsDB();
-        viewLogsFile = new ViewLogsFile();
         chineseFood = new ChineseFood();
         italianFood = new ItalianFood();
         colombianFood = new ColombianFood();
@@ -102,7 +95,6 @@ public class Coordinator {
                 .withViewRegisterDish(registerDish)
                 .withViewRegisterDrink(registerDrink)
                 .withViewLogsDB(viewLogsDB)
-                .withViewLogsFile(viewLogsFile)
                 .withControllerRegisterDish(controllerRegisterDish)
                 .withControllerRegisterDrink(controllerRegisterDrink)
                 .build();
@@ -141,7 +133,6 @@ public class Coordinator {
                 .withControllerRegisterDrink(controllerRegisterDrink)
                 .build();
 
-        controllerViewLogsFile = new ControllerViewLogsFile(viewLogsFile, subject);
         controllerDashboard = new ControllerDashboard(dashboardAdmin, subject);
     }
 
@@ -151,17 +142,6 @@ public class Coordinator {
         controllerItalianFood = new ControllerItalianFood(italianFood, subject);
         controllerRatingPanel = new ControllerRatingPanel(ratingsPanel, subject);
         controllerDashboardCustomer = new ControllerDashboardCustomer(dashboardCustomers, subject);
-    }
-
-    private void createFiles() {
-        try {
-            DAORestaurantFile<Dish> daoDish = FactoryMethod.getInstanceFile(InstanceTypeFile.DAODISHFILE);
-            DAORestaurantFile<Drink> daoDrink = FactoryMethod.getInstanceFile(InstanceTypeFile.DAODRINKFILE);
-            daoDrink.createFile("Drinks.txt");
-            daoDish.createFile("Dishes.txt");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
 }

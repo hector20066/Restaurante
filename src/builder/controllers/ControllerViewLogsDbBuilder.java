@@ -11,7 +11,7 @@ import view.administrators.ViewLogsDB;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class ControllerViewLogsDbBuilder {
 

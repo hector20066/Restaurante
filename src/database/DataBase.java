@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class DataBase {
     

@@ -5,7 +5,7 @@ import controller.Coordinator;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class Main {
     

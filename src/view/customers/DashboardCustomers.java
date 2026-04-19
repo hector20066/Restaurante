@@ -17,7 +17,7 @@ import javax.swing.JSeparator;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class DashboardCustomers extends javax.swing.JPanel {
 

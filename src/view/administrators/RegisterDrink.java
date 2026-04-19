@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class RegisterDrink extends javax.swing.JPanel {
 

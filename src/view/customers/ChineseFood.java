@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class ChineseFood extends javax.swing.JPanel {
 

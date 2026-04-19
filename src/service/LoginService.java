@@ -2,7 +2,7 @@ package service;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class LoginService {
     

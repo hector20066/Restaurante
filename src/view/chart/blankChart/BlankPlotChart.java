@@ -8,7 +8,7 @@ import java.text.DecimalFormat;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class BlankPlotChart extends JComponent {
 

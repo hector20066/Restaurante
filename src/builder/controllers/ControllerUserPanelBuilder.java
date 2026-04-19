@@ -6,7 +6,7 @@ import view.customers.*;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class ControllerUserPanelBuilder {
 

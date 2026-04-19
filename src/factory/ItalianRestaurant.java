@@ -7,7 +7,7 @@ import model.entities.ItalianDrink;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class ItalianRestaurant implements AbstractFactory {
 

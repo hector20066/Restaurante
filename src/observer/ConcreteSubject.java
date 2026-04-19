@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class ConcreteSubject implements Subject {
 

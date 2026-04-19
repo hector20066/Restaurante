@@ -2,7 +2,7 @@ package view.model;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class ModelChart {
     

@@ -15,7 +15,7 @@ import java.awt.geom.RoundRectangle2D;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class ButtonAction extends JButton {
     

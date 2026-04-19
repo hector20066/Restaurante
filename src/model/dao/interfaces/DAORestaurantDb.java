@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  * @param <T>
  */
 public interface DAORestaurantDb <T> {

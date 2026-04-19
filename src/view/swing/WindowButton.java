@@ -6,7 +6,7 @@ import java.awt.*;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class WindowButton extends JButton {
 

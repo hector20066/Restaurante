@@ -2,14 +2,9 @@ package controller.admin;
 
 import factory.*;
 import model.dao.interfaces.DAORestaurantDb;
-import model.dao.interfaces.DAORestaurantFile;
 import model.entities.Drink;
 import model.enums.InstanceTypeDB;
 import model.enums.InstanceTypeFile;
-import model.strategy.DBDAOStrategy;
-import model.strategy.FileDAOStrategy;
-import model.strategy.RestaurantDAOManager;
-import model.strategy.Strategy;
 import observer.Subject;
 import utils.MessageUtils;
 import view.administrators.RegisterDrink;
@@ -18,7 +13,7 @@ import javax.swing.*;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class ControllerRegisterDrink {
 
@@ -28,18 +23,14 @@ public class ControllerRegisterDrink {
     private final RegisterDrink registerDrink;
     private final Subject subject;
     private final DAORestaurantDb<Drink> daoRestaurantDb;
-    private final DAORestaurantFile<Drink> daoRestaurantFile;
 
     AbstractFactory factory;
-    Strategy<Drink> strategy;
-    RestaurantDAOManager<Drink> restaurantDAOManager;
 
     public ControllerRegisterDrink(RegisterDrink registerDrink, Subject subject) {
         this.registerDrink = registerDrink;
         this.subject = subject;
 
         this.daoRestaurantDb = FactoryMethod.getInstanceDB(InstanceTypeDB.DAODRINKDB);
-        this.daoRestaurantFile = FactoryMethod.getInstanceFile(InstanceTypeFile.DAODRINKFILE);
 
         connectEvents();
     }
@@ -118,22 +109,16 @@ public class ControllerRegisterDrink {
         drink.setDescription(description);
         drink.setPrice(price);
 
-        if (waySave == 0) { // Save to Data Base
-            strategy = new DBDAOStrategy<>(daoRestaurantDb);
-        } else { // Save to File
-            strategy = new FileDAOStrategy<>(daoRestaurantFile);
-        }
     }
 
     private void registerOfModify(Drink drink) {
         try {
-            restaurantDAOManager = new RestaurantDAOManager<>(strategy);
 
             if (isModify()) {
                 drink.setCode(codeDrink);
-                restaurantDAOManager.modify(drink);
+                daoRestaurantDb.modify(drink);
             } else {
-                restaurantDAOManager.save(drink);
+                daoRestaurantDb.save(drink);
             }
         } catch (Exception e) {
             e.printStackTrace();

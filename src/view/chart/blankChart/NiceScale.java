@@ -2,7 +2,7 @@ package view.chart.blankChart;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class NiceScale {
 

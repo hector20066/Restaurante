@@ -14,7 +14,7 @@ import javax.swing.event.DocumentListener;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class ViewLogsDB extends javax.swing.JPanel {
 

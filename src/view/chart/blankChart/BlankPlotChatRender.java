@@ -4,7 +4,7 @@ import java.awt.*;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public abstract class BlankPlotChatRender {
     

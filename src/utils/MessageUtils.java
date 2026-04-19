@@ -4,7 +4,7 @@ import javax.swing.*;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class MessageUtils {
 

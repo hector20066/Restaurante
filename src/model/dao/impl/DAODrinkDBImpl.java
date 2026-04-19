@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class DAODrinkDBImpl extends DataBase implements DAORestaurantDb<Drink> {
 

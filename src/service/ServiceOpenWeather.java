@@ -10,7 +10,7 @@ import java.nio.charset.StandardCharsets;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class ServiceOpenWeather {
 

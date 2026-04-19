@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class IDAOQualificationImpl extends DataBase implements IDAO<Qualification> {
 

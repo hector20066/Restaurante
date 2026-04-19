@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class Qualification {
 

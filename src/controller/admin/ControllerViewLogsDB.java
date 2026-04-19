@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class ControllerViewLogsDB implements Observer {
 

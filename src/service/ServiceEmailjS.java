@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package service;
 
 import java.io.BufferedReader;
@@ -10,11 +14,11 @@ import java.util.List;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class ServiceEmailjS {
-
-    private static final String API_URL = "https://api.emailjs.com/api/v1.0/email/send";
+    
+ private static final String API_URL = "https://api.emailjs.com/api/v1.0/email/send";
     private static final String SERVICE_ID = "service_pf8gdkc";
     private static final String TEMPLATE_ID = "template_f9qhkbg";
     private static final String PUBLIC_KEY = "11brmFbS2m4tV-bsn";
@@ -72,3 +76,4 @@ public class ServiceEmailjS {
     }
 
 }
+

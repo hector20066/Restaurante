@@ -8,7 +8,7 @@ import java.awt.event.MouseListener;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class LogIn extends javax.swing.JFrame {
 

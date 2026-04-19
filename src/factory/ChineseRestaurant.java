@@ -7,7 +7,7 @@ import model.entities.Drink;
 
 /**
  *
- * @author hectoracevedo
+ * @author Andres Cardenas
  */
 public class ChineseRestaurant implements AbstractFactory {
 
