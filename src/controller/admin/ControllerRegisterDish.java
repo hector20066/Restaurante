@@ -1,9 +1,9 @@
 package controller.admin;
 
 import factory.*;
+import model.dao.impl.DAODishDBImpl;
 import model.dao.interfaces.DAORestaurantDb;
 import model.entities.Dish;
-import model.enums.InstanceTypeDB;
 import utils.MessageUtils;
 import view.administrators.RegisterDish;
 
@@ -29,7 +29,7 @@ public class ControllerRegisterDish {
         this.registerDish = registerDish;
         this.subject = subject;
 
-        this.daoRestaurantDb = FactoryMethod.getInstanceDB(InstanceTypeDB.DAODISHDB);
+        this.daoRestaurantDb = DAODishDBImpl.getInstance();
 
         connectEvents();
     }
@@ -40,7 +40,7 @@ public class ControllerRegisterDish {
 
     private void register() {
         try {
-            String typeDish = registerDish.getCbo_typeDish().getSelectedItem().toString();
+            String typeDish = (String) registerDish.getCbo_typeDish().getSelectedItem();
             String nameDish = registerDish.getTxt_name().getText();
             String description = registerDish.getTxt_description().getText();
             String price = registerDish.getTxt_price().getText().trim();

@@ -2,6 +2,7 @@ package controller.customers;
 
 import model.entities.Dish;
 import model.entities.Drink;
+import model.enums.TypeFood;
 import observer.Subject;
 import view.customers.ChineseFood;
 
@@ -15,14 +16,11 @@ import javax.swing.table.DefaultTableModel;
 public class ControllerChineseFood extends AbstractFoodController {
 
     private final ChineseFood chineseFood;
-    private final Subject subject;
 
     public ControllerChineseFood(ChineseFood chineseFood, Subject subject) {
         super();
         this.chineseFood = chineseFood;
-        this.subject = subject;
-
-        this.subject.register(this);
+        subject.register(this);
 
         connectEvents();
     }
@@ -36,13 +34,8 @@ public class ControllerChineseFood extends AbstractFoodController {
     }
 
     @Override
-    protected String getDishType() {
-        return "Plato Chino";
-    }
-
-    @Override
-    protected String getDrinkType() {
-        return "Bebida China";
+    protected TypeFood getTypeFood() {
+        return TypeFood.CHINESE;
     }
 
     @Override

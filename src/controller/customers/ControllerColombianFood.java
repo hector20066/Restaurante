@@ -2,6 +2,7 @@ package controller.customers;
 
 import model.entities.Dish;
 import model.entities.Drink;
+import model.enums.TypeFood;
 import observer.Subject;
 import view.customers.ColombianFood;
 
@@ -35,13 +36,8 @@ public class ControllerColombianFood extends AbstractFoodController  {
     }
 
     @Override
-    protected String getDishType() {
-        return "Plato Colombiano";
-    }
-
-    @Override
-    protected String getDrinkType() {
-        return "Bebida Colombiana";
+    protected TypeFood getTypeFood() {
+        return TypeFood.COLOMBIAN;
     }
 
     @Override

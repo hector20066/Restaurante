@@ -1,11 +1,12 @@
 package controller.admin;
 
 import builder.controllers.ControllerViewLogsDbBuilder;
-import factory.FactoryMethod;
+import model.dao.impl.DAODishDBImpl;
+import model.dao.impl.DAODrinkDBImpl;
 import model.dao.interfaces.DAORestaurantDb;
 import model.entities.Dish;
 import model.entities.Drink;
-import model.enums.InstanceTypeDB;
+import model.enums.TypeFood;
 import observer.Observer;
 import observer.Subject;
 import utils.MessageUtils;
@@ -52,8 +53,8 @@ public class ControllerViewLogsDB implements Observer {
         this.controllerRegisterDrink = builder.getControllerRegisterDrink();
         this.subject = builder.getSubject();
 
-        this.daoDrink = FactoryMethod.getInstanceDB(InstanceTypeDB.DAODRINKDB);
-        this.daoDish =  FactoryMethod.getInstanceDB(InstanceTypeDB.DAODISHDB);
+        this.daoDrink = DAODrinkDBImpl.getInstance();
+        this.daoDish = DAODishDBImpl.getInstance();
 
         this.subject.register(this);
 
@@ -216,7 +217,6 @@ public class ControllerViewLogsDB implements Observer {
             }
         } catch (Exception e) {
             MessageUtils.errorMessage("Ha ocurrido un error al eliminar la bebida");
-            e.printStackTrace();
         }
     }
 
@@ -320,10 +320,10 @@ public class ControllerViewLogsDB implements Observer {
             String name = drink.getName();
             int code = drink.getCode();
             float price = drink.getPrice();
-            String type = drink.getTypeDrink();
+            TypeFood type = drink.getTypeDrink();
             String description = drink.getDescription();
 
-            Object[] data = new Object[]{name, code, price, type, description};
+            Object[] data = new Object[]{name, code, price, type.getValue(), description};
             modelDrinks.addRow(data);
         }
     }
@@ -335,10 +335,10 @@ public class ControllerViewLogsDB implements Observer {
             String name = dish.getName();
             int code = dish.getCode();
             float price = dish.getPrice();
-            String type = dish.getTypeDish();
+            TypeFood type = dish.getTypeDish();
             String description = dish.getDescription();
 
-            Object[] data = new Object[]{name, code, price, type, description};
+            Object[] data = new Object[]{name, code, price, type.getValue(), description};
             modelDishes.addRow(data);
         }
     }

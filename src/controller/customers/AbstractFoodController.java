@@ -1,13 +1,16 @@
 package controller.customers;
 
-import factory.FactoryMethod;
+import model.dao.impl.DAODishDBImpl;
+import model.dao.impl.DAODrinkDBImpl;
+import model.dao.impl.IDAOCustomersImpl;
+import model.dao.impl.IDAOSalesImpl;
 import model.dao.interfaces.DAORestaurantDb;
 import model.dao.interfaces.IDAO;
 import model.entities.Customer;
 import model.entities.Dish;
 import model.entities.Drink;
 import model.entities.Sale;
-import model.enums.InstanceTypeDB;
+import model.enums.TypeFood;
 import observer.Observer;
 import service.ServiceEmailjS;
 import utils.MessageUtils;
@@ -34,10 +37,10 @@ public abstract class AbstractFoodController implements Observer {
     private final IDAO<Sale> daoSales;
 
     public AbstractFoodController() {
-        this.daoDish = FactoryMethod.getInstanceDB(InstanceTypeDB.DAODISHDB);
-        this.daoDrink = FactoryMethod.getInstanceDB(InstanceTypeDB.DAODRINKDB);
-        this.daoCustomer = FactoryMethod.getInstanceDB(InstanceTypeDB.CUSTOMERDB);
-        this.daoSales = FactoryMethod.getInstanceDB(InstanceTypeDB.SALEDB);
+        this.daoDish = DAODishDBImpl.getInstance();
+        this.daoDrink = DAODrinkDBImpl.getInstance();
+        this.daoCustomer = IDAOCustomersImpl.getInstance();
+        this.daoSales = IDAOSalesImpl.getInstance();
     }
 
     @Override
@@ -48,8 +51,8 @@ public abstract class AbstractFoodController implements Observer {
                 List<Drink> drinks = daoDrink.getData();
 
                 SwingUtilities.invokeLater(() -> {
-                    loadDishes(dishes, getDishType());
-                    loadDrinks(drinks, getDrinkType());
+                    loadDishes(dishes, getTypeFood());
+                    loadDrinks(drinks, getTypeFood());
                 });
             } catch (Exception e) {
                 e.printStackTrace();
@@ -57,8 +60,7 @@ public abstract class AbstractFoodController implements Observer {
         }).start();
     }
 
-    protected abstract String getDishType();
-    protected abstract String getDrinkType();
+    protected abstract TypeFood getTypeFood();
     protected abstract void connectEvents();
 
     protected abstract JTextField getTxt_amountDish();
@@ -313,14 +315,14 @@ public abstract class AbstractFoodController implements Observer {
 
     protected abstract void loadDrinkData(Drink drink);
 
-    protected final void loadDishes(List<Dish> dishes, String typeDish) {
+    protected final void loadDishes(List<Dish> dishes, TypeFood typeDish) {
         try {
             getCbo_dish().removeAllItems();
             getCbo_dish().addItem("Seleccione el plato");
 
             for (Dish dish : dishes) {
                 String name = dish.getName();
-                String type = dish.getTypeDish();
+                TypeFood type = dish.getTypeDish();
 
                 if (typeDish.equals(type)) {
                     getCbo_dish().addItem(name);
@@ -331,14 +333,14 @@ public abstract class AbstractFoodController implements Observer {
         }
     }
 
-    protected final void loadDrinks(List<Drink> drinks, String typeDrink) {
+    protected final void loadDrinks(List<Drink> drinks, TypeFood typeDrink) {
         try {
             getCbo_drink().removeAllItems();
             getCbo_drink().addItem("Seleccione la bebida");
 
             for (Drink drink : drinks) {
                 String name = drink.getName();
-                String type = drink.getTypeDrink();
+                TypeFood type = drink.getTypeDrink();
 
                 if (typeDrink.equals(type)) {
                     getCbo_drink().addItem(name);

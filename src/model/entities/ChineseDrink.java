@@ -1,5 +1,7 @@
 package model.entities;
 
+import model.enums.TypeFood;
+
 /**
  *
  * @author Andres Cardenas
@@ -15,8 +17,8 @@ public class ChineseDrink extends Drink {
     }
 
     @Override
-    public String getTypeDrink() {
-        return "Bebida China";
+    public TypeFood getTypeDrink() {
+        return TypeFood.CHINESE;
     }
 
 }

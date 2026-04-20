@@ -1,5 +1,7 @@
 package model.entities;
 
+import model.enums.TypeFood;
+
 /**
  *
  * @author Andres Cardenas
@@ -54,6 +56,6 @@ public abstract class Drink {
         return price;
     }
 
-    public abstract String getTypeDrink ();
+    public abstract TypeFood getTypeDrink ();
 
 }

@@ -1,5 +1,7 @@
 package model.entities;
 
+import model.enums.TypeFood;
+
 /**
  *
  * @author Andres Cardenas
@@ -15,8 +17,8 @@ public class ColombianDish extends Dish {
     }
 
     @Override
-    public String getTypeDish() {
-        return "Plato Colombiano";
+    public TypeFood getTypeDish() {
+        return TypeFood.COLOMBIAN;
     }
 
 }

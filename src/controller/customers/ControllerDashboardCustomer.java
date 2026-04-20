@@ -1,12 +1,13 @@
 package controller.customers;
 
-import factory.FactoryMethod;
+import model.dao.impl.DAODishDBImpl;
+import model.dao.impl.DAODrinkDBImpl;
+import model.dao.impl.IDAOQualificationImpl;
 import model.dao.interfaces.DAORestaurantDb;
 import model.dao.interfaces.IDAO;
 import model.entities.Dish;
 import model.entities.Drink;
 import model.entities.Qualification;
-import model.enums.InstanceTypeDB;
 import observer.Observer;
 import observer.Subject;
 import view.customers.DashboardCustomers;
@@ -21,7 +22,6 @@ import java.util.List;
 public class ControllerDashboardCustomer implements Observer {
 
     private final DashboardCustomers dashboardCustomers;
-    private final Subject subject;
 
     private final IDAO<Qualification> daoQualification;
     private final DAORestaurantDb<Dish> daoDish;
@@ -29,13 +29,12 @@ public class ControllerDashboardCustomer implements Observer {
 
     public ControllerDashboardCustomer(DashboardCustomers dashboardCustomers, Subject subject) {
         this.dashboardCustomers = dashboardCustomers;
-        this.subject = subject;
 
-        this.daoQualification = FactoryMethod.getInstanceDB(InstanceTypeDB.QUALIFICATIONDB);
-        this.daoDish = FactoryMethod.getInstanceDB(InstanceTypeDB.DAODISHDB);
-        this.daoDrink = FactoryMethod.getInstanceDB(InstanceTypeDB.DAODRINKDB);
+        this.daoQualification = IDAOQualificationImpl.getInstance();
+        this.daoDish = DAODishDBImpl.getInstance();
+        this.daoDrink = DAODrinkDBImpl.getInstance();
 
-        this.subject.register(this);
+        subject.register(this);
     }
 
     @Override

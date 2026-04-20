@@ -1,11 +1,15 @@
 package controller.customers;
 
+import model.dao.impl.DAODishDBImpl;
+import model.dao.impl.DAODrinkDBImpl;
+import model.dao.impl.IDAOQualificationImpl;
 import model.dao.interfaces.DAORestaurantDb;
 import model.dao.interfaces.IDAO;
 import model.entities.Customer;
 import model.entities.Dish;
 import model.entities.Drink;
 import model.entities.Qualification;
+import model.enums.TypeFood;
 import observer.Subject;
 import utils.MessageUtils;
 import view.customers.RatingsPanel;
@@ -39,10 +43,10 @@ public class ControllerRatingPanel {
         this.ratingsPanel = ratingsPanel;
         this.subject = subject;
 
-        this.daoQualification =IDAOCustomersImpl.getInstance;
-        this.daoCustomer = FactoryMethod.getInstanceDB(InstanceTypeDB.CUSTOMERDB);
-        this.daoDish = FactoryMethod.getInstanceDB(InstanceTypeDB.DAODISHDB);
-        this.daoDrink = FactoryMethod.getInstanceDB(InstanceTypeDB.DAODRINKDB);
+        this.daoQualification = IDAOQualificationImpl.getInstance();
+        this.daoCustomer = IDAOCustomersImpl.getInstance();
+        this.daoDish = DAODishDBImpl.getInstance();
+        this.daoDrink = DAODrinkDBImpl.getInstance();
 
         this.starsDishes = new JCheckBox[]{ratingsPanel.getCbx_starDish1(), ratingsPanel.getCbx_starDish2(), ratingsPanel.getCbx_starDish3(), ratingsPanel.getCbx_starDish4(), ratingsPanel.getCbx_starDish5()};
         this.starsDrinks = new JCheckBox[]{ratingsPanel.getCbx_starDrink1(), ratingsPanel.getCbx_starDrink2(), ratingsPanel.getCbx_starDrink3(), ratingsPanel.getCbx_starDrink4(), ratingsPanel.getCbx_starDrink5()};
@@ -238,29 +242,28 @@ public class ControllerRatingPanel {
 
     private void showDishesType() {
         try {
-            String type = ratingsPanel.getCbo_typeDish().getSelectedItem().toString();
-            String typeDish = "";
+            String type = (String) ratingsPanel.getCbo_typeDish().getSelectedItem();
+            TypeFood typeDish = null;
 
             switch (type) {
                 case "Colombiano" -> {
-                    typeDish = "Plato Colombiano";
+                    typeDish = TypeFood.COLOMBIAN;
                 }
                 case "Italiano" -> {
-                    typeDish = "Plato Italiano";
+                    typeDish = TypeFood.ITALIAN;
                 }
                 case "Chino" -> {
-                    typeDish = "Plato Chino";
+                    typeDish = TypeFood.CHINESE;
                 }
             }
 
             loadDishType(typeDish);
         } catch (Exception e) {
-            e.printStackTrace();
             MessageUtils.errorMessage("Ha ocurrido un error al cargar los platos.\nIntentelo nuevamente");
         }
     }
 
-    private void loadDishType(String type) {
+    private void loadDishType(TypeFood type) {
         new Thread(() -> {
             try {
                 List<Dish> listDishes = daoDish.getData();
@@ -274,13 +277,13 @@ public class ControllerRatingPanel {
         }).start();
     }
 
-    private void loadDishes(List<Dish> dishes, String type) {
+    private void loadDishes(List<Dish> dishes, TypeFood type) {
         ratingsPanel.getCbo_dish().removeAllItems();
         ratingsPanel.getCbo_dish().addItem("Seleccione un plato");
 
         for (Dish dish : dishes) {
             String nameDish = dish.getName();
-            String typeDish = dish.getTypeDish();
+            TypeFood typeDish = dish.getTypeDish();
 
             if (type.equals(typeDish)) {
                 ratingsPanel.getCbo_dish().addItem(nameDish);
@@ -291,17 +294,17 @@ public class ControllerRatingPanel {
     private void showDrinksType() {
         try {
             String type = ratingsPanel.getCbo_typeDrink().getSelectedItem().toString();
-            String typeDrink = "";
+            TypeFood typeDrink = null;
 
             switch (type) {
                 case "Colombiana" -> {
-                    typeDrink = "Bebida Colombiana";
+                    typeDrink = TypeFood.COLOMBIAN;
                 }
                 case "Italiana" -> {
-                    typeDrink = "Bebida Italiana";
+                    typeDrink = TypeFood.ITALIAN;
                 }
                 case "China" -> {
-                    typeDrink = "Bebida China";
+                    typeDrink = TypeFood.CHINESE;
                 }
             }
 
@@ -312,7 +315,7 @@ public class ControllerRatingPanel {
         }
     }
 
-    private void loadDrinkType(String type) {
+    private void loadDrinkType(TypeFood type) {
         new Thread(() -> {
             try {
                 List<Drink> listDrinks = daoDrink.getData();
@@ -326,13 +329,13 @@ public class ControllerRatingPanel {
         }).start();
     }
 
-    private void loadDrinks(List<Drink> drinks, String type) {
+    private void loadDrinks(List<Drink> drinks, TypeFood type) {
         ratingsPanel.getCbo_drink().removeAllItems();
         ratingsPanel.getCbo_drink().addItem("Seleccione la bebida");
 
         for (Drink drink : drinks) {
             String nameDrink = drink.getName();
-            String typeDrink = drink.getTypeDrink();
+            TypeFood typeDrink = drink.getTypeDrink();
 
             if (type.equals(typeDrink)) {
                 ratingsPanel.getCbo_drink().addItem(nameDrink);

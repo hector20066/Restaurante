@@ -3,6 +3,7 @@ package model.dao.impl;
 import database.DataBase;
 import model.dao.interfaces.DAORestaurantDb;
 import model.entities.Drink;
+import model.enums.TypeFood;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -39,7 +40,7 @@ public class DAODrinkDBImpl extends DataBase implements DAORestaurantDb<Drink> {
             st.setString(1, data.getName());
             st.setString(2, data.getDescription());
             st.setFloat(3, data.getPrice());
-            st.setString(4, data.getTypeDrink());
+            st.setString(4, String.valueOf(data.getTypeDrink()));
             st.executeUpdate();
         } finally {
             this.close();
@@ -57,11 +58,11 @@ public class DAODrinkDBImpl extends DataBase implements DAORestaurantDb<Drink> {
 
             try (ResultSet rs = st.executeQuery()) {
                 if (rs.next()) {
-                    String typeDrink = rs.getString("typeDrink");
+                    TypeFood typeDrink = TypeFood.valueOf(rs.getString("typeDrink"));
 
                     drink = new Drink() {
                         @Override
-                        public String getTypeDrink() {
+                        public TypeFood getTypeDrink() {
                             return typeDrink;
                         }
                     };
@@ -87,11 +88,11 @@ public class DAODrinkDBImpl extends DataBase implements DAORestaurantDb<Drink> {
 
             try (ResultSet rs = st.executeQuery()) {
                 if (rs.next()) {
-                    String typeDrink = rs.getString("typeDrink");
+                    TypeFood typeDrink = TypeFood.valueOf(rs.getString("typeDrink"));
 
                     drink = new Drink() {
                         @Override
-                        public String getTypeDrink() {
+                        public TypeFood getTypeDrink() {
                             return typeDrink;
                         }
                     };
@@ -117,11 +118,11 @@ public class DAODrinkDBImpl extends DataBase implements DAORestaurantDb<Drink> {
 
             try (ResultSet rs = st.executeQuery()) {
                 while (rs.next()) {
-                    String typeDrink = rs.getString("typeDrink");
+                    TypeFood typeDrink = TypeFood.valueOf(rs.getString("typeDrink"));
 
                     Drink drink = new Drink() {
                         @Override
-                        public String getTypeDrink() {
+                        public TypeFood getTypeDrink() {
                             return typeDrink;
                         }
                     };

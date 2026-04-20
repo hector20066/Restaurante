@@ -5,6 +5,7 @@ import model.dao.interfaces.IDAO;
 import model.entities.Dish;
 import model.entities.Drink;
 import model.entities.Sale;
+import model.enums.TypeFood;
 import observer.Observer;
 import observer.Subject;
 import view.administrators.DashboardAdmin;
@@ -27,7 +28,6 @@ import model.dao.impl.IDAOSalesImpl;
 public class ControllerDashboard implements Observer {
 
     private final DashboardAdmin dashboard;
-    private final Subject subject;
 
     private final IDAO<Sale> daoSale;
     private final DAORestaurantDb<Dish> daoDish;
@@ -35,18 +35,16 @@ public class ControllerDashboard implements Observer {
 
     public ControllerDashboard(DashboardAdmin dashboard, Subject subject) {
         this.dashboard = dashboard;
-        this.subject = subject;
 
         this.daoSale = IDAOSalesImpl.getInstance();
         this.daoDish = DAODishDBImpl.getInstance();
         this.daoDrink = DAODrinkDBImpl.getInstance();
 
-        this.subject.register(this);
+        subject.register(this);
     }
 
     @Override
     public void update() {
-        // testDataChart();
         new Thread(() -> {
             loadGraphicalData();
             loadCardsData();
@@ -90,12 +88,13 @@ public class ControllerDashboard implements Observer {
         if (sale.getDishCode() == 0) return;
 
         Dish dish = daoDish.getData(sale.getDishCode());
+
         if (dish == null) return;
 
         switch (dish.getTypeDish()) {
-            case "Plato Colombiano" -> colombian[month] += sale.getAmountDish();
-            case "Plato Italiano" -> italian[month] += sale.getAmountDish();
-            case "Plato Chino" -> chinese[month] += sale.getAmountDish();
+            case TypeFood.COLOMBIAN -> colombian[month] += sale.getAmountDish();
+            case TypeFood.ITALIAN -> italian[month] += sale.getAmountDish();
+            case TypeFood.CHINESE -> chinese[month] += sale.getAmountDish();
         }
     }
 
@@ -106,9 +105,9 @@ public class ControllerDashboard implements Observer {
         if (drink == null) return;
 
         switch (drink.getTypeDrink()) {
-            case "Bebida Colombiana" -> colombian[month] += sale.getAmountDrink();
-            case "Bebida Italiano"  -> italian[month] += sale.getAmountDrink();
-            case "Bebida China"     -> chinese[month] += sale.getAmountDrink();
+            case TypeFood.COLOMBIAN -> colombian[month] += sale.getAmountDrink();
+            case TypeFood.ITALIAN -> italian[month] += sale.getAmountDrink();
+            case TypeFood.CHINESE -> chinese[month] += sale.getAmountDrink();
         }
     }
 
@@ -129,29 +128,12 @@ public class ControllerDashboard implements Observer {
 
         for (int i = 0; i < 6; i++) {
             int monthIndex = (currentMonth - 6 + i + 12) % 12;
-            String monthName = Month.of(monthIndex + 1).getDisplayName(TextStyle.FULL, new Locale("es"));
+            String monthName = Month.of(monthIndex + 1).getDisplayName(TextStyle.FULL, Locale.of("es"));
 
             double[] values = new double[]{colombian[monthIndex], italian[monthIndex], chinese[monthIndex]};
 
             dashboard.getChart().addData(new ModelChart(monthName, values));
         }
-    }
-
-    private void testDataChart() {
-        dashboard.getChart().clear();
-        dashboard.getChart().addLegend("Comida Colombiana", new Color(255,209,102));
-        dashboard.getChart().addLegend("Comida Italiana", new Color(6,214,160));
-        dashboard.getChart().addLegend("Comida China", new Color(239,71,111));
-
-        dashboard.getChart().addData(new ModelChart("Marzo", new double[]{150, 100, 350}));
-        dashboard.getChart().addData(new ModelChart("Abril", new double[]{100, 160, 150}));
-        dashboard.getChart().addData(new ModelChart("Mayo", new double[]{200, 320, 150}));
-        dashboard.getChart().addData(new ModelChart("Junio", new double[]{250, 450, 150}));
-        dashboard.getChart().addData(new ModelChart("Julio", new double[]{220, 480, 150}));
-        dashboard.getChart().addData(new ModelChart("Agosto", new double[]{180, 230, 150}));
-        dashboard.getChart().addData(new ModelChart("Septiembre", new double[]{130, 300, 150}));
-        dashboard.getChart().addData(new ModelChart("Octubre", new double[]{290, 430, 150}));
-        dashboard.getChart().addData(new ModelChart("Noviembre", new double[]{150, 130, 250}));
     }
 
     private void loadCardsData() {

@@ -3,6 +3,7 @@ package model.dao.impl;
 import database.DataBase;
 import model.dao.interfaces.DAORestaurantDb;
 import model.entities.Dish;
+import model.enums.TypeFood;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -39,7 +40,7 @@ public class DAODishDBImpl extends DataBase implements DAORestaurantDb<Dish> {
             st.setString(1, data.getName());
             st.setString(2, data.getDescription());
             st.setFloat(3, data.getPrice());
-            st.setString(4, data.getTypeDish());
+            st.setString(4, String.valueOf(data.getTypeDish()));
             st.executeUpdate();
         } finally {
             this.close();
@@ -57,11 +58,11 @@ public class DAODishDBImpl extends DataBase implements DAORestaurantDb<Dish> {
 
             try (ResultSet rs = st.executeQuery()) {
                 if (rs.next()) {
-                    String type = rs.getString("typeDish");
+                    TypeFood type = TypeFood.valueOf(rs.getString("typeDish"));
 
                     dish = new Dish() {
                         @Override
-                        public String getTypeDish() {
+                        public TypeFood getTypeDish() {
                             return type;
                         }
                     };
@@ -87,11 +88,11 @@ public class DAODishDBImpl extends DataBase implements DAORestaurantDb<Dish> {
 
             try (ResultSet rs = st.executeQuery()) {
                 if (rs.next()) {
-                    String type = rs.getString("typeDish");
+                    TypeFood type = TypeFood.valueOf(rs.getString("typeDish"));
 
                     dish = new Dish() {
                         @Override
-                        public String getTypeDish() {
+                        public TypeFood getTypeDish() {
                             return type;
                         }
                     };
@@ -117,11 +118,11 @@ public class DAODishDBImpl extends DataBase implements DAORestaurantDb<Dish> {
 
             try (ResultSet rs = st.executeQuery()) {
                 while (rs.next()) {
-                    String type = rs.getString("typeDish");
+                    TypeFood type = TypeFood.valueOf(rs.getString("typeDish"));
 
                     Dish dish = new Dish() {
                         @Override
-                        public String getTypeDish() {
+                        public TypeFood getTypeDish() {
                             return type;
                         }
                     };

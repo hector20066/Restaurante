@@ -1,5 +1,7 @@
 package model.entities;
 
+import model.enums.TypeFood;
+
 /**
  *
  * @author Andres Cardenas
@@ -15,8 +17,8 @@ public class ItalianDish extends Dish {
     }
 
     @Override
-    public String getTypeDish() {
-        return "Plato Italiano";
+    public TypeFood getTypeDish() {
+        return TypeFood.ITALIAN;
     }
 
 }

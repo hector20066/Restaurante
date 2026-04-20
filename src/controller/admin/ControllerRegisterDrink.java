@@ -1,10 +1,9 @@
 package controller.admin;
 
 import factory.*;
+import model.dao.impl.DAODrinkDBImpl;
 import model.dao.interfaces.DAORestaurantDb;
 import model.entities.Drink;
-import model.enums.InstanceTypeDB;
-import model.enums.InstanceTypeFile;
 import observer.Subject;
 import utils.MessageUtils;
 import view.administrators.RegisterDrink;
@@ -30,7 +29,7 @@ public class ControllerRegisterDrink {
         this.registerDrink = registerDrink;
         this.subject = subject;
 
-        this.daoRestaurantDb = FactoryMethod.getInstanceDB(InstanceTypeDB.DAODRINKDB);
+        this.daoRestaurantDb = DAODrinkDBImpl.getInstance();
 
         connectEvents();
     }
@@ -41,14 +40,14 @@ public class ControllerRegisterDrink {
 
     private void register() {
         try {
-            String typeDrink = registerDrink.getCbo_typeDrink().getSelectedItem().toString();
+            String typeDrink = (String) registerDrink.getCbo_typeDrink().getSelectedItem();
             String nameDrink = registerDrink.getTxt_name().getText();
             String description = registerDrink.getTxt_description().getText();
             String price = registerDrink.getTxt_price().getText().trim();
-            int waySave = registerDrink.getCbo_waySave().getSelectedIndex(); // 0: DB ; 1: File
+            int waySave = registerDrink.getCbo_waySave().getSelectedIndex();
 
             if (isInvalidData(nameDrink, description, price)) {
-                MessageUtils.warningMessage("Por favor ingrese toda la informacion solicitada.");
+                MessageUtils.warningMessage("Por favor ingrese toda la información solicitada.");
                 return;
             }
 
