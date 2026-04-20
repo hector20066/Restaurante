@@ -14,10 +14,10 @@ public class DataBase {
     
     protected Connection connection;
     protected final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    protected final String DB_URL = "jdbc:mysql://www.hldevworks.com:3306/u311612716_restaurante?useSSL=false&requireSSL=false&allowPublicKeyRetrieval=true";
+    protected final String DB_URL = "jdbc:mysql://localhost:3306/restaurante";
     
-    private final String user = "u311612716_restaurante";
-    private final String pass = "Restaurant$202627";
+    private final String user = "root";
+    private final String pass = "";
     
     public void connect() throws SQLException {
         try {

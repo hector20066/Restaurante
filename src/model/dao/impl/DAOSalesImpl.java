@@ -1,15 +1,14 @@
 package model.dao.impl;
 
 import database.DataBase;
-import model.dao.interfaces.IDAO;
-import model.entities.Sale;
-
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import model.dao.interfaces.IDAO;
+import model.entities.Sale;
 
 /**
  *
@@ -33,29 +32,13 @@ public class DAOSalesImpl extends DataBase implements IDAO<Sale> {
 
     @Override
     public void save(Sale data) throws Exception {
-        String sql = "INSERT INTO sales(dishCode, amountDish, drinkCode, amountDrink, clientId, totalSale, date) VALUES (?, ?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO venta(id_cliente, fecha, total) VALUES (?, ?, ?);";
         this.connect();
 
         try (PreparedStatement st = this.connection.prepareStatement(sql)) {
-            if (data.getDishCode() != 0) {
-                st.setInt(1, data.getDishCode());
-                st.setInt(2, data.getAmountDish());
-            } else {
-                st.setNull(1, java.sql.Types.INTEGER);
-                st.setNull(2, java.sql.Types.INTEGER);
-            }
-
-            if (data.getDrinkCode() != 0) {
-                st.setInt(3, data.getDrinkCode());
-                st.setInt(4, data.getAmountDrink());
-            } else {
-                st.setNull(3, java.sql.Types.INTEGER);
-                st.setNull(4, java.sql.Types.INTEGER);
-            }
-
-            st.setInt(5, data.getClientId());
-            st.setFloat(6, data.getTotalSale());
-            st.setDate(7, Date.valueOf(data.getDate()));
+            st.setInt(1, data.getClientId());
+            st.setDate(2, Date.valueOf(data.getDate()));
+            st.setFloat(3, data.getTotal());
             st.executeUpdate();
         } finally {
             this.close();
@@ -65,7 +48,7 @@ public class DAOSalesImpl extends DataBase implements IDAO<Sale> {
     @Override
     public synchronized Sale getData(int code) throws Exception {
         Sale sale = null;
-        String sql = "SELECT * FROM sales WHERE numberSale = ? LIMIT 1;";
+        String sql = "SELECT * FROM venta WHERE num_venta = ? LIMIT 1;";
         this.connect();
 
         try (PreparedStatement st = this.connection.prepareStatement(sql)) {
@@ -87,7 +70,7 @@ public class DAOSalesImpl extends DataBase implements IDAO<Sale> {
     @Override
     public synchronized List<Sale> getData() throws Exception {
         List<Sale> list;
-        String sql = "SELECT * FROM sales";
+        String sql = "SELECT * FROM venta";
         this.connect();
 
         try (PreparedStatement st = this.connection.prepareStatement(sql)) {
@@ -109,7 +92,7 @@ public class DAOSalesImpl extends DataBase implements IDAO<Sale> {
 
     @Override
     public boolean exists(int id) throws Exception {
-        String sql = "SELECT 1 FROM sales WHERE saleNumber = ?";
+        String sql = "SELECT 1 FROM venta WHERE num_venta = ?";
         this.connect();
 
         try (PreparedStatement st = this.connection.prepareStatement(sql)) {
@@ -124,21 +107,10 @@ public class DAOSalesImpl extends DataBase implements IDAO<Sale> {
     }
 
     private void resultQuery(ResultSet rs, Sale sale) throws SQLException {
-        sale.setSaleNumber(rs.getInt("numberSale"));
-        Integer dish = rs.getObject("dishCode", Integer.class);
-        Integer amountDish = rs.getObject("amountDish", Integer.class);
-        Integer drink = rs.getObject("drinkCode", Integer.class);
-        Integer amountDrink = rs.getObject("amountDrink", Integer.class);
-
-        sale.setDishCode(dish == null ? 0 : dish);
-        sale.setAmountDish(amountDish == null ? 0 : amountDish);
-
-        sale.setDrinkCode(drink == null ? 0 : drink);
-        sale.setAmountDrink(amountDrink == null ? 0 : amountDrink);
-
-        sale.setClientId(rs.getInt("clientId"));
-        sale.setTotalSale(rs.getFloat("totalSale"));
-        sale.setDate(rs.getDate("date").toLocalDate());
+        sale.setSaleNumber(rs.getInt("num_venta"));
+        sale.setClientId(rs.getInt("id_cliente"));
+        sale.setDate(rs.getDate("fecha").toLocalDate());
+        sale.setTotal(rs.getFloat("total"));
     }
 
 }

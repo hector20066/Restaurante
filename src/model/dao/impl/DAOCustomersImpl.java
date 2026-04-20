@@ -1,14 +1,13 @@
 package model.dao.impl;
 
 import database.DataBase;
-import model.dao.interfaces.IDAO;
-import model.entities.Customer;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import model.dao.interfaces.IDAO;
+import model.entities.Customer;
 
 /**
  *
@@ -109,9 +108,9 @@ public class DAOCustomersImpl extends DataBase implements IDAO<Customer> {
 
     private void resultQuery(ResultSet rs, Customer customer) throws SQLException {
         customer.setId(rs.getInt("id"));
-        customer.setName(rs.getString("name"));
-        customer.setAddress(rs.getString("address"));
-        customer.setEmail(rs.getString("email"));
+        customer.setName(rs.getString("nombre"));
+        customer.setAddress(rs.getString("direccion"));
+        customer.setEmail(rs.getString("correo"));
     }
 
 }

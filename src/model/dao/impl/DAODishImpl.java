@@ -1,15 +1,14 @@
 package model.dao.impl;
 
 import database.DataBase;
-import model.dao.interfaces.DAORestaurantDb;
-import model.entities.Dish;
-import model.enums.TypeFood;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import model.dao.interfaces.DAORestaurantDb;
+import model.entities.Dish;
+import model.enums.TypeFood;
 
 /**
  *
@@ -33,7 +32,7 @@ public class DAODishImpl extends DataBase implements DAORestaurantDb<Dish> {
 
     @Override
     public void save(Dish data) throws Exception {
-        String sql = "INSERT INTO dishes(name, description, price, typeDish) VALUES (?, ?, ?, ?);";
+        String sql = "INSERT INTO platos(nombre, descripcion, precio, tipo_plato) VALUES (?, ?, ?, ?);";
         this.connect();
 
         try (PreparedStatement st = this.connection.prepareStatement(sql)) {
@@ -50,7 +49,7 @@ public class DAODishImpl extends DataBase implements DAORestaurantDb<Dish> {
     @Override
     public synchronized Dish getData(int code) throws Exception {
         Dish dish = null;
-        String sql = "SELECT * FROM dishes WHERE code = ? LIMIT 1;";
+        String sql = "SELECT * FROM platos WHERE codigo = ? LIMIT 1;";
         this.connect();
 
         try (PreparedStatement st = this.connection.prepareStatement(sql)) {
@@ -58,7 +57,7 @@ public class DAODishImpl extends DataBase implements DAORestaurantDb<Dish> {
 
             try (ResultSet rs = st.executeQuery()) {
                 if (rs.next()) {
-                    TypeFood type = TypeFood.valueOf(rs.getString("typeDish"));
+                    TypeFood type = TypeFood.valueOf(rs.getString("tipo_plato"));
 
                     dish = new Dish() {
                         @Override
@@ -80,7 +79,7 @@ public class DAODishImpl extends DataBase implements DAORestaurantDb<Dish> {
     @Override
     public synchronized Dish getData(String name) throws Exception {
         Dish dish = null;
-        String sql = "SELECT * FROM dishes WHERE name = ? LIMIT 1;";
+        String sql = "SELECT * FROM platos WHERE nombre = ? LIMIT 1;";
         this.connect();
 
         try (PreparedStatement st = this.connection.prepareStatement(sql)) {
@@ -88,7 +87,7 @@ public class DAODishImpl extends DataBase implements DAORestaurantDb<Dish> {
 
             try (ResultSet rs = st.executeQuery()) {
                 if (rs.next()) {
-                    TypeFood type = TypeFood.valueOf(rs.getString("typeDish"));
+                    TypeFood type = TypeFood.valueOf(rs.getString("tipo_plato"));
 
                     dish = new Dish() {
                         @Override
@@ -110,7 +109,7 @@ public class DAODishImpl extends DataBase implements DAORestaurantDb<Dish> {
     @Override
     public synchronized List<Dish> getData() throws Exception {
         List<Dish> list;
-        String sql = "SELECT * FROM dishes;";
+        String sql = "SELECT * FROM platos;";
         this.connect();
 
         try (PreparedStatement st = this.connection.prepareStatement(sql)) {
@@ -118,7 +117,7 @@ public class DAODishImpl extends DataBase implements DAORestaurantDb<Dish> {
 
             try (ResultSet rs = st.executeQuery()) {
                 while (rs.next()) {
-                    TypeFood type = TypeFood.valueOf(rs.getString("typeDish"));
+                    TypeFood type = TypeFood.valueOf(rs.getString("tipo_plato"));
 
                     Dish dish = new Dish() {
                         @Override
@@ -139,15 +138,15 @@ public class DAODishImpl extends DataBase implements DAORestaurantDb<Dish> {
     }
 
     private void resultQuery(Dish dish, ResultSet rs) throws SQLException {
-        dish.setCode(rs.getInt("code"));
-        dish.setName(rs.getString("name"));
-        dish.setDescription(rs.getString("description"));
-        dish.setPrice(rs.getFloat("price"));
+        dish.setCode(rs.getInt("codigo"));
+        dish.setName(rs.getString("nombre"));
+        dish.setDescription(rs.getString("descripcion"));
+        dish.setPrice(rs.getFloat("precio"));
     }
 
     @Override
     public void modify(Dish data) throws Exception {
-        String sql = "UPDATE dishes SET name = ?, description = ?, price = ? WHERE code = ?;";
+        String sql = "UPDATE platos SET nombre = ?, descripcion = ?, precio = ? WHERE codigo = ?;";
         this.connect();
 
         try (PreparedStatement st = this.connection.prepareStatement(sql)) {
@@ -163,7 +162,7 @@ public class DAODishImpl extends DataBase implements DAORestaurantDb<Dish> {
 
     @Override
     public void delete(int code) throws Exception {
-        String sql = "DELETE FROM dishes WHERE code = ?;";
+        String sql = "DELETE FROM platos WHERE codigo = ?;";
         this.connect();
 
         try (PreparedStatement st = this.connection.prepareStatement(sql)) {
