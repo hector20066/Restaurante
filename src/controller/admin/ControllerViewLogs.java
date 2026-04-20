@@ -166,13 +166,13 @@ public class ControllerViewLogs implements Observer {
     public void update() {
         new Thread(() -> {
             try {
-                List<Dish> dishes = daoDish.getData();
+                /*List<Dish> dishes = daoDish.getData();
                 List<Drink> drinks = daoDrink.getData();
 
                 SwingUtilities.invokeLater(() -> {
                     loadDishes(dishes, viewLogsDB.getModelDishes());
                     loadDrinks(drinks, viewLogsDB.getModelDrinks());
-                });
+                });*/
             } catch (Exception e) {
                 e.printStackTrace();
             }

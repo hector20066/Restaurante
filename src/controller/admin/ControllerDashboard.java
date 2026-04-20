@@ -46,8 +46,8 @@ public class ControllerDashboard implements Observer {
     @Override
     public void update() {
         new Thread(() -> {
-            loadGraphicalData();
-            loadCardsData();
+            //loadGraphicalData();
+            //loadCardsData();
         }).start();
     }
 
@@ -85,7 +85,7 @@ public class ControllerDashboard implements Observer {
     }
 
     private void processDish(Sale sale, int month, int[] colombian, int[] italian, int[] chinese) throws Exception {
-        if (sale.getDishCode() == 0) return;
+        /*if (sale.getDishCode() == 0) return;
 
         Dish dish = daoDish.getData(sale.getDishCode());
 
@@ -95,11 +95,11 @@ public class ControllerDashboard implements Observer {
             case TypeFood.COLOMBIAN -> colombian[month] += sale.getAmountDish();
             case TypeFood.ITALIAN -> italian[month] += sale.getAmountDish();
             case TypeFood.CHINESE -> chinese[month] += sale.getAmountDish();
-        }
+        }*/
     }
 
     private void processDrink(Sale sale, int month, int[] colombian, int[] italian, int[] chinese) throws Exception {
-        if (sale.getDrinkCode() == 0) return;
+        /*if (sale.getDrinkCode() == 0) return;
 
         Drink drink = daoDrink.getData(sale.getDrinkCode());
         if (drink == null) return;
@@ -108,7 +108,7 @@ public class ControllerDashboard implements Observer {
             case TypeFood.COLOMBIAN -> colombian[month] += sale.getAmountDrink();
             case TypeFood.ITALIAN -> italian[month] += sale.getAmountDrink();
             case TypeFood.CHINESE -> chinese[month] += sale.getAmountDrink();
-        }
+        }*/
     }
 
     private void setupChartLegend() {
@@ -148,9 +148,9 @@ public class ControllerDashboard implements Observer {
         List<Sale> sales = daoSale.getData();
         int amount = 0;
 
-        for (Sale sale : sales) {
+        /*for (Sale sale : sales) {
             amount += sale.getAmountDish();
-        }
+        }*/
 
         return amount;
     }
@@ -159,9 +159,9 @@ public class ControllerDashboard implements Observer {
         List<Sale> sales = daoSale.getData();
         int amount = 0;
 
-        for (Sale sale : sales) {
+        /*for (Sale sale : sales) {
             amount += sale.getAmountDrink();
-        }
+        }*/
 
         return amount;
     }
@@ -170,9 +170,9 @@ public class ControllerDashboard implements Observer {
         List<Sale> sales = daoSale.getData();
         float totalSales = 0;
 
-        for (Sale sale : sales) {
+        /*for (Sale sale : sales) {
             totalSales += sale.getTotalSale();
-        }
+        }*/
 
         return totalSales;
     }

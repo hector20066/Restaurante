@@ -2,7 +2,7 @@ package controller.customers;
 
 import model.dao.impl.DAODishImpl;
 import model.dao.impl.DAODrinkImpl;
-import model.dao.impl.DAOQualificationImpl;
+import model.dao.impl.DAOQualificationDrinkImpl;
 import model.dao.interfaces.DAORestaurantDb;
 import model.dao.interfaces.IDAO;
 import model.entities.Dish;
@@ -23,14 +23,14 @@ public class ControllerDashboardCustomer implements Observer {
 
     private final DashboardCustomers dashboardCustomers;
 
-    private final IDAO<Qualification> daoQualification;
+    //private final IDAO<Qualification> daoQualification;
     private final DAORestaurantDb<Dish> daoDish;
     private final DAORestaurantDb<Drink> daoDrink;
 
     public ControllerDashboardCustomer(DashboardCustomers dashboardCustomers, Subject subject) {
         this.dashboardCustomers = dashboardCustomers;
 
-        this.daoQualification = DAOQualificationImpl.getInstance();
+        //this.daoQualification = DAOQualificationDrinkImpl.getInstance();
         this.daoDish = DAODishImpl.getInstance();
         this.daoDrink = DAODrinkImpl.getInstance();
 
@@ -43,7 +43,7 @@ public class ControllerDashboardCustomer implements Observer {
     }
 
     private void loadRatings() {
-        new Thread(()-> {
+        /*new Thread(()-> {
             try {
                 List<Qualification> ratings = daoQualification.getData();
                 dashboardCustomers.cleanPanel();
@@ -69,7 +69,7 @@ public class ControllerDashboardCustomer implements Observer {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }).start();
+        }).start();*/
     }
 
 }

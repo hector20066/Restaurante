@@ -1,23 +1,24 @@
 package controller.customers;
 
+import java.time.LocalDate;
+import java.util.List;
+import javax.swing.*;
+import model.dao.impl.DAOCustomersImpl;
 import model.dao.impl.DAODishImpl;
 import model.dao.impl.DAODrinkImpl;
-import model.dao.impl.DAOQualificationImpl;
+import model.dao.impl.DAOQualificationDishDB;
+import model.dao.impl.DAOQualificationDrinkImpl;
 import model.dao.interfaces.DAORestaurantDb;
 import model.dao.interfaces.IDAO;
 import model.entities.Customer;
 import model.entities.Dish;
 import model.entities.Drink;
-import model.entities.Qualification;
+import model.entities.QualificationDish;
+import model.entities.QualificationDrink;
 import model.enums.TypeFood;
 import observer.Subject;
 import utils.MessageUtils;
 import view.customers.RatingsPanel;
-
-import javax.swing.*;
-import java.time.LocalDate;
-import java.util.List;
-import model.dao.impl.DAOCustomersImpl;
 
 /**
  *
@@ -28,7 +29,8 @@ public class ControllerRatingPanel {
     private final RatingsPanel ratingsPanel;
     private final Subject subject;
 
-    private final IDAO<Qualification> daoQualification;
+    private final IDAO<QualificationDish> daoQualificationDish;
+    private final IDAO<QualificationDrink> daoQualificationDrink;
     private final IDAO<Customer> daoCustomer;
     private final DAORestaurantDb<Dish> daoDish;
     private final DAORestaurantDb<Drink> daoDrink;
@@ -42,7 +44,8 @@ public class ControllerRatingPanel {
         this.ratingsPanel = ratingsPanel;
         this.subject = subject;
 
-        this.daoQualification = DAOQualificationImpl.getInstance();
+        this.daoQualificationDish = DAOQualificationDishDB.getInstance();
+        this.daoQualificationDrink = DAOQualificationDrinkImpl.getInstance();
         this.daoCustomer = DAOCustomersImpl.getInstance();
         this.daoDish = DAODishImpl.getInstance();
         this.daoDrink = DAODrinkImpl.getInstance();
@@ -125,9 +128,9 @@ public class ControllerRatingPanel {
                 Dish dish = daoDish.getData(dishName);
                 int idDish = dish.getCode();
 
-                Qualification qualification = new Qualification();
+                QualificationDish qualification = new QualificationDish();
                 assignValuesQualificationDish(qualification, idCustomer, idDish, selectedStars, comment);
-                daoQualification.save(qualification);
+                daoQualificationDish.save(qualification);
 
                 SwingUtilities.invokeLater(this::refreshWindow);
             } catch (Exception e) {
@@ -136,11 +139,10 @@ public class ControllerRatingPanel {
         }).start();
     }
 
-    private void assignValuesQualificationDish(Qualification qualification, String idCustomer, int idDish, int selectedStars, String comment) {
+    private void assignValuesQualificationDish(QualificationDish qualification, String idCustomer, int idDish, int selectedStars, String comment) {
         qualification.setStars(selectedStars);
         qualification.setComment(comment);
         qualification.setIdDish(idDish);
-        qualification.setIdDrink(0);
         qualification.setIdCustomer(Integer.parseInt(idCustomer));
         qualification.setDate(LocalDate.now());
     }
@@ -151,7 +153,6 @@ public class ControllerRatingPanel {
             String drinkName = ratingsPanel.getCbo_drink().getSelectedItem().toString();
             int selectedStars = 0;
             String comment = ratingsPanel.getTxa_opinionsDrink().getText();
-
 
             if (idCustomer.isBlank()) {
                 MessageUtils.warningMessage("Por favor ingrese su cedula para continuar con la calificacion.");
@@ -186,9 +187,9 @@ public class ControllerRatingPanel {
                 Drink drink = daoDrink.getData(drinkName);
                 int idDrink = drink.getCode();
 
-                Qualification qualification = new Qualification();
+                QualificationDrink qualification = new QualificationDrink();
                 assignValuesQualificationDrink(qualification, idCustomer, idDrink, selectedStars, comment);
-                daoQualification.save(qualification);
+                daoQualificationDrink.save(qualification);
 
                 SwingUtilities.invokeLater(this::refreshWindow);
             } catch (Exception e) {
@@ -197,10 +198,9 @@ public class ControllerRatingPanel {
         }).start();
     }
 
-    private void assignValuesQualificationDrink(Qualification qualification, String idCustomer, int idDrink, int selectedStars, String comment) {
+    private void assignValuesQualificationDrink(QualificationDrink qualification, String idCustomer, int idDrink, int selectedStars, String comment) {
         qualification.setStars(selectedStars);
         qualification.setComment(comment);
-        qualification.setIdDish(0);
         qualification.setIdDrink(idDrink);
         qualification.setIdCustomer(Integer.parseInt(idCustomer));
         qualification.setDate(LocalDate.now());

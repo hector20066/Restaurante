@@ -46,7 +46,7 @@ public abstract class AbstractFoodController implements Observer {
     @Override
     public void update() {
         new Thread(() -> {
-            try {
+            /*try {
                 List<Dish> dishes = daoDish.getData();
                 List<Drink> drinks = daoDrink.getData();
 
@@ -56,7 +56,7 @@ public abstract class AbstractFoodController implements Observer {
                 });
             } catch (Exception e) {
                 e.printStackTrace();
-            }
+            }*/
         }).start();
     }
 
@@ -228,12 +228,12 @@ public abstract class AbstractFoodController implements Observer {
     }
 
     protected void assignValuesSale(Sale sale, String customerId, int dishCode, int amountDish, int drinkCode, int amountDrink, float saleSubtotal) {
-        sale.setDishCode(dishCode);
+        /*sale.setDishCode(dishCode);
         sale.setAmountDish(amountDish);
         sale.setDrinkCode(drinkCode);
-        sale.setAmountDrink(amountDrink);
+        sale.setAmountDrink(amountDrink);*/
         sale.setClientId(Integer.parseInt(customerId));
-        sale.setTotalSale(saleSubtotal);
+        //sale.setTotalSale(saleSubtotal);
         sale.setDate(LocalDate.now());
     }
 
