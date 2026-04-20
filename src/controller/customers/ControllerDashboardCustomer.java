@@ -1,7 +1,7 @@
 package controller.customers;
 
-import model.dao.impl.DAODishDBImpl;
-import model.dao.impl.DAODrinkDBImpl;
+import model.dao.impl.DAODishImpl;
+import model.dao.impl.DAODrinkImpl;
 import model.dao.impl.IDAOQualificationImpl;
 import model.dao.interfaces.DAORestaurantDb;
 import model.dao.interfaces.IDAO;
@@ -31,8 +31,8 @@ public class ControllerDashboardCustomer implements Observer {
         this.dashboardCustomers = dashboardCustomers;
 
         this.daoQualification = IDAOQualificationImpl.getInstance();
-        this.daoDish = DAODishDBImpl.getInstance();
-        this.daoDrink = DAODrinkDBImpl.getInstance();
+        this.daoDish = DAODishImpl.getInstance();
+        this.daoDrink = DAODrinkImpl.getInstance();
 
         subject.register(this);
     }

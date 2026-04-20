@@ -1,8 +1,8 @@
 package controller.admin;
 
 import builder.controllers.ControllerViewLogsDbBuilder;
-import model.dao.impl.DAODishDBImpl;
-import model.dao.impl.DAODrinkDBImpl;
+import model.dao.impl.DAODishImpl;
+import model.dao.impl.DAODrinkImpl;
 import model.dao.interfaces.DAORestaurantDb;
 import model.entities.Dish;
 import model.entities.Drink;
@@ -53,8 +53,8 @@ public class ControllerViewLogs implements Observer {
         this.controllerRegisterDrink = builder.getControllerRegisterDrink();
         this.subject = builder.getSubject();
 
-        this.daoDrink = DAODrinkDBImpl.getInstance();
-        this.daoDish = DAODishDBImpl.getInstance();
+        this.daoDrink = DAODrinkImpl.getInstance();
+        this.daoDish = DAODishImpl.getInstance();
 
         this.subject.register(this);
 

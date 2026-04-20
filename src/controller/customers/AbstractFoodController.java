@@ -1,7 +1,7 @@
 package controller.customers;
 
-import model.dao.impl.DAODishDBImpl;
-import model.dao.impl.DAODrinkDBImpl;
+import model.dao.impl.DAODishImpl;
+import model.dao.impl.DAODrinkImpl;
 import model.dao.impl.IDAOCustomersImpl;
 import model.dao.impl.IDAOSalesImpl;
 import model.dao.interfaces.DAORestaurantDb;
@@ -37,8 +37,8 @@ public abstract class AbstractFoodController implements Observer {
     private final IDAO<Sale> daoSales;
 
     public AbstractFoodController() {
-        this.daoDish = DAODishDBImpl.getInstance();
-        this.daoDrink = DAODrinkDBImpl.getInstance();
+        this.daoDish = DAODishImpl.getInstance();
+        this.daoDrink = DAODrinkImpl.getInstance();
         this.daoCustomer = IDAOCustomersImpl.getInstance();
         this.daoSales = IDAOSalesImpl.getInstance();
     }

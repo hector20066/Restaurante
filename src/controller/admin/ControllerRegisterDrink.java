@@ -1,7 +1,7 @@
 package controller.admin;
 
 import factory.*;
-import model.dao.impl.DAODrinkDBImpl;
+import model.dao.impl.DAODrinkImpl;
 import model.dao.interfaces.DAORestaurantDb;
 import model.entities.Drink;
 import observer.Subject;
@@ -29,7 +29,7 @@ public class ControllerRegisterDrink {
         this.registerDrink = registerDrink;
         this.subject = subject;
 
-        this.daoRestaurantDb = DAODrinkDBImpl.getInstance();
+        this.daoRestaurantDb = DAODrinkImpl.getInstance();
 
         connectEvents();
     }

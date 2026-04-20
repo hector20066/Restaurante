@@ -17,8 +17,8 @@ import java.time.Month;
 import java.time.format.TextStyle;
 import java.util.List;
 import java.util.Locale;
-import model.dao.impl.DAODishDBImpl;
-import model.dao.impl.DAODrinkDBImpl;
+import model.dao.impl.DAODishImpl;
+import model.dao.impl.DAODrinkImpl;
 import model.dao.impl.IDAOSalesImpl;
 
 /**
@@ -37,8 +37,8 @@ public class ControllerDashboard implements Observer {
         this.dashboard = dashboard;
 
         this.daoSale = IDAOSalesImpl.getInstance();
-        this.daoDish = DAODishDBImpl.getInstance();
-        this.daoDrink = DAODrinkDBImpl.getInstance();
+        this.daoDish = DAODishImpl.getInstance();
+        this.daoDrink = DAODrinkImpl.getInstance();
 
         subject.register(this);
     }

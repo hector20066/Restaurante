@@ -1,7 +1,7 @@
 package controller.customers;
 
-import model.dao.impl.DAODishDBImpl;
-import model.dao.impl.DAODrinkDBImpl;
+import model.dao.impl.DAODishImpl;
+import model.dao.impl.DAODrinkImpl;
 import model.dao.impl.IDAOQualificationImpl;
 import model.dao.interfaces.DAORestaurantDb;
 import model.dao.interfaces.IDAO;
@@ -15,7 +15,6 @@ import utils.MessageUtils;
 import view.customers.RatingsPanel;
 
 import javax.swing.*;
-import java.awt.*;
 import java.time.LocalDate;
 import java.util.List;
 import model.dao.impl.IDAOCustomersImpl;
@@ -45,8 +44,8 @@ public class ControllerRatingPanel {
 
         this.daoQualification = IDAOQualificationImpl.getInstance();
         this.daoCustomer = IDAOCustomersImpl.getInstance();
-        this.daoDish = DAODishDBImpl.getInstance();
-        this.daoDrink = DAODrinkDBImpl.getInstance();
+        this.daoDish = DAODishImpl.getInstance();
+        this.daoDrink = DAODrinkImpl.getInstance();
 
         this.starsDishes = new JCheckBox[]{ratingsPanel.getCbx_starDish1(), ratingsPanel.getCbx_starDish2(), ratingsPanel.getCbx_starDish3(), ratingsPanel.getCbx_starDish4(), ratingsPanel.getCbx_starDish5()};
         this.starsDrinks = new JCheckBox[]{ratingsPanel.getCbx_starDrink1(), ratingsPanel.getCbx_starDrink2(), ratingsPanel.getCbx_starDrink3(), ratingsPanel.getCbx_starDrink4(), ratingsPanel.getCbx_starDrink5()};

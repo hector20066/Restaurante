@@ -1,7 +1,7 @@
 package controller.admin;
 
 import factory.*;
-import model.dao.impl.DAODishDBImpl;
+import model.dao.impl.DAODishImpl;
 import model.dao.interfaces.DAORestaurantDb;
 import model.entities.Dish;
 import utils.MessageUtils;
@@ -29,7 +29,7 @@ public class ControllerRegisterDish {
         this.registerDish = registerDish;
         this.subject = subject;
 
-        this.daoRestaurantDb = DAODishDBImpl.getInstance();
+        this.daoRestaurantDb = DAODishImpl.getInstance();
 
         connectEvents();
     }
