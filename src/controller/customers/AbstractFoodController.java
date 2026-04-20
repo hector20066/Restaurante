@@ -1,8 +1,19 @@
 package controller.customers;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JComboBox;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
+
+import model.dao.impl.DAOCustomersImpl;
 import model.dao.impl.DAODishImpl;
 import model.dao.impl.DAODrinkImpl;
-import model.dao.impl.DAOCustomersImpl;
+import model.dao.impl.DAOSaleDetailImpl;
 import model.dao.impl.DAOSalesImpl;
 import model.dao.interfaces.DAORestaurantDb;
 import model.dao.interfaces.IDAO;
@@ -10,16 +21,11 @@ import model.entities.Customer;
 import model.entities.Dish;
 import model.entities.Drink;
 import model.entities.Sale;
+import model.entities.SaleDetail;
 import model.enums.TypeFood;
 import observer.Observer;
 import service.ServiceEmailjS;
 import utils.MessageUtils;
-
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -35,12 +41,14 @@ public abstract class AbstractFoodController implements Observer {
     private final DAORestaurantDb<Drink> daoDrink;
     private final IDAO<Customer> daoCustomer;
     private final IDAO<Sale> daoSales;
+    private final IDAO<SaleDetail> daoSaleDetail;
 
     public AbstractFoodController() {
         this.daoDish = DAODishImpl.getInstance();
         this.daoDrink = DAODrinkImpl.getInstance();
         this.daoCustomer = DAOCustomersImpl.getInstance();
         this.daoSales = DAOSalesImpl.getInstance();
+        this.daoSaleDetail = DAOSaleDetailImpl.getInstance();
     }
 
     @Override
@@ -191,17 +199,17 @@ public abstract class AbstractFoodController implements Observer {
 
         for (int i = 0; i < rows; i++) {
             dishName = getJtbl_food().getValueAt(i, 0).toString();
-            int dishCode = Integer.parseInt(getJtbl_food().getValueAt(i, 1).toString());
+            int currentDishCode = Integer.parseInt(getJtbl_food().getValueAt(i, 1).toString());
             amountDish = getJtbl_food().getValueAt(i, 2).toString();
             drinkName = getJtbl_food().getValueAt(i, 3).toString();
-            int drinkCode = Integer.parseInt(getJtbl_food().getValueAt(i, 4).toString());
+            int currentDrinkCode = Integer.parseInt(getJtbl_food().getValueAt(i, 4).toString());
             amountDrink = getJtbl_food().getValueAt(i, 5).toString();
             float saleSubtotal = Float.parseFloat(getJtbl_food().getValueAt(i, 6).toString());
 
             addDetailsIfValid(details, dishName, amountDish, "No seleccionado");
             addDetailsIfValid(details, drinkName, amountDrink, "No seleccionada");
 
-            addSale(customerId, dishCode, Integer.parseInt(amountDish), drinkCode, Integer.parseInt(amountDrink), saleSubtotal);
+            addSale(customerId, currentDishCode, Integer.parseInt(amountDish), currentDrinkCode, Integer.parseInt(amountDrink), saleSubtotal);
         }
 
         sendConfirmationSale(customerName, customerEmail, details, String.valueOf(this.totalSale));
@@ -220,6 +228,7 @@ public abstract class AbstractFoodController implements Observer {
          new Thread(() -> {
             try {
                 daoSales.save(sale);
+                saveSaleDetail(sale.getSaleNumber(), dishCode, amountDish, drinkCode, amountDrink, saleSubtotal);
                 SwingUtilities.invokeLater(this::clearDataSale);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -227,13 +236,24 @@ public abstract class AbstractFoodController implements Observer {
          }).start();
     }
 
+    protected final void saveSaleDetail(int saleId, int dishCode, int amountDish, int drinkCode, int amountDrink, float saleSubtotal) {
+        try {
+            SaleDetail saleDetail = new SaleDetail();
+            saleDetail.setSaleId(saleId);
+            saleDetail.setDishId(dishCode > 0 ? dishCode : null);
+            saleDetail.setDrinkId(drinkCode > 0 ? drinkCode : null);
+            saleDetail.setDishAmount(amountDish > 0 ? amountDish : null);
+            saleDetail.setDrinkAmount(amountDrink > 0 ? amountDrink : null);
+            saleDetail.setDishPrice(new java.math.BigDecimal(saleSubtotal));
+            daoSaleDetail.save(saleDetail);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     protected void assignValuesSale(Sale sale, String customerId, int dishCode, int amountDish, int drinkCode, int amountDrink, float saleSubtotal) {
-        /*sale.setDishCode(dishCode);
-        sale.setAmountDish(amountDish);
-        sale.setDrinkCode(drinkCode);
-        sale.setAmountDrink(amountDrink);*/
         sale.setClientId(Integer.parseInt(customerId));
-        //sale.setTotalSale(saleSubtotal);
+        sale.setTotal(saleSubtotal);
         sale.setDate(LocalDate.now());
     }
 
@@ -242,7 +262,7 @@ public abstract class AbstractFoodController implements Observer {
             new Thread(() -> {
                 ServiceEmailjS serviceEmailjS = new ServiceEmailjS();
                 String response = serviceEmailjS.sendEmail(customerName, customerEmail, details, totalSale);
-                IO.println(response);
+                System.out.println(response);
             }).start();
         } catch (Exception e) {
             e.printStackTrace();

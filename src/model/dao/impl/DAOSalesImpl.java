@@ -1,20 +1,22 @@
 package model.dao.impl;
 
-import database.DataBase;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import model.dao.interfaces.IDAO;
+
+import database.DataBase;
+import model.dao.interfaces.DAOWithAutoIncrement;
 import model.entities.Sale;
 
 /**
  *
  * @author Andres Cardenas
  */
-public class DAOSalesImpl extends DataBase implements IDAO<Sale> {
+public class DAOSalesImpl extends DataBase implements DAOWithAutoIncrement<Sale> {
 
     private static DAOSalesImpl instance;
 
@@ -32,17 +34,32 @@ public class DAOSalesImpl extends DataBase implements IDAO<Sale> {
 
     @Override
     public void save(Sale data) throws Exception {
+        saveAndGetId(data);
+    }
+
+    @Override
+    public int saveAndGetId(Sale data) throws Exception {
         String sql = "INSERT INTO venta(id_cliente, fecha, total) VALUES (?, ?, ?);";
         this.connect();
+        int generatedId = -1;
 
-        try (PreparedStatement st = this.connection.prepareStatement(sql)) {
+        try (PreparedStatement st = this.connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             st.setInt(1, data.getClientId());
             st.setDate(2, Date.valueOf(data.getDate()));
             st.setFloat(3, data.getTotal());
             st.executeUpdate();
+            
+            try (ResultSet generatedKeys = st.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    generatedId = (int) generatedKeys.getLong(1);
+                    data.setSaleNumber(generatedId);
+                }
+            }
         } finally {
             this.close();
         }
+        
+        return generatedId;
     }
 
     @Override
