@@ -8,13 +8,13 @@ import java.time.LocalDate;
  */
 public class Qualification {
 
-    private int code;
-    private int stars;
-    private String comment;
-    private int idDish;
-    private int idDrink;
-    private int idCustomer;
-    private LocalDate date;
+    protected int code;
+    protected int stars;
+    protected String comment;
+    protected int idDish;
+    protected int idDrink;
+    protected int idCustomer;
+    protected LocalDate date;
 
     public Qualification() {
 

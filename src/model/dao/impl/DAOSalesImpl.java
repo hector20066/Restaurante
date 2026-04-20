@@ -15,17 +15,17 @@ import java.util.List;
  *
  * @author Andres Cardenas
  */
-public class IDAOSalesImpl extends DataBase implements IDAO<Sale> {
+public class DAOSalesImpl extends DataBase implements IDAO<Sale> {
 
-    private static IDAOSalesImpl instance;
+    private static DAOSalesImpl instance;
 
-    private IDAOSalesImpl() {
+    private DAOSalesImpl() {
 
     }
 
-    public static IDAOSalesImpl getInstance() {
+    public static DAOSalesImpl getInstance() {
         if (instance == null) {
-            instance = new IDAOSalesImpl();
+            instance = new DAOSalesImpl();
         }
 
         return instance;

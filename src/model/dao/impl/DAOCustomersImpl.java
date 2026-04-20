@@ -14,17 +14,17 @@ import java.util.List;
  *
  * @author Andres Cardenas
  */
-public class IDAOCustomersImpl extends DataBase implements IDAO<Customer> {
+public class DAOCustomersImpl extends DataBase implements IDAO<Customer> {
 
-    private static IDAOCustomersImpl instance;
+    private static DAOCustomersImpl instance;
 
-    private IDAOCustomersImpl() {
+    private DAOCustomersImpl() {
 
     }
 
-    public static IDAOCustomersImpl getInstance() {
+    public static DAOCustomersImpl getInstance() {
         if (instance == null) {
-            instance = new IDAOCustomersImpl();
+            instance = new DAOCustomersImpl();
         }
 
         return instance;

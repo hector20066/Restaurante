@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Locale;
 import model.dao.impl.DAODishImpl;
 import model.dao.impl.DAODrinkImpl;
-import model.dao.impl.IDAOSalesImpl;
+import model.dao.impl.DAOSalesImpl;
 
 /**
  *
@@ -36,7 +36,7 @@ public class ControllerDashboard implements Observer {
     public ControllerDashboard(DashboardAdmin dashboard, Subject subject) {
         this.dashboard = dashboard;
 
-        this.daoSale = IDAOSalesImpl.getInstance();
+        this.daoSale = DAOSalesImpl.getInstance();
         this.daoDish = DAODishImpl.getInstance();
         this.daoDrink = DAODrinkImpl.getInstance();
 

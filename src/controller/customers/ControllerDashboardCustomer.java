@@ -2,7 +2,7 @@ package controller.customers;
 
 import model.dao.impl.DAODishImpl;
 import model.dao.impl.DAODrinkImpl;
-import model.dao.impl.IDAOQualificationImpl;
+import model.dao.impl.DAOQualificationImpl;
 import model.dao.interfaces.DAORestaurantDb;
 import model.dao.interfaces.IDAO;
 import model.entities.Dish;
@@ -30,7 +30,7 @@ public class ControllerDashboardCustomer implements Observer {
     public ControllerDashboardCustomer(DashboardCustomers dashboardCustomers, Subject subject) {
         this.dashboardCustomers = dashboardCustomers;
 
-        this.daoQualification = IDAOQualificationImpl.getInstance();
+        this.daoQualification = DAOQualificationImpl.getInstance();
         this.daoDish = DAODishImpl.getInstance();
         this.daoDrink = DAODrinkImpl.getInstance();
 

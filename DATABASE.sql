@@ -41,7 +41,7 @@ CREATE TABLE detalle_venta (
     cantBebida INT NULL,
     precioPlato DECIMAL(10,2) NULL,
     precioBebida DECIMAL(10,2) NULL,
-    FOREIGN KEY (idVenta) REFERENCES venta(num_venta),
+    FOREIGN KEY (idVenta) REFERENCES venta(num_venta) ON DELETE CASCADE,
     FOREIGN KEY (idPlato) REFERENCES platos(codigo),
     FOREIGN KEY (idBebida) REFERENCES bebidas(codigo)
 );

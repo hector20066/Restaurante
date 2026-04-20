@@ -13,17 +13,17 @@ import java.util.List;
  *
  * @author Andres Cardenas
  */
-public class IDAOQualificationImpl extends DataBase implements IDAO<Qualification> {
+public class DAOQualificationImpl extends DataBase implements IDAO<Qualification> {
 
-    private static IDAOQualificationImpl instance;
+    private static DAOQualificationImpl instance;
 
-    private IDAOQualificationImpl() {
+    private DAOQualificationImpl() {
 
     }
 
-    public static IDAOQualificationImpl getInstance() {
+    public static DAOQualificationImpl getInstance() {
         if (instance == null) {
-            instance = new IDAOQualificationImpl();
+            instance = new DAOQualificationImpl();
         }
 
         return instance;

@@ -2,7 +2,7 @@ package controller.customers;
 
 import model.dao.impl.DAODishImpl;
 import model.dao.impl.DAODrinkImpl;
-import model.dao.impl.IDAOQualificationImpl;
+import model.dao.impl.DAOQualificationImpl;
 import model.dao.interfaces.DAORestaurantDb;
 import model.dao.interfaces.IDAO;
 import model.entities.Customer;
@@ -17,7 +17,7 @@ import view.customers.RatingsPanel;
 import javax.swing.*;
 import java.time.LocalDate;
 import java.util.List;
-import model.dao.impl.IDAOCustomersImpl;
+import model.dao.impl.DAOCustomersImpl;
 
 /**
  *
@@ -42,8 +42,8 @@ public class ControllerRatingPanel {
         this.ratingsPanel = ratingsPanel;
         this.subject = subject;
 
-        this.daoQualification = IDAOQualificationImpl.getInstance();
-        this.daoCustomer = IDAOCustomersImpl.getInstance();
+        this.daoQualification = DAOQualificationImpl.getInstance();
+        this.daoCustomer = DAOCustomersImpl.getInstance();
         this.daoDish = DAODishImpl.getInstance();
         this.daoDrink = DAODrinkImpl.getInstance();
 
