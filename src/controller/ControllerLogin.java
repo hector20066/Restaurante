@@ -78,7 +78,7 @@ public class ControllerLogin {
 
             if (loginService.login(user, password)) {
                 showAdminWindow();
-                subject.nofifyObserver();
+                subject.notifyObserver();
             } else {
                 MessageUtils.errorMessage("No se ha encontrado la cuenta. Por favor si no es empleado\ninicie sesion como invitado");
             }
@@ -98,7 +98,7 @@ public class ControllerLogin {
     private void loginGuest() {
         try {
             showUserWindow();
-            subject.nofifyObserver();
+            subject.notifyObserver();
         } catch (Exception e) {
             MessageUtils.errorMessage("Ha ocurrido un error al iniciar sesion.\nLamentamos los inconvenientes");
         }

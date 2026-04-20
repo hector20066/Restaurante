@@ -35,10 +35,8 @@ public class ConcreteSubject implements Subject {
     }
 
     @Override
-    public void nofifyObserver() {
-        for (Observer observer : list) {
-            observer.update();
-        }
+    public void notifyObserver() {
+        list.forEach(Observer::update);
     }
 
 }

@@ -226,7 +226,7 @@ public class ControllerViewLogs implements Observer {
 
             SwingUtilities.invokeLater(() -> {
                 MessageUtils.informationMessage("Se ha eliminado el registro");
-                subject.nofifyObserver();
+                subject.notifyObserver();
             });
         }).start();
     }

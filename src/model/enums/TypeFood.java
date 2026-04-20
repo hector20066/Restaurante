@@ -15,4 +15,5 @@ public enum TypeFood {
     public String getValue() {
         return value;
     }
+
 }

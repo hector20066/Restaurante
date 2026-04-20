@@ -214,7 +214,7 @@ public class ControllerRatingPanel {
         MessageUtils.informationMessage("Gracias por su calificacion.");
         clearFieldsDrinks();
         clearFieldsDish();
-        subject.nofifyObserver();
+        subject.notifyObserver();
     }
 
     private void clearFieldsDish() {

@@ -125,7 +125,7 @@ public class ControllerRegisterDrink {
     private void runSwingUtilities(String typeDrink) {
         MessageUtils.informationMessage("Se ha registrado la bebida " + typeDrink + " exitosamente.");
         clearFields();
-        subject.nofifyObserver();
+        subject.notifyObserver();
     }
 
     private void clearFields() {

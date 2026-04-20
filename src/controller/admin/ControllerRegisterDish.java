@@ -124,7 +124,7 @@ public class ControllerRegisterDish {
     private void runSwingUtilities(String typeDish) {
         MessageUtils.informationMessage("Se ha registrado el plato " + typeDish + " correctamente.");
         clearFields();
-        subject.nofifyObserver();
+        subject.notifyObserver();
     }
 
     private void clearFields() {
