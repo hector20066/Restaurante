@@ -6,8 +6,6 @@ import builder.controllers.ControllerUserPanelBuilder;
 import builder.controllers.ControllerViewLogsDbBuilder;
 import controller.admin.*;
 import controller.customers.*;
-import model.entities.Dish;
-import model.entities.Drink;
 import observer.ConcreteSubject;
 import view.LogIn;
 import view.administrators.*;
@@ -43,7 +41,7 @@ public class Coordinator {
     private ControllerAdminPanel controllerAdminPanel;
     private ControllerRegisterDish controllerRegisterDish;
     private ControllerRegisterDrink controllerRegisterDrink;
-    private ControllerViewLogsDB controllerViewLogsDB;
+    private ControllerViewLogs controllerViewLogsDB;
     private ControllerDashboard controllerDashboard;
 
     // Drivers Users

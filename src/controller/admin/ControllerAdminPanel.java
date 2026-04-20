@@ -119,7 +119,6 @@ public class ControllerAdminPanel {
         adminPanel.getBtn_registerDish().setForeground(new Color(0, 49, 245));
         controllerRegisterDish.setModify(false);
         registerDish.getBtn_register().setText("REGISTRAR PLATO");
-        registerDish.getCbo_waySave().setEnabled(true);
         registerDish.getTxt_name().setText("");
         registerDish.getTxt_description().setText("");
         registerDish.getTxt_price().setText("");
@@ -136,7 +135,6 @@ public class ControllerAdminPanel {
         adminPanel.getBtn_registerDrinks().setForeground(new Color(0, 49, 245));
         controllerRegisterDrink.setModify(false);
         registerDrink.getBtn_register().setText("REGISTRAR BEBIDA");
-        registerDrink.getCbo_waySave().setEnabled(true);
         registerDrink.getTxt_name().setText("");
         registerDrink.getTxt_description().setText("");
         registerDrink.getTxt_price().setText("");

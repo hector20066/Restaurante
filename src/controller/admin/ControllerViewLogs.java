@@ -31,7 +31,7 @@ import java.util.regex.Pattern;
  *
  * @author Andres Cardenas
  */
-public class ControllerViewLogsDB implements Observer {
+public class ControllerViewLogs implements Observer {
 
     private final ViewLogsDB viewLogsDB;
     private final RegisterDish registerDish;
@@ -44,7 +44,7 @@ public class ControllerViewLogsDB implements Observer {
     private final DAORestaurantDb<Drink> daoDrink;
     private final DAORestaurantDb<Dish> daoDish;
 
-    public ControllerViewLogsDB(ControllerViewLogsDbBuilder builder) {
+    public ControllerViewLogs(ControllerViewLogsDbBuilder builder) {
         this.viewLogsDB = builder.getViewLogsDB();
         this.registerDish = builder.getRegisterDish();
         this.registerDrink = builder.getRegisterDrink();
@@ -253,8 +253,6 @@ public class ControllerViewLogsDB implements Observer {
         registerDish.getTxt_name().setText(name);
         registerDish.getTxt_price().setText(price);
         registerDish.getTxt_description().setText(description);
-        registerDish.getCbo_waySave().setSelectedIndex(0);
-        registerDish.getCbo_waySave().setEnabled(false);
         registerDish.getBtn_register().setText("MODIFICAR PLATO");
 
         if (type.equals("Plato Colombiano")) {
@@ -298,8 +296,6 @@ public class ControllerViewLogsDB implements Observer {
         registerDrink.getTxt_name().setText(name);
         registerDrink.getTxt_description().setText(description);
         registerDrink.getTxt_price().setText(price);
-        registerDrink.getCbo_waySave().setSelectedIndex(0);
-        registerDrink.getCbo_waySave().setEnabled(false);
         registerDrink.getBtn_register().setText("MODIFICAR BEBIDA");
 
         if (type.equals("Bebida Colombiana")) {

@@ -3,7 +3,7 @@ package builder.controllers;
 import controller.admin.ControllerAdminPanel;
 import controller.admin.ControllerRegisterDish;
 import controller.admin.ControllerRegisterDrink;
-import controller.admin.ControllerViewLogsDB;
+import controller.admin.ControllerViewLogs;
 import observer.Subject;
 import view.administrators.RegisterDish;
 import view.administrators.RegisterDrink;
@@ -58,8 +58,8 @@ public class ControllerViewLogsDbBuilder {
         return this;
     }
 
-    public ControllerViewLogsDB build() {
-        return new ControllerViewLogsDB(this);
+    public ControllerViewLogs build() {
+        return new ControllerViewLogs(this);
     }
 
     public ViewLogsDB getViewLogsDB() {

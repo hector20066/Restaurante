@@ -44,7 +44,6 @@ public class ControllerRegisterDrink {
             String nameDrink = registerDrink.getTxt_name().getText();
             String description = registerDrink.getTxt_description().getText();
             String price = registerDrink.getTxt_price().getText().trim();
-            int waySave = registerDrink.getCbo_waySave().getSelectedIndex();
 
             if (isInvalidData(nameDrink, description, price)) {
                 MessageUtils.warningMessage("Por favor ingrese toda la información solicitada.");
@@ -52,12 +51,12 @@ public class ControllerRegisterDrink {
             }
 
             if (typeDrink.equals("Colombiana")) {
-                registerColombianDrink(nameDrink, description, Float.parseFloat(price), waySave);
+                registerColombianDrink(nameDrink, description, Float.parseFloat(price));
             } else {
                 if (typeDrink.equals("Italiana")) {
-                    registerItalianDrink(nameDrink, description, Float.parseFloat(price), waySave);
+                    registerItalianDrink(nameDrink, description, Float.parseFloat(price));
                 } else {
-                    registerChineseDrink(nameDrink, description, Float.parseFloat(price), waySave);
+                    registerChineseDrink(nameDrink, description, Float.parseFloat(price));
                 }
             }
         } catch (Exception e) {
@@ -70,10 +69,10 @@ public class ControllerRegisterDrink {
         return nameDrink.isBlank() || description.isBlank() || price.isBlank();
     }
 
-    private void registerColombianDrink(String nameDrink, String description, float price, int waySave) throws Exception {
+    private void registerColombianDrink(String nameDrink, String description, float price) throws Exception {
         factory = new ColombianRestaurant();
         Drink colombianDrink = factory.createDrink();
-        assignValuesDrink(nameDrink, description, price, waySave, colombianDrink);
+        assignValuesDrink(nameDrink, description, price, colombianDrink);
 
         new Thread(() -> {
             registerOfModify(colombianDrink);
@@ -81,10 +80,10 @@ public class ControllerRegisterDrink {
         }).start();
     }
 
-    private void registerItalianDrink(String nameDrink, String description, float price, int waySave) {
+    private void registerItalianDrink(String nameDrink, String description, float price) {
         factory = new ItalianRestaurant();
         Drink italianDrink = factory.createDrink();
-        assignValuesDrink(nameDrink, description, price, waySave, italianDrink);
+        assignValuesDrink(nameDrink, description, price, italianDrink);
 
         new Thread(() -> {
             registerOfModify(italianDrink);
@@ -92,10 +91,10 @@ public class ControllerRegisterDrink {
         }).start();
     }
 
-    private void registerChineseDrink(String nameDrink, String description, float price, int waySave) {
+    private void registerChineseDrink(String nameDrink, String description, float price) {
         factory = new ChineseRestaurant();
         Drink chineseDrink = factory.createDrink();
-        assignValuesDrink(nameDrink, description, price, waySave, chineseDrink);
+        assignValuesDrink(nameDrink, description, price, chineseDrink);
 
         new Thread(() -> {
             registerOfModify(chineseDrink);
@@ -103,11 +102,10 @@ public class ControllerRegisterDrink {
         }).start();
     }
 
-    private void assignValuesDrink(String nameDrink, String description, float price, int waySave, Drink drink) {
+    private void assignValuesDrink(String nameDrink, String description, float price, Drink drink) {
         drink.setName(nameDrink);
         drink.setDescription(description);
         drink.setPrice(price);
-
     }
 
     private void registerOfModify(Drink drink) {

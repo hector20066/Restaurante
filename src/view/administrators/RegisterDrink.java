@@ -36,8 +36,6 @@ public class RegisterDrink extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         txt_price = new javax.swing.JTextField();
         btn_register = new view.swing.ButtonAction();
-        jLabel8 = new javax.swing.JLabel();
-        cbo_waySave = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -87,12 +85,6 @@ public class RegisterDrink extends javax.swing.JPanel {
         btn_register.setFont(new java.awt.Font("SansSerif", 1, 15)); // NOI18N
         btn_register.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        jLabel8.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(33, 37, 41));
-        jLabel8.setText("Guardar en:");
-
-        cbo_waySave.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Base de Datos (Disponibles para la venta)", "Archivo (Futuramente disponibles)" }));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -136,13 +128,7 @@ public class RegisterDrink extends javax.swing.JPanel {
                                 .addGap(6, 6, 6)
                                 .addComponent(cbo_typeDrink, 0, 263, Short.MAX_VALUE))
                             .addComponent(jLabel3))
-                        .addGap(249, 249, 249)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(cbo_waySave, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(161, 161, 161)))
+                        .addGap(706, 706, 706)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -153,15 +139,9 @@ public class RegisterDrink extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbo_typeDrink, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbo_waySave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbo_typeDrink, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(jLabel7)
                 .addGap(18, 18, 18)
@@ -192,10 +172,6 @@ public class RegisterDrink extends javax.swing.JPanel {
         return cbo_typeDrink;
     }
 
-    public JComboBox<String> getCbo_waySave() {
-        return cbo_waySave;
-    }
-
     public JTextField getTxt_description() {
         return txt_description;
     }
@@ -211,7 +187,6 @@ public class RegisterDrink extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private view.swing.ButtonAction btn_register;
     private javax.swing.JComboBox<String> cbo_typeDrink;
-    private javax.swing.JComboBox<String> cbo_waySave;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -219,7 +194,6 @@ public class RegisterDrink extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField txt_description;
     private javax.swing.JTextField txt_name;
     private javax.swing.JTextField txt_price;

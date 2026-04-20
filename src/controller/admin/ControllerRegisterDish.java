@@ -44,7 +44,6 @@ public class ControllerRegisterDish {
             String nameDish = registerDish.getTxt_name().getText();
             String description = registerDish.getTxt_description().getText();
             String price = registerDish.getTxt_price().getText().trim();
-            int waySave = registerDish.getCbo_waySave().getSelectedIndex();
 
             if (isInvalidData(nameDish, description, price)) {
                 MessageUtils.warningMessage("Por favor ingrese toda la informacion solicitada.");
@@ -52,12 +51,12 @@ public class ControllerRegisterDish {
             }
 
             if (typeDish.equals("Colombiano")) {
-                registerColombianDish(nameDish, description, Float.parseFloat(price), waySave);
+                registerColombianDish(nameDish, description, Float.parseFloat(price));
             } else {
                 if (typeDish.equals("Italiano")) {
-                    registerItalianDish(nameDish, description, Float.parseFloat(price), waySave);
+                    registerItalianDish(nameDish, description, Float.parseFloat(price));
                 } else {
-                    registerChineseDish(nameDish, description, Float.parseFloat(price), waySave);
+                    registerChineseDish(nameDish, description, Float.parseFloat(price));
                 }
             }
         } catch (Exception e) {
@@ -69,10 +68,10 @@ public class ControllerRegisterDish {
         return nameDish.isBlank() || description.isBlank() || price.isBlank();
     }
 
-    private void registerColombianDish(String nameDish, String description, float price, int waySave) {
+    private void registerColombianDish(String nameDish, String description, float price) {
         factory = new ColombianRestaurant();
         Dish colombianDish = factory.createDish();
-        assignValuesDish(nameDish, description, price, waySave, colombianDish);
+        assignValuesDish(nameDish, description, price, colombianDish);
 
         new Thread(() -> {
             registerOfModify(colombianDish);
@@ -80,10 +79,10 @@ public class ControllerRegisterDish {
         }).start();
     }
 
-    private void registerItalianDish(String nameDish, String description, float price, int waySave) {
+    private void registerItalianDish(String nameDish, String description, float price) {
         factory = new ItalianRestaurant();
         Dish italianDish = factory.createDish();
-        assignValuesDish(nameDish, description, price, waySave, italianDish);
+        assignValuesDish(nameDish, description, price, italianDish);
 
         new Thread(() -> {
             registerOfModify(italianDish);
@@ -91,10 +90,10 @@ public class ControllerRegisterDish {
         }).start();
     }
 
-    private void registerChineseDish(String nameDish, String description, float price, int waySave) {
+    private void registerChineseDish(String nameDish, String description, float price) {
         factory = new ChineseRestaurant();
         Dish chineseDish = factory.createDish();
-        assignValuesDish(nameDish, description, price, waySave, chineseDish);
+        assignValuesDish(nameDish, description, price, chineseDish);
 
         new Thread(() -> {
             registerOfModify(chineseDish);
@@ -102,11 +101,10 @@ public class ControllerRegisterDish {
         }).start();
     }
 
-    private void assignValuesDish(String nameDish, String description, float price, int waySave, Dish dish) {
+    private void assignValuesDish(String nameDish, String description, float price, Dish dish) {
         dish.setName(nameDish);
         dish.setDescription(description);
         dish.setPrice(price);
-
     }
 
     private void registerOfModify(Dish dish) {

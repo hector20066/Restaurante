@@ -36,8 +36,6 @@ public class RegisterDish extends javax.swing.JPanel {
         txt_description = new javax.swing.JTextField();
         btn_register = new view.swing.ButtonAction();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        cbo_waySave = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -87,12 +85,6 @@ public class RegisterDish extends javax.swing.JPanel {
         jLabel7.setForeground(new java.awt.Color(33, 37, 41));
         jLabel7.setText("Por favor ingrese la siguiente informacion del plato seleccionado:");
 
-        jLabel8.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(33, 37, 41));
-        jLabel8.setText("Guardar en:");
-
-        cbo_waySave.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Base de Datos (Disponibles para la venta)", "Archivo (Futuramente disponibles)" }));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -111,13 +103,7 @@ public class RegisterDish extends javax.swing.JPanel {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(20, 20, 20)
                                         .addComponent(cbo_typeDish, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addGap(110, 110, 110)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(cbo_waySave, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addGap(107, 107, 107))
+                                .addGap(664, 664, 664))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(14, 14, 14)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,13 +140,9 @@ public class RegisterDish extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel8))
+                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbo_typeDish, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbo_waySave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(cbo_typeDish, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(jLabel7)
                 .addGap(18, 18, 18)
@@ -191,10 +173,6 @@ public class RegisterDish extends javax.swing.JPanel {
         return cbo_typeDish;
     }
 
-    public JComboBox<String> getCbo_waySave() {
-        return cbo_waySave;
-    }
-
     public JTextField getTxt_description() {
         return txt_description;
     }
@@ -210,7 +188,6 @@ public class RegisterDish extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private view.swing.ButtonAction btn_register;
     private javax.swing.JComboBox<String> cbo_typeDish;
-    private javax.swing.JComboBox<String> cbo_waySave;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -218,7 +195,6 @@ public class RegisterDish extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField txt_description;
     private javax.swing.JTextField txt_name;
     private javax.swing.JTextField txt_price;
