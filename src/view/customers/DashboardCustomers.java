@@ -6,7 +6,6 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -24,9 +23,11 @@ public class DashboardCustomers extends javax.swing.JPanel {
     public DashboardCustomers() {
         initComponents();
 
-        jpl_contentRatings.setLayout(new BoxLayout(jpl_contentRatings, BoxLayout.Y_AXIS));
+        jpl_contentRatingsDish.setLayout(new BoxLayout(jpl_contentRatingsDish, BoxLayout.Y_AXIS));
+         jpl_contentRatingsDrink.setLayout(new BoxLayout(jpl_contentRatingsDrink, BoxLayout.Y_AXIS));
 
-        jsp_scroll.getVerticalScrollBar().setUnitIncrement(15);
+        jsp_scrollDish.getVerticalScrollBar().setUnitIncrement(15);
+        jsp_scrollDrik.getVerticalScrollBar().setUnitIncrement(15);
     }
 
     /**
@@ -46,9 +47,16 @@ public class DashboardCustomers extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jsp_scroll = new javax.swing.JScrollPane();
-        jpl_contentRatings = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jpl_dishes = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jsp_scrollDish = new javax.swing.JScrollPane();
+        jpl_contentRatingsDish = new javax.swing.JPanel();
+        jpl_drinks = new javax.swing.JPanel();
+        jPanel = new javax.swing.JPanel();
+        jsp_scrollDrik = new javax.swing.JScrollPane();
+        jpl_contentRatingsDrink = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -90,28 +98,102 @@ public class DashboardCustomers extends javax.swing.JPanel {
         jSeparator1.setForeground(new java.awt.Color(66, 165, 245));
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jsp_scroll.setBackground(new java.awt.Color(255, 255, 255));
-        jsp_scroll.setBorder(null);
-
-        jpl_contentRatings.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jpl_contentRatingsLayout = new javax.swing.GroupLayout(jpl_contentRatings);
-        jpl_contentRatings.setLayout(jpl_contentRatingsLayout);
-        jpl_contentRatingsLayout.setHorizontalGroup(
-            jpl_contentRatingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 323, Short.MAX_VALUE)
-        );
-        jpl_contentRatingsLayout.setVerticalGroup(
-            jpl_contentRatingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 507, Short.MAX_VALUE)
-        );
-
-        jsp_scroll.setViewportView(jpl_contentRatings);
-
         jLabel7.setFont(new java.awt.Font("SansSerif", 3, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(25, 118, 210));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Mejor Calificados");
+
+        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jTabbedPane1.setForeground(new java.awt.Color(33, 37, 41));
+        jTabbedPane1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        jsp_scrollDish.setBackground(new java.awt.Color(255, 255, 255));
+        jsp_scrollDish.setBorder(null);
+
+        jpl_contentRatingsDish.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jpl_contentRatingsDishLayout = new javax.swing.GroupLayout(jpl_contentRatingsDish);
+        jpl_contentRatingsDish.setLayout(jpl_contentRatingsDishLayout);
+        jpl_contentRatingsDishLayout.setHorizontalGroup(
+            jpl_contentRatingsDishLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 338, Short.MAX_VALUE)
+        );
+        jpl_contentRatingsDishLayout.setVerticalGroup(
+            jpl_contentRatingsDishLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 453, Short.MAX_VALUE)
+        );
+
+        jsp_scrollDish.setViewportView(jpl_contentRatingsDish);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jsp_scrollDish)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jsp_scrollDish)
+        );
+
+        javax.swing.GroupLayout jpl_dishesLayout = new javax.swing.GroupLayout(jpl_dishes);
+        jpl_dishes.setLayout(jpl_dishesLayout);
+        jpl_dishesLayout.setHorizontalGroup(
+            jpl_dishesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jpl_dishesLayout.setVerticalGroup(
+            jpl_dishesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Platos", jpl_dishes);
+
+        jPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        jsp_scrollDrik.setBackground(new java.awt.Color(255, 255, 255));
+        jsp_scrollDrik.setBorder(null);
+
+        jpl_contentRatingsDrink.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jpl_contentRatingsDrinkLayout = new javax.swing.GroupLayout(jpl_contentRatingsDrink);
+        jpl_contentRatingsDrink.setLayout(jpl_contentRatingsDrinkLayout);
+        jpl_contentRatingsDrinkLayout.setHorizontalGroup(
+            jpl_contentRatingsDrinkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 338, Short.MAX_VALUE)
+        );
+        jpl_contentRatingsDrinkLayout.setVerticalGroup(
+            jpl_contentRatingsDrinkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 453, Short.MAX_VALUE)
+        );
+
+        jsp_scrollDrik.setViewportView(jpl_contentRatingsDrink);
+
+        javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
+        jPanel.setLayout(jPanelLayout);
+        jPanelLayout.setHorizontalGroup(
+            jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jsp_scrollDrik)
+        );
+        jPanelLayout.setVerticalGroup(
+            jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jsp_scrollDrik)
+        );
+
+        javax.swing.GroupLayout jpl_drinksLayout = new javax.swing.GroupLayout(jpl_drinks);
+        jpl_drinks.setLayout(jpl_drinksLayout);
+        jpl_drinksLayout.setHorizontalGroup(
+            jpl_drinksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jpl_drinksLayout.setVerticalGroup(
+            jpl_drinksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Bebidas", jpl_drinks);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -120,9 +202,7 @@ public class DashboardCustomers extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
+                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -136,8 +216,8 @@ public class DashboardCustomers extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jsp_scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(21, 21, 21))))
+                            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,32 +232,33 @@ public class DashboardCustomers extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(73, 73, 73)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jSeparator1)
-                                .addGap(24, 24, 24)))
-                        .addComponent(jLabel12))
-                    .addComponent(jsp_scroll))
+                        .addComponent(jLabel2)
+                        .addGap(73, 73, 73)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jSeparator1)
+                        .addGap(24, 24, 24))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jTabbedPane1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addComponent(jLabel12)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     public void cleanPanel() {
-        jpl_contentRatings.removeAll();
+        jpl_contentRatingsDish.removeAll();
+        jpl_contentRatingsDrink.removeAll();
     }
 
-    public void addRatingPanel(String food, int numStars) {
+    public void addRatingPanelDish(String food, int numStars) {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBackground(Color.WHITE);
@@ -224,9 +305,61 @@ public class DashboardCustomers extends javax.swing.JPanel {
         panel.add(Box.createVerticalStrut(5));
         panel.add(separator);
 
-        jpl_contentRatings.add(panel);
-        jpl_contentRatings.revalidate();
-        jpl_contentRatings.repaint();
+        jpl_contentRatingsDish.add(panel);
+        jpl_contentRatingsDish.revalidate();
+        jpl_contentRatingsDish.repaint();
+    }
+    
+     public void addRatingPanelDrink(String food, int numStars) {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setBackground(Color.WHITE);
+        panel.setBorder(BorderFactory.createEmptyBorder(2, 10, 2, 10));
+
+        JLabel lbl_title = new JLabel(food);
+        lbl_title.setFont(new Font("SansSerif", Font.BOLD, 14));
+        lbl_title.setForeground(new Color(33, 37, 41));
+        lbl_title.setAlignmentX(Component.LEFT_ALIGNMENT);
+        panel.add(lbl_title);
+
+        JPanel content = new JPanel();
+        content.setLayout(new FlowLayout(FlowLayout.LEFT, 8, 0));
+        content.setBackground(Color.WHITE);
+        content.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        JLabel lbl_stars = new JLabel("Calificación:");
+        lbl_stars.setFont(new Font("SansSerif", Font.PLAIN, 12));
+        lbl_stars.setForeground(new Color(33, 37, 41));
+        content.add(lbl_stars);
+
+        String fullStarPath = "/view/image/starQualification.png";
+        String emptyStarPath = "/view/image/starEmpty.png";
+
+        ImageIcon fullStarIcon = new ImageIcon(getClass().getResource(fullStarPath));
+        ImageIcon emptyStarIcon = new ImageIcon(getClass().getResource(emptyStarPath));
+
+        JPanel starsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 1, 0));
+        starsPanel.setBackground(Color.WHITE);
+
+        for (int i = 0; i < 5; i++) {
+            JLabel star = new JLabel(i < numStars ? fullStarIcon : emptyStarIcon);
+            starsPanel.add(star);
+        }
+
+        content.add(starsPanel);
+        panel.add(content);
+
+        JSeparator separator = new JSeparator();
+        separator.setForeground(new Color(220, 220, 220));
+        separator.setMaximumSize(new Dimension(Integer.MAX_VALUE, 1));
+        separator.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        panel.add(Box.createVerticalStrut(5));
+        panel.add(separator);
+
+        jpl_contentRatingsDrink.add(panel);
+        jpl_contentRatingsDrink.revalidate();
+        jpl_contentRatingsDrink.repaint();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -238,8 +371,15 @@ public class DashboardCustomers extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JPanel jpl_contentRatings;
-    private javax.swing.JScrollPane jsp_scroll;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JPanel jpl_contentRatingsDish;
+    private javax.swing.JPanel jpl_contentRatingsDrink;
+    private javax.swing.JPanel jpl_dishes;
+    private javax.swing.JPanel jpl_drinks;
+    private javax.swing.JScrollPane jsp_scrollDish;
+    private javax.swing.JScrollPane jsp_scrollDrik;
     // End of variables declaration//GEN-END:variables
 }
