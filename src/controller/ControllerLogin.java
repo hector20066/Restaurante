@@ -68,7 +68,7 @@ public class ControllerLogin {
 
     private void loginAdmin() {
         try {
-            String user = login.getTxt_user().getText().trim();
+            /*String user = login.getTxt_user().getText().trim();
             String password = new String(login.getJpld_password().getPassword());
 
             if (user.isBlank() || password.isBlank()) {
@@ -81,7 +81,7 @@ public class ControllerLogin {
                 subject.notifyObserver();
             } else {
                 MessageUtils.errorMessage("No se ha encontrado la cuenta. Por favor si no es empleado\ninicie sesion como invitado");
-            }
+            }*/
         } catch (Exception e) {
             MessageUtils.errorMessage("Ha ocurrido un error al iniciar sesion.\nLamentamos los inconvenientes");
         }

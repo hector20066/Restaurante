@@ -29,7 +29,7 @@ CREATE TABLE venta (
     id_cliente INT,
     fecha DATE,
     total DECIMAL(10,2),
-    FOREIGN KEY (id_cliente) REFERENCES cliente(id)
+    FOREIGN KEY (id_cliente) REFERENCES cliente(id) ON DELETE SET NULL
 );
 
 CREATE TABLE detalle_venta (
@@ -42,8 +42,8 @@ CREATE TABLE detalle_venta (
     precioPlato DECIMAL(10,2) NULL,
     precioBebida DECIMAL(10,2) NULL,
     FOREIGN KEY (idVenta) REFERENCES venta(num_venta) ON DELETE CASCADE,
-    FOREIGN KEY (idPlato) REFERENCES platos(codigo),
-    FOREIGN KEY (idBebida) REFERENCES bebidas(codigo)
+    FOREIGN KEY (idPlato) REFERENCES platos(codigo) ON DELETE SET NULL,
+    FOREIGN KEY (idBebida) REFERENCES bebidas(codigo) ON DELETE SET NULL
 );
 
 CREATE TABLE calificacion_bebida (
@@ -53,8 +53,8 @@ CREATE TABLE calificacion_bebida (
     idBebida INT,
     idCliente INT,
     fecha DATE,
-    FOREIGN KEY (idBebida) REFERENCES bebidas(codigo),
-    FOREIGN KEY (idCliente) REFERENCES cliente(id)
+    FOREIGN KEY (idBebida) REFERENCES bebidas(codigo) ON DELETE CASCADE,
+    FOREIGN KEY (idCliente) REFERENCES cliente(id) ON DELETE CASCADE
 );
 
 CREATE TABLE calificacion_plato (
@@ -64,6 +64,6 @@ CREATE TABLE calificacion_plato (
     idPlato INT,
     idCliente INT,
     fecha DATE,
-    FOREIGN KEY (idPlato) REFERENCES platos(codigo),
-    FOREIGN KEY (idCliente) REFERENCES cliente(id)
+    FOREIGN KEY (idPlato) REFERENCES platos(codigo) ON DELETE CASCADE ,
+    FOREIGN KEY (idCliente) REFERENCES cliente(id) ON DELETE CASCADE
 );
