@@ -40,7 +40,7 @@ public class ControllerRegisterDrink {
 
     private void register() {
         try {
-            String typeDrink = (String) registerDrink.getCbo_typeDrink().getSelectedItem();
+            /*String typeDrink = (String) registerDrink.getCbo_typeDrink().getSelectedItem();
             String nameDrink = registerDrink.getTxt_name().getText();
             String description = registerDrink.getTxt_description().getText();
             String price = registerDrink.getTxt_price().getText().trim();
@@ -58,10 +58,9 @@ public class ControllerRegisterDrink {
                 } else {
                     registerChineseDrink(nameDrink, description, Float.parseFloat(price));
                 }
-            }
+            }*/
         } catch (Exception e) {
             MessageUtils.errorMessage("Ha ocurrido un error al tratar de registrar la bebida");
-            e.printStackTrace();
         }
     }
 
@@ -110,7 +109,6 @@ public class ControllerRegisterDrink {
 
     private void registerOfModify(Drink drink) {
         try {
-
             if (isModify()) {
                 drink.setCode(codeDrink);
                 daoRestaurantDb.modify(drink);

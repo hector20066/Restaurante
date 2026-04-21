@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class ServiceEmailjS {
     
- private static final String API_URL = "https://api.emailjs.com/api/v1.0/email/send";
+    private static final String API_URL = "https://api.emailjs.com/api/v1.0/email/send";
     private static final String SERVICE_ID = "service_pf8gdkc";
     private static final String TEMPLATE_ID = "template_f9qhkbg";
     private static final String PUBLIC_KEY = "11brmFbS2m4tV-bsn";

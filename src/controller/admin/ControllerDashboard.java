@@ -9,6 +9,7 @@ import model.enums.TypeFood;
 import observer.Observer;
 import observer.Subject;
 import view.administrators.DashboardAdmin;
+import view.model.CardModel;
 import view.model.ModelChart;
 
 import java.awt.*;
@@ -20,6 +21,8 @@ import java.util.Locale;
 import model.dao.impl.DAODishImpl;
 import model.dao.impl.DAODrinkImpl;
 import model.dao.impl.DAOSalesImpl;
+
+import javax.swing.*;
 
 /**
  *
@@ -46,6 +49,13 @@ public class ControllerDashboard implements Observer {
     @Override
     public void update() {
         new Thread(() -> {
+            dashboard.getChart().clear();
+            dashboard.getChart().addLegend("Comida Colombiana", new Color(255,209,102));
+            dashboard.getChart().addLegend("Comida Italiana", new Color(6,214,160));
+            dashboard.getChart().addLegend("Comida China", new Color(239,71,111));
+            dashboard.getCard1().setData(new CardModel(new ImageIcon(getClass().getResource("/view/image/martini.png")), "Bebidas", String.valueOf(0), "Total de bebidas vendidas"));
+            dashboard.getCard2().setData(new CardModel(new ImageIcon(getClass().getResource("/view/image/utensils.png")), "Platos", String.valueOf(0), "Total de platos vendidos"));
+            dashboard.getCard3().setData(new CardModel(new ImageIcon(getClass().getResource("/view/image/profit.png")), "Total Ventas", String.valueOf(0), "Total ganado en ventas"));
             //loadGraphicalData();
             //loadCardsData();
         }).start();

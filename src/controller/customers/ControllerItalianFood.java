@@ -19,7 +19,6 @@ public class ControllerItalianFood extends AbstractFoodController {
 
     public ControllerItalianFood(ItalianFood italianFood, Subject subject) {
         this.italianFood = italianFood;
-
         subject.register(this);
 
         connectEvents();

@@ -18,33 +18,26 @@ import view.customers.*;
 public class Coordinator {
 
     private ConcreteSubject subject;
-    private LogIn login;
 
+    private LogIn login;
     private AdminPanel adminPanel;
     private UserPanel userPanel;
-
-    // Admin Panels
     private DashboardAdmin dashboardAdmin;
     private RegisterDish registerDish;
     private RegisterDrink registerDrink;
     private ViewLogsDB viewLogsDB;
-    
-    // Users Panels
     private DashboardCustomers dashboardCustomers;
     private ChineseFood chineseFood;
     private ItalianFood italianFood;
     private ColombianFood colombianFood;
     private RatingsPanel ratingsPanel;
 
-    // Drivers Admin
     private ControllerLogin controllerLogin;
     private ControllerAdminPanel controllerAdminPanel;
     private ControllerRegisterDish controllerRegisterDish;
     private ControllerRegisterDrink controllerRegisterDrink;
     private ControllerViewLogs controllerViewLogsDB;
     private ControllerDashboard controllerDashboard;
-
-    // Drivers Users
     private ControllerDashboardCustomer controllerDashboardCustomer;
     private ControllerUsersPanel controllerUsersPanel;
     private ControllerColombianFood controllerColombianFood;
@@ -53,19 +46,13 @@ public class Coordinator {
     private ControllerRatingPanel controllerRatingPanel;
 
     public void startApp() {
-        startObserver();
+        subject = ConcreteSubject.getInstance();
         startViews();
         startDrivers();
 
-        java.awt.EventQueue.invokeLater(() -> {
-            login.setVisible(true);
-            login.setLocationRelativeTo(null);
-            login.setResizable(false);
-        });
-    }
-
-    private void startObserver() {
-        subject = ConcreteSubject.getInstance();
+        login.setVisible(true);
+        login.setLocationRelativeTo(null);
+        login.setResizable(false);
     }
 
     private void startViews() {

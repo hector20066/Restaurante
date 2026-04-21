@@ -90,7 +90,7 @@ public class ControllerRatingPanel {
 
     private void qualificationDish() {
         try {
-            String idCustomer = ratingsPanel.getTxt_customerId().getText().trim();
+            /*String idCustomer = ratingsPanel.getTxt_customerId().getText().trim();
             String dishName = ratingsPanel.getCbo_dish().getSelectedItem().toString();
             int selectedStars = 0;
             String comment = ratingsPanel.getTxa_opinionsDish().getText();
@@ -111,7 +111,7 @@ public class ControllerRatingPanel {
                 return;
             }
 
-            saveRatingsDish(idCustomer, dishName, selectedStars, comment);
+            saveRatingsDish(idCustomer, dishName, selectedStars, comment);*/
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -149,7 +149,7 @@ public class ControllerRatingPanel {
 
     private void qualificationDrink() {
         try {
-            String idCustomer = ratingsPanel.getTxt_customerId().getText().trim();
+            /*String idCustomer = ratingsPanel.getTxt_customerId().getText().trim();
             String drinkName = ratingsPanel.getCbo_drink().getSelectedItem().toString();
             int selectedStars = 0;
             String comment = ratingsPanel.getTxa_opinionsDrink().getText();
@@ -170,7 +170,7 @@ public class ControllerRatingPanel {
                 return;
             }
 
-            saveRatingsDrink(idCustomer, drinkName, selectedStars, comment);
+            saveRatingsDrink(idCustomer, drinkName, selectedStars, comment);*/
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -211,7 +211,7 @@ public class ControllerRatingPanel {
     }
 
     private void refreshWindow() {
-        MessageUtils.informationMessage("Gracias por su calificacion.");
+        MessageUtils.informationMessage("Gracias por su calificación.");
         clearFieldsDrinks();
         clearFieldsDish();
         subject.notifyObserver();

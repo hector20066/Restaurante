@@ -181,7 +181,7 @@ public class ControllerViewLogs implements Observer {
 
     private void deleteDish() {
         try {
-            if (verifySelectedRows(viewLogsDB.getJtbl_dishes())) {
+            /*if (verifySelectedRows(viewLogsDB.getJtbl_dishes())) {
                 int code = Integer.parseInt(getDataFromTable(viewLogsDB.getJtbl_dishes(), 1));
 
                 runDelete(() -> {
@@ -193,16 +193,15 @@ public class ControllerViewLogs implements Observer {
                 });
             } else {
                 MessageUtils.warningMessage("Por favor seleccione el plato a eliminar");
-            }
+            }*/
         } catch (Exception e) {
             MessageUtils.errorMessage("Ha ocurrido un error al eliminar el plato");
-            e.printStackTrace();
         }
     }
 
     private void deleteDrink() {
         try {
-            if (verifySelectedRows(viewLogsDB.getJtbl_drinks())) {
+            /*if (verifySelectedRows(viewLogsDB.getJtbl_drinks())) {
                 int code = Integer.parseInt(getDataFromTable(viewLogsDB.getJtbl_drinks(), 1));
 
                 runDelete(() -> {
@@ -214,7 +213,7 @@ public class ControllerViewLogs implements Observer {
                 });
             } else {
                 MessageUtils.warningMessage("Por favor seleccione el plato a eliminar");
-            }
+            }*/
         } catch (Exception e) {
             MessageUtils.errorMessage("Ha ocurrido un error al eliminar la bebida");
         }
@@ -232,7 +231,7 @@ public class ControllerViewLogs implements Observer {
     }
 
     private void modifyDish() {
-        if (verifySelectedRows(viewLogsDB.getJtbl_dishes())) {
+        /*if (verifySelectedRows(viewLogsDB.getJtbl_dishes())) {
             String name = getDataFromTable(viewLogsDB.getJtbl_dishes(), 0);
             String price = getDataFromTable(viewLogsDB.getJtbl_dishes(), 2);
             String description = getDataFromTable(viewLogsDB.getJtbl_dishes(), 4);
@@ -246,7 +245,7 @@ public class ControllerViewLogs implements Observer {
             loadDataFieldsDish(name, price, description, type);
         } else {
             MessageUtils.warningMessage("Por favor seleccione el plato a modificar");
-        }
+        }*/
     }
 
     private void loadDataFieldsDish(String name, String price, String description, String type) {
@@ -267,7 +266,7 @@ public class ControllerViewLogs implements Observer {
     }
 
     private void modifyDrink() {
-        if (verifySelectedRows(viewLogsDB.getJtbl_drinks())) {
+        /*if (verifySelectedRows(viewLogsDB.getJtbl_drinks())) {
             String name = getDataFromTable(viewLogsDB.getJtbl_drinks(), 0);
             String price = getDataFromTable(viewLogsDB.getJtbl_drinks(), 2);
             String description = getDataFromTable(viewLogsDB.getJtbl_drinks(), 4);
@@ -281,7 +280,7 @@ public class ControllerViewLogs implements Observer {
             loadDataFieldsDrink(name, description, price, type);
         } else {
             MessageUtils.warningMessage("Por favor seleccione la bebida a modificar");
-        }
+        }*/
     }
 
     private boolean verifySelectedRows(JTable table) {

@@ -16,13 +16,11 @@ import javax.swing.table.DefaultTableModel;
 public class ControllerColombianFood extends AbstractFoodController  {
 
     private final ColombianFood colombianFood;
-    private Subject subject;
 
     public ControllerColombianFood(ColombianFood colombianFood, Subject subject) {
         this.colombianFood = colombianFood;
-        this.subject = subject;
 
-        this.subject.register(this);
+        subject.register(this);
 
         connectEvents();
     }

@@ -68,6 +68,8 @@ public class ControllerLogin {
 
     private void loginAdmin() {
         try {
+            showAdminWindow();
+            subject.notifyObserver();
             /*String user = login.getTxt_user().getText().trim();
             String password = new String(login.getJpld_password().getPassword());
 
@@ -83,7 +85,7 @@ public class ControllerLogin {
                 MessageUtils.errorMessage("No se ha encontrado la cuenta. Por favor si no es empleado\ninicie sesion como invitado");
             }*/
         } catch (Exception e) {
-            MessageUtils.errorMessage("Ha ocurrido un error al iniciar sesion.\nLamentamos los inconvenientes");
+            MessageUtils.errorMessage("Ha ocurrido un error al iniciar sesión.\nLamentamos los inconvenientes");
         }
     }
 
@@ -100,7 +102,7 @@ public class ControllerLogin {
             showUserWindow();
             subject.notifyObserver();
         } catch (Exception e) {
-            MessageUtils.errorMessage("Ha ocurrido un error al iniciar sesion.\nLamentamos los inconvenientes");
+            MessageUtils.errorMessage("Ha ocurrido un error al iniciar sesión.\nLamentamos los inconvenientes");
         }
     }
 
@@ -109,6 +111,7 @@ public class ControllerLogin {
         userPanel.setLocationRelativeTo(null);
         userPanel.setResizable(false);
         controllerUsersPanel.showDashboard();
+        login.dispose();
     }
 
     private void mousePressedUser() {

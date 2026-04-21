@@ -90,7 +90,7 @@ public abstract class AbstractFoodController implements Observer {
     protected abstract DefaultTableModel getTableModelFood();
 
     protected final void addOrder() {
-        String amountDishString = getTxt_amountDish().getText().trim();
+        /*String amountDishString = getTxt_amountDish().getText().trim();
         String amountDrinkString = getTxt_amountDrink().getText().trim();
 
         if (noDishSelected() && noDrinkSelected() && amountDishString.isBlank() || amountDrinkString.isBlank()) {
@@ -120,7 +120,7 @@ public abstract class AbstractFoodController implements Observer {
             priceDrink = Float.parseFloat(priceDrinkString);
         }
 
-        loadDataTable(nameDish, amountDish, priceDish, nameDrink, amountDrink, priceDrink);
+        loadDataTable(nameDish, amountDish, priceDish, nameDrink, amountDrink, priceDrink);*/
     }
 
     protected boolean noDishSelected() {
@@ -149,7 +149,7 @@ public abstract class AbstractFoodController implements Observer {
     }
 
     protected final void carryOutTransaction() {
-        String customerName = getTxt_customerName().getText();
+        /*String customerName = getTxt_customerName().getText();
         String customerId = getTxt_customerId().getText().trim();
         String customerEmail = getTxt_customerEmail().getText().trim();
         String customerAddress = getTxt_customerAddress().getText();
@@ -175,7 +175,7 @@ public abstract class AbstractFoodController implements Observer {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }).start();
+        }).start();*/
     }
 
     protected boolean isInvalidCustomerData(String customerName, String customerId, String customerEmail, String customerAddress) {

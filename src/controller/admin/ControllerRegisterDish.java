@@ -40,7 +40,7 @@ public class ControllerRegisterDish {
 
     private void register() {
         try {
-            String typeDish = (String) registerDish.getCbo_typeDish().getSelectedItem();
+            /*String typeDish = (String) registerDish.getCbo_typeDish().getSelectedItem();
             String nameDish = registerDish.getTxt_name().getText();
             String description = registerDish.getTxt_description().getText();
             String price = registerDish.getTxt_price().getText().trim();
@@ -58,7 +58,7 @@ public class ControllerRegisterDish {
                 } else {
                     registerChineseDish(nameDish, description, Float.parseFloat(price));
                 }
-            }
+            }*/
         } catch (Exception e) {
             MessageUtils.errorMessage("Ha ocurrido un error al realizar la accion");
         }
