@@ -1,8 +1,6 @@
 package controller.customers;
 
 import builder.controllers.ControllerUserPanelBuilder;
-import service.ServiceOpenWeather;
-import utils.ExtractJsonValuesUtils;
 import utils.MessageUtils;
 import utils.NavigatorUtils;
 import view.LogIn;
@@ -90,20 +88,6 @@ public class ControllerUsersPanel {
         }catch(Exception e){
             MessageUtils.errorMessage("Ha ocurrido un error al ocultar el menu");
         }
-    }
-
-    private void loadWeather(String city) {
-        new Thread(() -> {
-            ServiceOpenWeather serviceOpenWeather = new ServiceOpenWeather();
-            String json = serviceOpenWeather.getClimate(city);
-            String climateDescription = ExtractJsonValuesUtils.extractJsonValues(json, "description");
-            String temperature = ExtractJsonValuesUtils.extractJsonValues(json, "temp");
-
-            SwingUtilities.invokeLater(() -> {
-                userPanel.getJlb_climateDescription().setText("Clima: " + climateDescription);
-                userPanel.getJlb_temperature().setText("Temperatura: " + temperature + " °C");
-            });
-        }).start();
     }
 
     private void updateTexts(boolean expandedMenu) {
