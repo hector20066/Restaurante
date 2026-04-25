@@ -15,11 +15,11 @@ public class DataBase {
     protected Connection connection;
     protected final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     protected final String DB_URL = "jdbc:mysql://localhost:3306/restaurante";
-    
+
     private final String user = "root";
     private final String pass = "";
     
-    public void connect() throws SQLException {
+    public void connect() {
         try {
             Class.forName(JDBC_DRIVER);
             connection = DriverManager.getConnection(DB_URL, user, pass);
