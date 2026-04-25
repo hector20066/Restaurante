@@ -50,13 +50,13 @@ public class DAOSaleDetailImpl extends DataBase implements IDAO<SaleDetail> {
     }
 
     @Override
-    public synchronized SaleDetail getData(int code) throws Exception {
+    public synchronized SaleDetail getData(int idVenta) throws Exception {
         SaleDetail saleDetail = null;
-        String sql = "SELECT * FROM detalle_venta WHERE idDetalle = ? LIMIT 1;";
+        String sql = "SELECT * FROM detalle_venta WHERE idVenta = ? LIMIT 1;";
         this.connect();
 
         try (PreparedStatement st = this.connection.prepareStatement(sql)) {
-            st.setInt(1, code);
+            st.setInt(1, idVenta);
 
             try (ResultSet rs = st.executeQuery()) {
                 if (rs.next()) {

@@ -49,7 +49,7 @@ public class DAODishImpl extends DataBase implements DAORestaurantDb<Dish> {
     }
 
     @Override
-    public synchronized Dish getData(int code) throws Exception {
+    public Dish getData(int code) throws Exception {
         Dish dish = null;
         String sql = "SELECT * FROM vista_platos_disponibles WHERE codigo = ? LIMIT 1;";
         this.connect();
@@ -79,7 +79,7 @@ public class DAODishImpl extends DataBase implements DAORestaurantDb<Dish> {
     }
 
     @Override
-    public synchronized Dish getData(String name) throws Exception {
+    public Dish getData(String name) throws Exception {
         Dish dish = null;
         String sql = "SELECT * FROM vista_platos_disponibles WHERE nombre = ? LIMIT 1;";
         this.connect();
@@ -109,7 +109,7 @@ public class DAODishImpl extends DataBase implements DAORestaurantDb<Dish> {
     }
 
     @Override
-    public synchronized List<Dish> getData() throws Exception {
+    public List<Dish> getData() throws Exception {
         List<Dish> list;
         String sql = "SELECT * FROM vista_platos_disponibles;";
         this.connect();
