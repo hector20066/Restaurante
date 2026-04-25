@@ -1,3 +1,0 @@
-0;Arroz con pollo;Arroz con trozos de pollo, servicon con una gran cantidad de salsa de tomate, papas de paquete o al francesa;Plato Colombiano;15000.0
-0;Sopa minestrone;Contiene pasta, jamon, pollo o trozos de carne, ademas de verduras y hortalizas;Plato Italiano;25000.0
-0;Xiaolongbao;Es un bollo de sopa rellenos de un rico y sabroso caldo y jugosa carne de cerdo;Plato Colombiano;14000.0

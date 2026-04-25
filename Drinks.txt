@@ -1,3 +1,0 @@
-0;Aguardiente;Bebida destilada a base de caña de azucar y anis, considerando como el licor nacional de colombia;Bebida Colombiana;50000.0
-0;Limoncello;Licor con sabor a limon;Bebida Italiana;10000.0
-0;Te con leche y tapioca;Es una bebida con sabor ligeramente amargo que tiene burbujas relacionadas con tapioca que presentan una textura suave;Bebida China;20000.0
