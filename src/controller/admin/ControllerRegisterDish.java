@@ -4,7 +4,6 @@ import factory.*;
 import model.dao.impl.DAODishImpl;
 import model.dao.interfaces.DAORestaurantDb;
 import model.entities.Dish;
-import utils.MessageUtils;
 import view.administrators.RegisterDish;
 
 import javax.swing.*;
@@ -23,7 +22,7 @@ public class ControllerRegisterDish {
     private final Subject subject;
     private final DAORestaurantDb<Dish> daoRestaurantDb;
 
-    AbstractFactory factory;
+    private AbstractFactory factory;
 
     public ControllerRegisterDish(RegisterDish registerDish, Subject subject) {
         this.registerDish = registerDish;
@@ -40,13 +39,13 @@ public class ControllerRegisterDish {
 
     private void register() {
         try {
-            /*String typeDish = (String) registerDish.getCbo_typeDish().getSelectedItem();
+            String typeDish = (String) registerDish.getCbo_typeDish().getSelectedItem();
             String nameDish = registerDish.getTxt_name().getText();
             String description = registerDish.getTxt_description().getText();
             String price = registerDish.getTxt_price().getText().trim();
 
-            if (isInvalidData(nameDish, description, price)) {
-                MessageUtils.warningMessage("Por favor ingrese toda la informacion solicitada.");
+            if (isInvalidData(nameDish, description, price, typeDish)) {
+                JOptionPane.showMessageDialog(registerDish, "Por favor ingrese toda la informacion solicitada.", "", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
@@ -58,14 +57,14 @@ public class ControllerRegisterDish {
                 } else {
                     registerChineseDish(nameDish, description, Float.parseFloat(price));
                 }
-            }*/
+            }
         } catch (Exception e) {
-            MessageUtils.errorMessage("Ha ocurrido un error al realizar la accion");
+            JOptionPane.showMessageDialog(registerDish, "Ha ocurrido un error al realizar la acción", "", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    private boolean isInvalidData(String nameDish, String description, String price) {
-        return nameDish.isBlank() || description.isBlank() || price.isBlank();
+    private boolean isInvalidData(String nameDish, String description, String price, String typeDish) {
+        return nameDish.isBlank() || description.isBlank() || price.isBlank() || typeDish.isBlank();
     }
 
     private void registerColombianDish(String nameDish, String description, float price) {
@@ -73,10 +72,12 @@ public class ControllerRegisterDish {
         Dish colombianDish = factory.createDish();
         assignValuesDish(nameDish, description, price, colombianDish);
 
-        new Thread(() -> {
+        try {
             registerOfModify(colombianDish);
-            SwingUtilities.invokeLater(() -> runSwingUtilities("Colombiano"));
-        }).start();
+            runSwingUtilities("Colombiano");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(registerDish, "No se ha podido registrar el plato Colombiano", "", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void registerItalianDish(String nameDish, String description, float price) {
@@ -84,10 +85,12 @@ public class ControllerRegisterDish {
         Dish italianDish = factory.createDish();
         assignValuesDish(nameDish, description, price, italianDish);
 
-        new Thread(() -> {
+        try {
             registerOfModify(italianDish);
-            SwingUtilities.invokeLater(() -> runSwingUtilities("Italiano"));
-        }).start();
+            runSwingUtilities("Italiano");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(registerDish, "No se ha podido registrar el plato Italiano", "", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void registerChineseDish(String nameDish, String description, float price) {
@@ -95,10 +98,12 @@ public class ControllerRegisterDish {
         Dish chineseDish = factory.createDish();
         assignValuesDish(nameDish, description, price, chineseDish);
 
-        new Thread(() -> {
+        try {
             registerOfModify(chineseDish);
-            SwingUtilities.invokeLater(() -> runSwingUtilities("Chino"));
-        }).start();
+            runSwingUtilities("Chino");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(registerDish, "No se ha podido registrar el plato Chino", "", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void assignValuesDish(String nameDish, String description, float price, Dish dish) {
@@ -107,30 +112,21 @@ public class ControllerRegisterDish {
         dish.setPrice(price);
     }
 
-    private void registerOfModify(Dish dish) {
-        try {
-
-            if (isModify()) {
-                dish.setCode(codeDish);
-                daoRestaurantDb.modify(dish);
-            } else {
-                daoRestaurantDb.save(dish);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    private void registerOfModify(Dish dish) throws Exception {
+        if (isModify()) {
+            dish.setCode(codeDish);
+            daoRestaurantDb.modify(dish);
+        } else {
+            daoRestaurantDb.save(dish);
         }
     }
 
     private void runSwingUtilities(String typeDish) {
-        MessageUtils.informationMessage("Se ha registrado el plato " + typeDish + " correctamente.");
-        clearFields();
-        subject.notifyObserver();
-    }
-
-    private void clearFields() {
+        JOptionPane.showMessageDialog(registerDish, "Se ha registrado el plato " + typeDish + " correctamente.", "", JOptionPane.INFORMATION_MESSAGE);
         registerDish.getTxt_name().setText("");
         registerDish.getTxt_description().setText("");
         registerDish.getTxt_price().setText("");
+        subject.notifyObserver();
     }
 
     public void setCodeDish(int codeDish) {

@@ -5,7 +5,6 @@ import model.dao.impl.DAODrinkImpl;
 import model.dao.interfaces.DAORestaurantDb;
 import model.entities.Drink;
 import observer.Subject;
-import utils.MessageUtils;
 import view.administrators.RegisterDrink;
 
 import javax.swing.*;
@@ -23,7 +22,7 @@ public class ControllerRegisterDrink {
     private final Subject subject;
     private final DAORestaurantDb<Drink> daoRestaurantDb;
 
-    AbstractFactory factory;
+    private AbstractFactory factory;
 
     public ControllerRegisterDrink(RegisterDrink registerDrink, Subject subject) {
         this.registerDrink = registerDrink;
@@ -40,13 +39,13 @@ public class ControllerRegisterDrink {
 
     private void register() {
         try {
-            /*String typeDrink = (String) registerDrink.getCbo_typeDrink().getSelectedItem();
+            String typeDrink = (String) registerDrink.getCbo_typeDrink().getSelectedItem();
             String nameDrink = registerDrink.getTxt_name().getText();
             String description = registerDrink.getTxt_description().getText();
             String price = registerDrink.getTxt_price().getText().trim();
 
-            if (isInvalidData(nameDrink, description, price)) {
-                MessageUtils.warningMessage("Por favor ingrese toda la información solicitada.");
+            if (isInvalidData(nameDrink, description, price, typeDrink)) {
+                JOptionPane.showMessageDialog(registerDrink, "Por favor ingrese toda la información solicitada.", "", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
@@ -58,14 +57,14 @@ public class ControllerRegisterDrink {
                 } else {
                     registerChineseDrink(nameDrink, description, Float.parseFloat(price));
                 }
-            }*/
+            }
         } catch (Exception e) {
-            MessageUtils.errorMessage("Ha ocurrido un error al tratar de registrar la bebida");
+            JOptionPane.showMessageDialog(registerDrink, "Ha ocurrido un error al tratar de registrar la bebida", "", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    private boolean isInvalidData(String nameDrink, String description, String price) {
-        return nameDrink.isBlank() || description.isBlank() || price.isBlank();
+    private boolean isInvalidData(String nameDrink, String description, String price, String typeDrink) {
+        return nameDrink.isBlank() || description.isBlank() || price.isBlank() || typeDrink.isBlank();
     }
 
     private void registerColombianDrink(String nameDrink, String description, float price) throws Exception {
@@ -73,10 +72,12 @@ public class ControllerRegisterDrink {
         Drink colombianDrink = factory.createDrink();
         assignValuesDrink(nameDrink, description, price, colombianDrink);
 
-        new Thread(() -> {
+        try {
             registerOfModify(colombianDrink);
-            SwingUtilities.invokeLater(() -> runSwingUtilities("Colombiana"));
-        }).start();
+            runSwingUtilities("Colombiana");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(registerDrink, "No se ha podido registrar la bebida Colombiana", "", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void registerItalianDrink(String nameDrink, String description, float price) {
@@ -84,10 +85,12 @@ public class ControllerRegisterDrink {
         Drink italianDrink = factory.createDrink();
         assignValuesDrink(nameDrink, description, price, italianDrink);
 
-        new Thread(() -> {
+        try {
             registerOfModify(italianDrink);
-            SwingUtilities.invokeLater(() -> runSwingUtilities("Italiana"));
-        }).start();
+            runSwingUtilities("Italiana");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(registerDrink, "No se ha podido registrar la bebida Italiana", "", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void registerChineseDrink(String nameDrink, String description, float price) {
@@ -95,10 +98,12 @@ public class ControllerRegisterDrink {
         Drink chineseDrink = factory.createDrink();
         assignValuesDrink(nameDrink, description, price, chineseDrink);
 
-        new Thread(() -> {
+        try {
             registerOfModify(chineseDrink);
-            SwingUtilities.invokeLater(() -> runSwingUtilities("China"));
-        }).start();
+            runSwingUtilities("China");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(registerDrink, "No se ha podido registrar la bebida China", "", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void assignValuesDrink(String nameDrink, String description, float price, Drink drink) {
@@ -107,29 +112,21 @@ public class ControllerRegisterDrink {
         drink.setPrice(price);
     }
 
-    private void registerOfModify(Drink drink) {
-        try {
-            if (isModify()) {
-                drink.setCode(codeDrink);
-                daoRestaurantDb.modify(drink);
-            } else {
-                daoRestaurantDb.save(drink);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    private void registerOfModify(Drink drink) throws Exception {
+        if (isModify()) {
+            drink.setCode(codeDrink);
+            daoRestaurantDb.modify(drink);
+        } else {
+            daoRestaurantDb.save(drink);
         }
     }
 
     private void runSwingUtilities(String typeDrink) {
-        MessageUtils.informationMessage("Se ha registrado la bebida " + typeDrink + " exitosamente.");
-        clearFields();
-        subject.notifyObserver();
-    }
-
-    private void clearFields() {
+        JOptionPane.showMessageDialog(registerDrink, "Se ha registrado la bebida " + typeDrink + " exitosamente.", "", JOptionPane.INFORMATION_MESSAGE);
         registerDrink.getTxt_name().setText("");
         registerDrink.getTxt_description().setText("");
         registerDrink.getTxt_price().setText("");
+        subject.notifyObserver();
     }
 
     public void setCodeDrink(int codeDrink) {

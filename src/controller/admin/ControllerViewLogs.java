@@ -9,7 +9,6 @@ import model.entities.Drink;
 import model.enums.TypeFood;
 import observer.Observer;
 import observer.Subject;
-import utils.MessageUtils;
 import view.administrators.RegisterDish;
 import view.administrators.RegisterDrink;
 import view.administrators.ViewLogsDB;
@@ -33,7 +32,7 @@ import java.util.regex.Pattern;
  */
 public class ControllerViewLogs implements Observer {
 
-    private final ViewLogsDB viewLogsDB;
+    private final ViewLogsDB viewLogs;
     private final RegisterDish registerDish;
     private final RegisterDrink registerDrink;
     private final ControllerAdminPanel controllerAdminPanel;
@@ -45,7 +44,7 @@ public class ControllerViewLogs implements Observer {
     private final DAORestaurantDb<Dish> daoDish;
 
     public ControllerViewLogs(ControllerViewLogsDbBuilder builder) {
-        this.viewLogsDB = builder.getViewLogsDB();
+        this.viewLogs = builder.getViewLogsDB();
         this.registerDish = builder.getRegisterDish();
         this.registerDrink = builder.getRegisterDrink();
         this.controllerAdminPanel = builder.getControllerAdminPanel();
@@ -68,46 +67,46 @@ public class ControllerViewLogs implements Observer {
         addDocumentSearchDrink();
         addListenerSearchDrink();
 
-        viewLogsDB.setControllerDeleteDish(e -> deleteDish());
-        viewLogsDB.setControllerDeleteDrink(e -> deleteDrink());
-        viewLogsDB.setControllerModifyDish(e -> modifyDish());
-        viewLogsDB.setControllerModifyDrink(e -> modifyDrink());
+        viewLogs.setControllerDeleteDish(e -> deleteDish());
+        viewLogs.setControllerDeleteDrink(e -> deleteDrink());
+        viewLogs.setControllerModifyDish(e -> modifyDish());
+        viewLogs.setControllerModifyDrink(e -> modifyDrink());
     }
 
     private void addDocumentSearchDish() {
-        viewLogsDB.setControllerSearchDishDocument(new DocumentListener() {
+        viewLogs.setControllerSearchDishDocument(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                filterTable(viewLogsDB.getTxt_searchDish(), viewLogsDB.getJtbl_dishes(), "Buscar Plato");
+                filterTable(viewLogs.getTxt_searchDish(), viewLogs.getJtbl_dishes(), "Buscar Plato");
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                filterTable(viewLogsDB.getTxt_searchDish(), viewLogsDB.getJtbl_dishes(), "Buscar Plato");
+                filterTable(viewLogs.getTxt_searchDish(), viewLogs.getJtbl_dishes(), "Buscar Plato");
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                filterTable(viewLogsDB.getTxt_searchDish(), viewLogsDB.getJtbl_dishes(), "Buscar Plato");
+                filterTable(viewLogs.getTxt_searchDish(), viewLogs.getJtbl_dishes(), "Buscar Plato");
             }
         });
     }
 
     private void addDocumentSearchDrink() {
-        viewLogsDB.setControllerSearchDrinkDocument(new DocumentListener() {
+        viewLogs.setControllerSearchDrinkDocument(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                filterTable(viewLogsDB.getTxt_searchDrink(), viewLogsDB.getJtbl_drinks(), "Buscar Bebida");
+                filterTable(viewLogs.getTxt_searchDrink(), viewLogs.getJtbl_drinks(), "Buscar Bebida");
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                filterTable(viewLogsDB.getTxt_searchDrink(), viewLogsDB.getJtbl_drinks(), "Buscar Bebida");
+                filterTable(viewLogs.getTxt_searchDrink(), viewLogs.getJtbl_drinks(), "Buscar Bebida");
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                filterTable(viewLogsDB.getTxt_searchDrink(), viewLogsDB.getJtbl_drinks(), "Buscar Bebida");
+                filterTable(viewLogs.getTxt_searchDrink(), viewLogs.getJtbl_drinks(), "Buscar Bebida");
             }
         });
     }
@@ -123,40 +122,40 @@ public class ControllerViewLogs implements Observer {
     }
 
     private void addListenerSearchDish() {
-        viewLogsDB.setControllerSearchDishFocus(new FocusAdapter() {
+        viewLogs.setControllerSearchDishFocus(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
-                if (viewLogsDB.getTxt_searchDish().getText().isBlank()) {
-                    viewLogsDB.getTxt_searchDish().setText("Buscar Plato");
+                if (viewLogs.getTxt_searchDish().getText().isBlank()) {
+                    viewLogs.getTxt_searchDish().setText("Buscar Plato");
                 }
             }
         });
 
-        viewLogsDB.setControllerSearchDishMouse(new MouseAdapter() {
+        viewLogs.setControllerSearchDishMouse(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (viewLogsDB.getTxt_searchDish().getText().equals("Buscar Plato")) {
-                    viewLogsDB.getTxt_searchDish().setText("");
+                if (viewLogs.getTxt_searchDish().getText().equals("Buscar Plato")) {
+                    viewLogs.getTxt_searchDish().setText("");
                 }
             }
         });
     }
 
     private void addListenerSearchDrink() {
-        viewLogsDB.setControllerSearchDrinkFocus(new FocusAdapter() {
+        viewLogs.setControllerSearchDrinkFocus(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
-                if (viewLogsDB.getTxt_searchDrink().getText().isBlank()) {
-                    viewLogsDB.getTxt_searchDrink().setText("Buscar Bebida");
+                if (viewLogs.getTxt_searchDrink().getText().isBlank()) {
+                    viewLogs.getTxt_searchDrink().setText("Buscar Bebida");
                 }
             }
         });
 
-        viewLogsDB.setControllerSearchDrinkMouse(new MouseAdapter() {
+        viewLogs.setControllerSearchDrinkMouse(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (viewLogsDB.getTxt_searchDrink().getText().equals("Buscar Bebida")) {
-                    viewLogsDB.getTxt_searchDrink().setText("");
+                if (viewLogs.getTxt_searchDrink().getText().equals("Buscar Bebida")) {
+                    viewLogs.getTxt_searchDrink().setText("");
                 }
             }
         });
@@ -166,77 +165,72 @@ public class ControllerViewLogs implements Observer {
     public void update() {
         new Thread(() -> {
             try {
-                /*List<Dish> dishes = daoDish.getData();
+                List<Dish> dishes = daoDish.getData();
                 List<Drink> drinks = daoDrink.getData();
 
                 SwingUtilities.invokeLater(() -> {
-                    loadDishes(dishes, viewLogsDB.getModelDishes());
-                    loadDrinks(drinks, viewLogsDB.getModelDrinks());
-                });*/
+                    loadDishes(dishes, viewLogs.getModelDishes());
+                    loadDrinks(drinks, viewLogs.getModelDrinks());
+                });
             } catch (Exception e) {
-                e.printStackTrace();
+                SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(viewLogs, "Error al cargar los platos en el reporte", "", JOptionPane.ERROR_MESSAGE));
             }
         }).start();
     }
 
     private void deleteDish() {
         try {
-            /*if (verifySelectedRows(viewLogsDB.getJtbl_dishes())) {
-                int code = Integer.parseInt(getDataFromTable(viewLogsDB.getJtbl_dishes(), 1));
+            if (verifySelectedRows(viewLogs.getJtbl_dishes())) {
+                int code = Integer.parseInt(getDataFromTable(viewLogs.getJtbl_dishes(), 1));
 
                 runDelete(() -> {
                     try {
                         daoDish.delete(code);
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(viewLogs, "Error al eliminar el plato", "", JOptionPane.ERROR_MESSAGE));
                     }
                 });
             } else {
-                MessageUtils.warningMessage("Por favor seleccione el plato a eliminar");
-            }*/
+                JOptionPane.showMessageDialog(viewLogs, "Por favor seleccione el plato a eliminar", "", JOptionPane.WARNING_MESSAGE);
+            }
         } catch (Exception e) {
-            MessageUtils.errorMessage("Ha ocurrido un error al eliminar el plato");
+            JOptionPane.showMessageDialog(viewLogs, "Ha ocurrido un error al eliminar el plato", "", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private void deleteDrink() {
         try {
-            /*if (verifySelectedRows(viewLogsDB.getJtbl_drinks())) {
-                int code = Integer.parseInt(getDataFromTable(viewLogsDB.getJtbl_drinks(), 1));
+            if (verifySelectedRows(viewLogs.getJtbl_drinks())) {
+                int code = Integer.parseInt(getDataFromTable(viewLogs.getJtbl_drinks(), 1));
 
                 runDelete(() -> {
                     try {
                         daoDrink.delete(code);
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(viewLogs, "Error al eliminar la bebida", "", JOptionPane.ERROR_MESSAGE));
                     }
                 });
             } else {
-                MessageUtils.warningMessage("Por favor seleccione el plato a eliminar");
-            }*/
+                JOptionPane.showMessageDialog(viewLogs, "Por favor seleccione el plato a eliminar", "", JOptionPane.WARNING_MESSAGE);
+            }
         } catch (Exception e) {
-            MessageUtils.errorMessage("Ha ocurrido un error al eliminar la bebida");
+            JOptionPane.showMessageDialog(viewLogs, "Ha ocurrido un error al eliminar la bebida", "", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private void runDelete(Runnable deleteOperation) {
-        new Thread(() -> {
-            deleteOperation.run();
-
-            SwingUtilities.invokeLater(() -> {
-                MessageUtils.informationMessage("Se ha eliminado el registro");
-                subject.notifyObserver();
-            });
-        }).start();
+        deleteOperation.run();
+        JOptionPane.showMessageDialog(viewLogs, "Se ha eliminado el registro", "", JOptionPane.INFORMATION_MESSAGE);
+        subject.notifyObserver();
     }
 
     private void modifyDish() {
-        /*if (verifySelectedRows(viewLogsDB.getJtbl_dishes())) {
-            String name = getDataFromTable(viewLogsDB.getJtbl_dishes(), 0);
-            String price = getDataFromTable(viewLogsDB.getJtbl_dishes(), 2);
-            String description = getDataFromTable(viewLogsDB.getJtbl_dishes(), 4);
-            String type = getDataFromTable(viewLogsDB.getJtbl_dishes(), 3);
-            int code = Integer.parseInt(getDataFromTable(viewLogsDB.getJtbl_dishes(), 1));
+        if (verifySelectedRows(viewLogs.getJtbl_dishes())) {
+            String name = getDataFromTable(viewLogs.getJtbl_dishes(), 0);
+            String price = getDataFromTable(viewLogs.getJtbl_dishes(), 2);
+            String description = getDataFromTable(viewLogs.getJtbl_dishes(), 4);
+            String type = getDataFromTable(viewLogs.getJtbl_dishes(), 3);
+            int code = Integer.parseInt(getDataFromTable(viewLogs.getJtbl_dishes(), 1));
 
             controllerAdminPanel.showRegisterDish();
             controllerRegisterDish.setCodeDish(code);
@@ -244,8 +238,8 @@ public class ControllerViewLogs implements Observer {
 
             loadDataFieldsDish(name, price, description, type);
         } else {
-            MessageUtils.warningMessage("Por favor seleccione el plato a modificar");
-        }*/
+            JOptionPane.showMessageDialog(viewLogs, "Por favor seleccione el plato a modificar", "", JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     private void loadDataFieldsDish(String name, String price, String description, String type) {
@@ -254,10 +248,10 @@ public class ControllerViewLogs implements Observer {
         registerDish.getTxt_description().setText(description);
         registerDish.getBtn_register().setText("MODIFICAR PLATO");
 
-        if (type.equals("Plato Colombiano")) {
+        if (type.equals("Colombiano")) {
             registerDish.getCbo_typeDish().setSelectedIndex(0);
         } else {
-            if (type.equals("Plato Italiano")) {
+            if (type.equals("Italiano")) {
                 registerDish.getCbo_typeDish().setSelectedIndex(1);
             } else {
                 registerDish.getCbo_typeDish().setSelectedIndex(2);
@@ -266,12 +260,12 @@ public class ControllerViewLogs implements Observer {
     }
 
     private void modifyDrink() {
-        /*if (verifySelectedRows(viewLogsDB.getJtbl_drinks())) {
-            String name = getDataFromTable(viewLogsDB.getJtbl_drinks(), 0);
-            String price = getDataFromTable(viewLogsDB.getJtbl_drinks(), 2);
-            String description = getDataFromTable(viewLogsDB.getJtbl_drinks(), 4);
-            String type = getDataFromTable(viewLogsDB.getJtbl_drinks(), 3);
-            int code = Integer.parseInt(getDataFromTable(viewLogsDB.getJtbl_drinks(), 1));
+        if (verifySelectedRows(viewLogs.getJtbl_drinks())) {
+            String name = getDataFromTable(viewLogs.getJtbl_drinks(), 0);
+            String price = getDataFromTable(viewLogs.getJtbl_drinks(), 2);
+            String description = getDataFromTable(viewLogs.getJtbl_drinks(), 4);
+            String type = getDataFromTable(viewLogs.getJtbl_drinks(), 3);
+            int code = Integer.parseInt(getDataFromTable(viewLogs.getJtbl_drinks(), 1));
 
             controllerAdminPanel.showRegisterDrink();
             controllerRegisterDrink.setModify(true);
@@ -279,8 +273,8 @@ public class ControllerViewLogs implements Observer {
 
             loadDataFieldsDrink(name, description, price, type);
         } else {
-            MessageUtils.warningMessage("Por favor seleccione la bebida a modificar");
-        }*/
+            JOptionPane.showMessageDialog(viewLogs, "Por favor seleccione la bebida a modificar", "", JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     private boolean verifySelectedRows(JTable table) {
@@ -297,10 +291,10 @@ public class ControllerViewLogs implements Observer {
         registerDrink.getTxt_price().setText(price);
         registerDrink.getBtn_register().setText("MODIFICAR BEBIDA");
 
-        if (type.equals("Bebida Colombiana")) {
+        if (type.equals("Colombiana")) {
             registerDrink.getCbo_typeDrink().setSelectedIndex(0);
         } else {
-            if (type.equals("Bebida Italiana")) {
+            if (type.equals("Italiana")) {
                 registerDrink.getCbo_typeDrink().setSelectedIndex(1);
             } else {
                 registerDrink.getCbo_typeDrink().setSelectedIndex(2);
