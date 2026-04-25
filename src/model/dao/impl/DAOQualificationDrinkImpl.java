@@ -1,10 +1,8 @@
 package model.dao.impl;
 
 import database.DataBase;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,16 +30,15 @@ public class DAOQualificationDrinkImpl extends DataBase implements IDAO<Qualific
 
     @Override
     public void save(QualificationDrink data) throws Exception {
-        String sql = "INSERT INTO calificacion_bebida (num_estrellas, comentario, idBebida, idCliente, fecha) VALUES (?, ?, ?, ?, ?);";
+        String sql = "{CALL sp_registrar_calificacion_bebida(?, ?, ?, ?)}";
         this.connect();
 
-        try (PreparedStatement st = this.connection.prepareStatement(sql)) {
-            st.setInt(1, data.getStars());
-            st.setString(2, data.getComment());
-            st.setInt(3, data.getIdDrink());
-            st.setInt(4, data.getIdCustomer());
-            st.setDate(5, Date.valueOf(data.getDate() != null ? data.getDate() : LocalDate.now()));
-            st.executeUpdate();
+        try (CallableStatement cs = this.connection.prepareCall(sql)) {
+            cs.setInt(1, data.getStars());
+            cs.setString(2, data.getComment());
+            cs.setInt(3, data.getIdDrink());
+            cs.setInt(4, data.getIdCustomer());
+            cs.executeUpdate();
         } finally {
             this.close();
         }
@@ -59,7 +56,12 @@ public class DAOQualificationDrinkImpl extends DataBase implements IDAO<Qualific
             try (ResultSet rs = st.executeQuery()) {
                 if (rs.next()) {
                     qualification = new QualificationDrink();
-                    resultQuery(rs, qualification);
+                    qualification.setCode(rs.getInt("id"));
+                    qualification.setStars(rs.getInt("num_estrellas"));
+                    qualification.setComment(rs.getString("comentario"));
+                    qualification.setIdDrink(rs.getInt("idBebida"));
+                    qualification.setIdCustomer(rs.getInt("idCliente"));
+                    qualification.setDate(rs.getDate("fecha").toLocalDate());
                 }
             }
         } finally {
@@ -81,7 +83,12 @@ public class DAOQualificationDrinkImpl extends DataBase implements IDAO<Qualific
             try (ResultSet rs = st.executeQuery()) {
                 while (rs.next()) {
                     QualificationDrink qualification = new QualificationDrink();
-                    resultQuery(rs, qualification);
+                    qualification.setCode(rs.getInt("id"));
+                    qualification.setStars(rs.getInt("num_estrellas"));
+                    qualification.setComment(rs.getString("comentario"));
+                    qualification.setIdDrink(rs.getInt("idBebida"));
+                    qualification.setIdCustomer(rs.getInt("idCliente"));
+                    qualification.setDate(rs.getDate("fecha").toLocalDate());
                     list.add(qualification);
                 }
             }
@@ -106,15 +113,6 @@ public class DAOQualificationDrinkImpl extends DataBase implements IDAO<Qualific
         } finally {
             this.close();
         }
-    }
-
-    private void resultQuery(ResultSet rs, QualificationDrink qualification) throws SQLException {
-        qualification.setCode(rs.getInt("id"));
-        qualification.setStars(rs.getInt("num_estrellas"));
-        qualification.setComment(rs.getString("comentario"));
-        qualification.setIdDrink(rs.getInt("idBebida"));
-        qualification.setIdCustomer(rs.getInt("idCliente"));
-        qualification.setDate(rs.getDate("fecha").toLocalDate());
     }
 
 }

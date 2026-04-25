@@ -61,7 +61,14 @@ public class DAOSaleDetailImpl extends DataBase implements IDAO<SaleDetail> {
             try (ResultSet rs = st.executeQuery()) {
                 if (rs.next()) {
                     saleDetail = new SaleDetail();
-                    resultQuery(rs, saleDetail);
+                    saleDetail.setDetailId(rs.getInt("idDetalle"));
+                    saleDetail.setSaleId(rs.getInt("idVenta"));
+                    saleDetail.setDishId((Integer) rs.getObject("idPlato"));
+                    saleDetail.setDrinkId((Integer) rs.getObject("idBebida"));
+                    saleDetail.setDishAmount((Integer) rs.getObject("cantPlato"));
+                    saleDetail.setDrinkAmount((Integer) rs.getObject("cantBebida"));
+                    saleDetail.setDishPrice(rs.getBigDecimal("precioPlato"));
+                    saleDetail.setDrinkPrice(rs.getBigDecimal("precioBebida"));
                 }
             }
         } finally {
@@ -83,7 +90,14 @@ public class DAOSaleDetailImpl extends DataBase implements IDAO<SaleDetail> {
             try (ResultSet rs = st.executeQuery()) {
                 while (rs.next()) {
                     SaleDetail saleDetail = new SaleDetail();
-                    resultQuery(rs, saleDetail);
+                    saleDetail.setDetailId(rs.getInt("idDetalle"));
+                    saleDetail.setSaleId(rs.getInt("idVenta"));
+                    saleDetail.setDishId((Integer) rs.getObject("idPlato"));
+                    saleDetail.setDrinkId((Integer) rs.getObject("idBebida"));
+                    saleDetail.setDishAmount((Integer) rs.getObject("cantPlato"));
+                    saleDetail.setDrinkAmount((Integer) rs.getObject("cantBebida"));
+                    saleDetail.setDishPrice(rs.getBigDecimal("precioPlato"));
+                    saleDetail.setDrinkPrice(rs.getBigDecimal("precioBebida"));
                     list.add(saleDetail);
                 }
             }
@@ -108,17 +122,6 @@ public class DAOSaleDetailImpl extends DataBase implements IDAO<SaleDetail> {
         } finally {
             this.close();
         }
-    }
-
-    private void resultQuery(ResultSet rs, SaleDetail saleDetail) throws SQLException {
-        saleDetail.setDetailId(rs.getInt("idDetalle"));
-        saleDetail.setSaleId(rs.getInt("idVenta"));
-        saleDetail.setDishId((Integer) rs.getObject("idPlato"));
-        saleDetail.setDrinkId((Integer) rs.getObject("idBebida"));
-        saleDetail.setDishAmount((Integer) rs.getObject("cantPlato"));
-        saleDetail.setDrinkAmount((Integer) rs.getObject("cantBebida"));
-        saleDetail.setDishPrice(rs.getBigDecimal("precioPlato"));
-        saleDetail.setDrinkPrice(rs.getBigDecimal("precioBebida"));
     }
 
 }

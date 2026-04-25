@@ -1,6 +1,8 @@
 package model.dao.impl;
 
 import database.DataBase;
+
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,15 +34,15 @@ public class DAODishImpl extends DataBase implements DAORestaurantDb<Dish> {
 
     @Override
     public void save(Dish data) throws Exception {
-        String sql = "INSERT INTO platos(nombre, descripcion, precio, tipo_plato) VALUES (?, ?, ?, ?);";
+        String sql = "{CALL sp_registrar_plato(?, ?, ?, ?)}";
         this.connect();
 
-        try (PreparedStatement st = this.connection.prepareStatement(sql)) {
-            st.setString(1, data.getName());
-            st.setString(2, data.getDescription());
-            st.setFloat(3, data.getPrice());
-            st.setString(4, String.valueOf(data.getTypeDish()));
-            st.executeUpdate();
+        try (CallableStatement cs = this.connection.prepareCall(sql)) {
+            cs.setString(1, data.getName());
+            cs.setString(2, data.getDescription());
+            cs.setFloat(3, data.getPrice());
+            cs.setString(4, String.valueOf(data.getTypeDish()));
+            cs.executeUpdate();
         } finally {
             this.close();
         }
@@ -49,7 +51,7 @@ public class DAODishImpl extends DataBase implements DAORestaurantDb<Dish> {
     @Override
     public synchronized Dish getData(int code) throws Exception {
         Dish dish = null;
-        String sql = "SELECT * FROM platos WHERE codigo = ? LIMIT 1;";
+        String sql = "SELECT * FROM vista_platos_disponibles WHERE codigo = ? LIMIT 1;";
         this.connect();
 
         try (PreparedStatement st = this.connection.prepareStatement(sql)) {
@@ -79,7 +81,7 @@ public class DAODishImpl extends DataBase implements DAORestaurantDb<Dish> {
     @Override
     public synchronized Dish getData(String name) throws Exception {
         Dish dish = null;
-        String sql = "SELECT * FROM platos WHERE nombre = ? LIMIT 1;";
+        String sql = "SELECT * FROM vista_platos_disponibles WHERE nombre = ? LIMIT 1;";
         this.connect();
 
         try (PreparedStatement st = this.connection.prepareStatement(sql)) {
@@ -109,7 +111,7 @@ public class DAODishImpl extends DataBase implements DAORestaurantDb<Dish> {
     @Override
     public synchronized List<Dish> getData() throws Exception {
         List<Dish> list;
-        String sql = "SELECT * FROM platos;";
+        String sql = "SELECT * FROM vista_platos_disponibles;";
         this.connect();
 
         try (PreparedStatement st = this.connection.prepareStatement(sql)) {

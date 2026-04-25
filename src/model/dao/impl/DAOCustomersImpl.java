@@ -1,6 +1,8 @@
 package model.dao.impl;
 
 import database.DataBase;
+
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,15 +33,15 @@ public class DAOCustomersImpl extends DataBase implements IDAO<Customer> {
 
     @Override
     public void save(Customer data) throws Exception {
-        String sql = "INSERT INTO customer (id, name, address, email) VALUES (?, ?, ?, ?);";
+        String sql = "{CALL sp_registrar_cliente(?, ?, ?, ?)}";
         this.connect();
 
-        try (PreparedStatement st = this.connection.prepareStatement(sql)) {
-            st.setInt(1, data.getId());
-            st.setString(2, data.getName());
-            st.setString(3, data.getAddress());
-            st.setString(4, data.getEmail());
-            st.executeUpdate();
+        try (CallableStatement cs = this.connection.prepareCall(sql)) {
+            cs.setInt(1, data.getId());
+            cs.setString(2, data.getName());
+            cs.setString(3, data.getAddress());
+            cs.setString(4, data.getEmail());
+            cs.executeUpdate();
         } finally {
             this.close();
         }
@@ -48,7 +50,7 @@ public class DAOCustomersImpl extends DataBase implements IDAO<Customer> {
     @Override
     public Customer getData(int code) throws Exception {
         Customer customer = null;
-        String sql = "SELECT * FROM customer WHERE id = ? LIMIT 1;";
+        String sql = "SELECT * FROM cliente WHERE id = ? LIMIT 1;";
         this.connect();
 
         try (PreparedStatement st = this.connection.prepareStatement(sql)) {
@@ -68,9 +70,9 @@ public class DAOCustomersImpl extends DataBase implements IDAO<Customer> {
     }
 
     @Override
-    public synchronized List<Customer> getData() throws Exception {
+    public List<Customer> getData() throws Exception {
         List<Customer> list;
-        String sql = "SELECT * FROM customer";
+        String sql = "SELECT * FROM cliente";
         this.connect();
 
         try (PreparedStatement st = this.connection.prepareStatement(sql)) {
@@ -92,7 +94,7 @@ public class DAOCustomersImpl extends DataBase implements IDAO<Customer> {
 
     @Override
     public boolean exists(int id) throws Exception {
-        String sql = "SELECT 1 FROM customer WHERE id = ?";
+        String sql = "SELECT 1 FROM cliente WHERE id = ?";
         this.connect();
 
         try (PreparedStatement st = this.connection.prepareStatement(sql)) {

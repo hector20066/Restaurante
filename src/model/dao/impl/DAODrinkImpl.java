@@ -1,6 +1,8 @@
 package model.dao.impl;
 
 import database.DataBase;
+
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,15 +34,15 @@ public class DAODrinkImpl extends DataBase implements DAORestaurantDb<Drink> {
 
     @Override
     public void save(Drink data) throws Exception {
-        String sql = "INSERT INTO bebidas(nombre, descripcion, precio, tipo_bebida) VALUES (?, ?, ?, ?);";
+        String sql = "{CALL sp_registrar_bebida(?, ?, ?, ?)}";
         this.connect();
 
-        try (PreparedStatement st = this.connection.prepareStatement(sql)) {
-            st.setString(1, data.getName());
-            st.setString(2, data.getDescription());
-            st.setFloat(3, data.getPrice());
-            st.setString(4, String.valueOf(data.getTypeDrink()));
-            st.executeUpdate();
+        try (CallableStatement cs = this.connection.prepareCall(sql)) {
+            cs.setString(1, data.getName());
+            cs.setString(2, data.getDescription());
+            cs.setFloat(3, data.getPrice());
+            cs.setString(4, String.valueOf(data.getTypeDrink()));
+            cs.executeUpdate();
         } finally {
             this.close();
         }
@@ -49,7 +51,7 @@ public class DAODrinkImpl extends DataBase implements DAORestaurantDb<Drink> {
     @Override
     public synchronized Drink getData(int code) throws Exception {
         Drink drink = null;
-        String sql = "SELECT * FROM bebidas WHERE codigo = ? LIMIT 1;";
+        String sql = "SELECT * FROM vista_bebidas_disponibles WHERE codigo = ? LIMIT 1;";
         this.connect();
 
         try (PreparedStatement st = this.connection.prepareStatement(sql)) {
@@ -79,7 +81,7 @@ public class DAODrinkImpl extends DataBase implements DAORestaurantDb<Drink> {
     @Override
     public synchronized Drink getData(String name) throws Exception {
         Drink drink = null;
-        String sql = "SELECT * FROM bebidas WHERE nombre = ? LIMIT 1;";
+        String sql = "SELECT * FROM vista_bebidas_disponibles WHERE nombre = ? LIMIT 1;";
         this.connect();
 
         try (PreparedStatement st = this.connection.prepareStatement(sql)) {
@@ -109,7 +111,7 @@ public class DAODrinkImpl extends DataBase implements DAORestaurantDb<Drink> {
     @Override
     public synchronized List<Drink> getData() throws Exception {
         List<Drink> list;
-        String sql = "SELECT * FROM bebidas;";
+        String sql = "SELECT * FROM vista_bebidas_disponibles;";
         this.connect();
 
         try (PreparedStatement st = this.connection.prepareStatement(sql)) {

@@ -16,6 +16,7 @@ import model.dao.impl.DAODrinkImpl;
 import model.dao.impl.DAOSaleDetailImpl;
 import model.dao.impl.DAOSalesImpl;
 import model.dao.interfaces.DAORestaurantDb;
+import model.dao.interfaces.DAOWithAutoIncrement;
 import model.dao.interfaces.IDAO;
 import model.entities.Customer;
 import model.entities.Dish;
@@ -40,7 +41,7 @@ public abstract class AbstractFoodController implements Observer {
     private final DAORestaurantDb<Dish> daoDish;
     private final DAORestaurantDb<Drink> daoDrink;
     private final IDAO<Customer> daoCustomer;
-    private final IDAO<Sale> daoSales;
+    private final DAOWithAutoIncrement<Sale> daoSales;
     private final IDAO<SaleDetail> daoSaleDetail;
 
     public AbstractFoodController() {
@@ -227,7 +228,7 @@ public abstract class AbstractFoodController implements Observer {
 
          new Thread(() -> {
             try {
-                daoSales.save(sale);
+                int numSale = daoSales.saveAndGetId(sale);
                 saveSaleDetail(sale.getSaleNumber(), dishCode, amountDish, drinkCode, amountDrink, saleSubtotal);
                 SwingUtilities.invokeLater(this::clearDataSale);
             } catch (Exception e) {

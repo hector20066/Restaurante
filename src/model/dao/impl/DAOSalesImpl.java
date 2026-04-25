@@ -1,10 +1,6 @@
 package model.dao.impl;
 
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,27 +35,25 @@ public class DAOSalesImpl extends DataBase implements DAOWithAutoIncrement<Sale>
 
     @Override
     public int saveAndGetId(Sale data) throws Exception {
-        String sql = "INSERT INTO venta(id_cliente, fecha, total) VALUES (?, ?, ?);";
+        String sql = "{CAll sp_registrar_venta(?, ?, ?)}";
         this.connect();
-        int generatedId = -1;
+        int num_venta = 0;
 
-        try (PreparedStatement st = this.connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            st.setInt(1, data.getClientId());
-            st.setDate(2, Date.valueOf(data.getDate()));
-            st.setFloat(3, data.getTotal());
-            st.executeUpdate();
+        try (CallableStatement cs = this.connection.prepareCall(sql)) {
+            cs.setInt(1, data.getClientId());
+            cs.setDate(2, Date.valueOf(data.getDate()));
+            cs.setFloat(3, data.getTotal());
             
-            try (ResultSet generatedKeys = st.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    generatedId = (int) generatedKeys.getLong(1);
-                    data.setSaleNumber(generatedId);
+            try (ResultSet rs = cs.executeQuery()) {
+                if (rs.next()) {
+                    num_venta = (int) rs.getLong("");
                 }
             }
         } finally {
             this.close();
         }
         
-        return generatedId;
+        return num_venta;
     }
 
     @Override
@@ -74,7 +68,10 @@ public class DAOSalesImpl extends DataBase implements DAOWithAutoIncrement<Sale>
             try (ResultSet rs = st.executeQuery()) {
                 if (rs.next()) {
                     sale = new Sale();
-                    resultQuery(rs, sale);
+                    sale.setSaleNumber(rs.getInt("num_venta"));
+                    sale.setClientId(rs.getInt("id_cliente"));
+                    sale.setDate(rs.getDate("fecha").toLocalDate());
+                    sale.setTotal(rs.getFloat("total"));
                 }
             }
         } finally {
@@ -96,7 +93,10 @@ public class DAOSalesImpl extends DataBase implements DAOWithAutoIncrement<Sale>
             try (ResultSet rs = st.executeQuery()) {
                 while (rs.next()) {
                     Sale sale = new Sale();
-                    resultQuery(rs, sale);
+                    sale.setSaleNumber(rs.getInt("num_venta"));
+                    sale.setClientId(rs.getInt("id_cliente"));
+                    sale.setDate(rs.getDate("fecha").toLocalDate());
+                    sale.setTotal(rs.getFloat("total"));
                     list.add(sale);
                 }
             }
@@ -121,13 +121,6 @@ public class DAOSalesImpl extends DataBase implements DAOWithAutoIncrement<Sale>
         } finally {
             this.close();
         }
-    }
-
-    private void resultQuery(ResultSet rs, Sale sale) throws SQLException {
-        sale.setSaleNumber(rs.getInt("num_venta"));
-        sale.setClientId(rs.getInt("id_cliente"));
-        sale.setDate(rs.getDate("fecha").toLocalDate());
-        sale.setTotal(rs.getFloat("total"));
     }
 
 }
