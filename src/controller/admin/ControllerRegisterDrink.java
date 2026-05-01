@@ -76,6 +76,7 @@ public class ControllerRegisterDrink {
             registerOfModify(colombianDrink);
             runSwingUtilities("Colombiana");
         } catch (Exception e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(registerDrink, "No se ha podido registrar la bebida Colombiana", "", JOptionPane.ERROR_MESSAGE);
         }
     }

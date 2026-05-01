@@ -59,6 +59,7 @@ public class ControllerRegisterDish {
                 }
             }
         } catch (Exception e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(registerDish, "Ha ocurrido un error al realizar la acción", "", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -76,6 +77,7 @@ public class ControllerRegisterDish {
             registerOfModify(colombianDish);
             runSwingUtilities("Colombiano");
         } catch (Exception e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(registerDish, "No se ha podido registrar el plato Colombiano", "", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -89,6 +91,7 @@ public class ControllerRegisterDish {
             registerOfModify(italianDish);
             runSwingUtilities("Italiano");
         } catch (Exception e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(registerDish, "No se ha podido registrar el plato Italiano", "", JOptionPane.ERROR_MESSAGE);
         }
     }

@@ -59,7 +59,7 @@ public class DAODishImpl extends DataBase implements DAORestaurantDb<Dish> {
 
             try (ResultSet rs = st.executeQuery()) {
                 if (rs.next()) {
-                    TypeFood type = TypeFood.valueOf(rs.getString("tipo_plato"));
+                    TypeFood type = TypeFood.valueOf(rs.getString("tipo"));
 
                     dish = new Dish() {
                         @Override
@@ -89,7 +89,7 @@ public class DAODishImpl extends DataBase implements DAORestaurantDb<Dish> {
 
             try (ResultSet rs = st.executeQuery()) {
                 if (rs.next()) {
-                    TypeFood type = TypeFood.valueOf(rs.getString("tipo_plato"));
+                    TypeFood type = TypeFood.valueOf(rs.getString("tipo"));
 
                     dish = new Dish() {
                         @Override
@@ -119,7 +119,7 @@ public class DAODishImpl extends DataBase implements DAORestaurantDb<Dish> {
 
             try (ResultSet rs = st.executeQuery()) {
                 while (rs.next()) {
-                    TypeFood type = TypeFood.valueOf(rs.getString("tipo_plato"));
+                    TypeFood type = TypeFood.valueOf(rs.getString("tipo"));
 
                     Dish dish = new Dish() {
                         @Override
