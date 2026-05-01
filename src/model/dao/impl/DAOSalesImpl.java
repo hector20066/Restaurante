@@ -1,6 +1,9 @@
 package model.dao.impl;
 
-import java.sql.*;
+import java.sql.CallableStatement;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +49,7 @@ public class DAOSalesImpl extends DataBase implements DAOWithAutoIncrement<Sale>
             
             try (ResultSet rs = cs.executeQuery()) {
                 if (rs.next()) {
-                    num_venta = (int) rs.getLong("");
+                    num_venta = rs.getInt("num_venta");
                 }
             }
         } finally {
