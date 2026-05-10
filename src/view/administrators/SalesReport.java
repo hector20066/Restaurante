@@ -79,7 +79,7 @@ public class SalesReport extends javax.swing.JPanel {
         txt_search.setBackground(new java.awt.Color(255, 255, 255));
         txt_search.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
         txt_search.setForeground(new java.awt.Color(33, 37, 41));
-        txt_search.setText("Buscar Plato");
+        txt_search.setText("Buscar Venta");
         txt_search.setBorder(null);
 
         javax.swing.GroupLayout jpl_searchLayout = new javax.swing.GroupLayout(jpl_search);

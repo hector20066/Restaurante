@@ -122,7 +122,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="29" green="25" red="21" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Buscar Plato"/>
+            <Property name="text" type="java.lang.String" value="Buscar Venta"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
