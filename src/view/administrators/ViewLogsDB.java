@@ -82,6 +82,8 @@ public class ViewLogsDB extends javax.swing.JPanel {
         jpl_searchDrink = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         txt_searchDrink = new javax.swing.JTextField();
+        btn_exportDish = new view.swing.ButtonAction();
+        btn_exportDrink = new view.swing.ButtonAction();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -210,6 +212,18 @@ public class ViewLogsDB extends javax.swing.JPanel {
             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        btn_exportDish.setBackground(new java.awt.Color(100, 181, 246));
+        btn_exportDish.setForeground(new java.awt.Color(10, 17, 40));
+        btn_exportDish.setText("Exportar");
+        btn_exportDish.setFont(new java.awt.Font("SansSerif", 1, 15)); // NOI18N
+        btn_exportDish.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        btn_exportDrink.setBackground(new java.awt.Color(100, 181, 246));
+        btn_exportDrink.setForeground(new java.awt.Color(10, 17, 40));
+        btn_exportDrink.setText("Exportar");
+        btn_exportDrink.setFont(new java.awt.Font("SansSerif", 1, 15)); // NOI18N
+        btn_exportDrink.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -230,6 +244,9 @@ public class ViewLogsDB extends javax.swing.JPanel {
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btn_exportDish, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(btn_modifyDish, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btn_deleteDish, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -238,6 +255,9 @@ public class ViewLogsDB extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 973, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btn_exportDrink, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addComponent(btn_modifyDrink, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btn_deleteDrink, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -268,7 +288,8 @@ public class ViewLogsDB extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_deleteDish, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_modifyDish, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_modifyDish, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_exportDish, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -280,7 +301,8 @@ public class ViewLogsDB extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_deleteDrink, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_modifyDrink, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_modifyDrink, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_exportDrink, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30))
         );
 
@@ -306,6 +328,14 @@ public class ViewLogsDB extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setControllerExportDishes(ActionListener action) {
+        btn_exportDish.addActionListener(action);
+    }
+    
+    public void setControllerExportDrinks(ActionListener action) {
+        btn_exportDrink.addActionListener(action);
+    }
+    
     public void setControllerDeleteDish(ActionListener action) {
         btn_deleteDish.addActionListener(action);
     }
@@ -386,6 +416,18 @@ public class ViewLogsDB extends javax.swing.JPanel {
         return btn_modifyDrink;
     }
 
+    public ButtonAction getBtn_exportDish() {
+        return btn_exportDish;
+    }
+
+    public ButtonAction getBtn_exportDrink() {
+        return btn_exportDrink;
+    }
+
+    public JScrollPane getScroll() {
+        return scroll;
+    }
+
     public JTable getJtbl_dishes() {
         return jtbl_dishes;
     }
@@ -397,6 +439,8 @@ public class ViewLogsDB extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private view.swing.ButtonAction btn_deleteDish;
     private view.swing.ButtonAction btn_deleteDrink;
+    private view.swing.ButtonAction btn_exportDish;
+    private view.swing.ButtonAction btn_exportDrink;
     private view.swing.ButtonAction btn_modifyDish;
     private view.swing.ButtonAction btn_modifyDrink;
     private javax.swing.JLabel jLabel1;
