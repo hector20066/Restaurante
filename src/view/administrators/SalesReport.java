@@ -65,6 +65,8 @@ public class SalesReport extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbl_salesReport = new javax.swing.JTable();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 150, 199));
         jLabel1.setText("Registro completo de ventas");
