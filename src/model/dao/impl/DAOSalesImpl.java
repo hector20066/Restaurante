@@ -50,7 +50,7 @@ public class DAOSalesImpl extends DataBase implements IDAOSales {
 
             try (ResultSet rs = cs.executeQuery()) {
                 if (rs.next()) {
-                    num_venta = rs.getInt("numVenta");
+                    num_venta = rs.getInt("num_venta");
                 }
             }
         } finally {

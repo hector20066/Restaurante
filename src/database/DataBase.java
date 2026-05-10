@@ -17,7 +17,7 @@ public class DataBase {
     protected final String DB_URL = "jdbc:mysql://localhost:3306/restaurante?serverTimezone=America/Bogota&useSSL=false&allowPublicKeyRetrieval=true";
 
     private final String user = "root";
-    private final String pass = "";
+    private final String pass = "272006";
     
     public void connect() {
         try {

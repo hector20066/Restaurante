@@ -135,8 +135,8 @@ public class ControllerAdminPanel {
         resetForeground();
         NavigatorUtils.showFormManagement(AdminPanel.getJpl_content(), salesReport);
         adminPanel.getBtn_salesReport().setIcon(new ImageIcon(getClass().getResource("/view/image/chart-no-axes-combined-selected.png")));
-        adminPanel.getBtn_dashboard().setBackground(new Color(187,222,251));
-        adminPanel.getBtn_dashboard().setForeground(new Color(0, 49, 245));
+        adminPanel.getBtn_salesReport().setBackground(new Color(187,222,251));
+        adminPanel.getBtn_salesReport().setForeground(new Color(0, 49, 245));
     }
 
     public void showRegisterDrink() {

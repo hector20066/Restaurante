@@ -113,18 +113,22 @@ public class ControllerChineseFood extends AbstractFoodController {
         return chineseFood.getTableModel();
     }
 
+    protected JPanel getJpl_contentFood() {
+        return chineseFood;
+    }
+
     @Override
     protected void loadDishData(Dish chineseDish) {
         chineseFood.getTxt_descriptionDish().setText(chineseDish.getDescription());
         chineseFood.getTxt_priceDish().setText(String.valueOf(chineseDish.getPrice()));
-        dishCode = chineseDish.getCode();
+        this.dish = chineseDish;
     }
 
     @Override
     protected void loadDrinkData(Drink chineseDrink) {
         chineseFood.getTxt_descriptionDrink().setText(chineseDrink.getDescription());
         chineseFood.getTxt_priceDrink().setText(String.valueOf(chineseDrink.getPrice()));
-        drinkCode = chineseDrink.getCode();
+        this.drink = chineseDrink;
     }
 
 }

@@ -1,13 +1,13 @@
 package model.dao.impl;
 
-import database.DataBase;
-
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import database.DataBase;
 import model.dao.interfaces.IDAO;
 import model.entities.Customer;
 
@@ -48,7 +48,7 @@ public class DAOCustomersImpl extends DataBase implements IDAO<Customer> {
     }
 
     @Override
-    public Customer getData(int code) throws Exception {
+    public synchronized Customer getData(int code) throws Exception {
         Customer customer = null;
         String sql = "SELECT * FROM cliente WHERE id = ? LIMIT 1;";
         this.connect();
@@ -70,7 +70,7 @@ public class DAOCustomersImpl extends DataBase implements IDAO<Customer> {
     }
 
     @Override
-    public List<Customer> getData() throws Exception {
+    public synchronized List<Customer> getData() throws Exception {
         List<Customer> list;
         String sql = "SELECT * FROM cliente";
         this.connect();

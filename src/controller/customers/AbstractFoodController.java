@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
@@ -25,8 +27,6 @@ import model.entities.Sale;
 import model.entities.SaleDetail;
 import model.enums.TypeFood;
 import observer.Observer;
-import service.ServiceEmailjS;
-import utils.MessageUtils;
 
 /**
  *
@@ -34,8 +34,8 @@ import utils.MessageUtils;
  */
 public abstract class AbstractFoodController implements Observer {
 
-    protected int dishCode;
-    protected int drinkCode;
+    protected Dish dish;
+    protected Drink drink;
     protected float totalSale;
 
     private final DAORestaurantDb<Dish> daoDish;
@@ -43,6 +43,25 @@ public abstract class AbstractFoodController implements Observer {
     private final IDAO<Customer> daoCustomer;
     private final DAOWithAutoIncrement<Sale> daoSales;
     private final IDAO<SaleDetail> daoSaleDetail;
+
+    private static class OrderData {
+        final String dishName;
+        final int dishAmount;
+        final float dishPrice;
+        final String drinkName;
+        final int drinkAmount;
+        final float drinkPrice;
+
+        OrderData(String dishName, int dishAmount, float dishPrice, 
+                 String drinkName, int drinkAmount, float drinkPrice) {
+            this.dishName = dishName;
+            this.dishAmount = dishAmount;
+            this.dishPrice = dishPrice;
+            this.drinkName = drinkName;
+            this.drinkAmount = drinkAmount;
+            this.drinkPrice = drinkPrice;
+        }
+    }
 
     public AbstractFoodController() {
         this.daoDish = DAODishImpl.getInstance();
@@ -55,7 +74,7 @@ public abstract class AbstractFoodController implements Observer {
     @Override
     public void update() {
         new Thread(() -> {
-            /*try {
+            try {
                 List<Dish> dishes = daoDish.getData();
                 List<Drink> drinks = daoDrink.getData();
 
@@ -65,7 +84,7 @@ public abstract class AbstractFoodController implements Observer {
                 });
             } catch (Exception e) {
                 e.printStackTrace();
-            }*/
+            }
         }).start();
     }
 
@@ -89,39 +108,117 @@ public abstract class AbstractFoodController implements Observer {
 
     protected abstract JTable getJtbl_food();
     protected abstract DefaultTableModel getTableModelFood();
+    protected abstract JPanel getJpl_contentFood();
 
     protected final void addOrder() {
-        /*String amountDishString = getTxt_amountDish().getText().trim();
-        String amountDrinkString = getTxt_amountDrink().getText().trim();
+        String dishAmount = getTxt_amountDish().getText().trim();
+        String drinkAmount = getTxt_amountDrink().getText().trim();
 
-        if (noDishSelected() && noDrinkSelected() && amountDishString.isBlank() || amountDrinkString.isBlank()) {
-            MessageUtils.warningMessage("Por favor ingrese la cantidad deseada.");
+        if (!validateOrderSelection()) {
             return;
         }
 
-        String nameDish = "No seleccionado";
-        String priceDishString = getTxt_priceDish().getText().trim();
-        int amountDish = 0;
-        float priceDish = 0;
-
-        if (!amountDishString.isBlank() && !priceDishString.isBlank()) {
-            nameDish = (String) getCbo_dish().getSelectedItem();
-            amountDish = Integer.parseInt(amountDishString);
-            priceDish = Float.parseFloat(priceDishString);
+        if (!validateAmounts(dishAmount, drinkAmount)) {
+            return;
         }
 
-        String nameDrink = "No seleccionada";
-        String priceDrinkString = getTxt_priceDrink().getText().trim();
-        int amountDrink = 0;
-        float priceDrink = 0;
+        OrderData orderData = prepareOrderData(dishAmount, drinkAmount);
+        loadOrderInBackground(orderData);
+    }
 
-        if (!amountDrinkString.isBlank() && !priceDrinkString.isBlank()) {
-            nameDrink = (String) getCbo_drink().getSelectedItem();
-            amountDrink = Integer.parseInt(amountDrinkString);
-            priceDrink = Float.parseFloat(priceDrinkString);
+    private boolean validateOrderSelection() {
+        boolean dishSelected = !noDishSelected();
+        boolean drinkSelected = !noDrinkSelected();
+
+        if (!dishSelected && !drinkSelected) {
+            showWarningMessage("Seleccione un plato o una bebida.");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validateAmounts(String dishAmount, String drinkAmount) {
+        boolean dishSelected = !noDishSelected();
+        boolean drinkSelected = !noDrinkSelected();
+
+        if (dishSelected && dishAmount.isBlank()) {
+            showWarningMessage("Ingrese la cantidad del plato.");
+            return false;
         }
 
-        loadDataTable(nameDish, amountDish, priceDish, nameDrink, amountDrink, priceDrink);*/
+        if (drinkSelected && drinkAmount.isBlank()) {
+            showWarningMessage("Ingrese la cantidad de la bebida.");
+            return false;
+        }
+        return true;
+    }
+
+    private OrderData prepareOrderData(String dishAmount, String drinkAmount) {
+        boolean dishSelected = !noDishSelected();
+        boolean drinkSelected = !noDrinkSelected();
+
+        String dishName = null;
+        int dishAmountValue = 0;
+        float dishPrice = 0;
+
+        if (dishSelected) {
+            dishName = (String) getCbo_dish().getSelectedItem();
+            dishAmountValue = Integer.parseInt(dishAmount);
+            dishPrice = Float.parseFloat(getTxt_priceDish().getText().trim());
+        }
+
+        String drinkName = null;
+        int drinkAmountValue = 0;
+        float drinkPrice = 0;
+
+        if (drinkSelected) {
+            drinkName = (String) getCbo_drink().getSelectedItem();
+            drinkAmountValue = Integer.parseInt(drinkAmount);
+            drinkPrice = Float.parseFloat(getTxt_priceDrink().getText().trim());
+        }
+
+        return new OrderData(dishName, dishAmountValue, dishPrice, drinkName, drinkAmountValue, drinkPrice);
+    }
+
+    private void loadOrderInBackground(OrderData orderData) {
+        new Thread(() -> {
+            try {
+                Dish dish = orderData.dishName != null ? daoDish.getData(orderData.dishName) : null;
+                Drink drink = orderData.drinkName != null ? daoDrink.getData(orderData.drinkName) : null;
+
+                SwingUtilities.invokeLater(() -> {
+                    processLoadedOrder(dish, orderData.dishAmount, orderData.dishPrice, drink, orderData.drinkAmount, orderData.drinkPrice);
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
+    private void processLoadedOrder(Dish dish, int dishAmount, float dishPrice, 
+                                    Drink drink, int drinkAmount, float drinkPrice) {
+        if (isDishOrDrinkAlreadyAdded(dish, drink)) {
+            showDuplicateWarning(dish, drink);
+            return;
+        }
+
+        loadDataTable(dish, dishAmount, dishPrice, drink, drinkAmount, drinkPrice);
+    }
+
+    private void showDuplicateWarning(Dish dish, Drink drink) {
+        String errorMsg = "";
+
+        if (dish != null && isDishAlreadyInTable(dish.getCode())) {
+            errorMsg = "El plato \"" + dish.getName() + "\" ya se encuentra en la tabla de pedidos.";
+        } else if (drink != null && isDrinkAlreadyInTable(drink.getCode())) {
+            errorMsg = "La bebida \"" + drink.getName() + "\" ya se encuentra en la tabla de pedidos.";
+        }
+
+        showWarningMessage(errorMsg);
+    }
+
+    private void showWarningMessage(String message) {
+        JOptionPane.showMessageDialog(getJpl_contentFood(), message, null, JOptionPane.WARNING_MESSAGE);
     }
 
     protected boolean noDishSelected() {
@@ -132,13 +229,59 @@ public abstract class AbstractFoodController implements Observer {
         return getCbo_drink().getSelectedIndex() == 0;
     }
 
-    protected final void loadDataTable(String nameDish, int amountDish, float priceDish, String nameDrink, int amountDrink, float priceDrink) {
+    protected final void loadDataTable(Dish dish, int amountDish, float priceDish, Drink drink, int amountDrink, float priceDrink) {
         float totalOrder = (amountDish * priceDish) + (amountDrink * priceDrink);
 
-        Object[] data = new Object[]{nameDish, this.dishCode, amountDish, nameDrink, this.drinkCode, amountDrink, totalOrder};
+        int dishCode = dish != null ? dish.getCode() : 0;
+        String dishName = dish != null ? dish.getName() : "No seleccionado";
+
+        int drinkCode = drink != null ? drink.getCode() : 0;
+        String drinkName = drink != null ? drink.getName() : "No seleccionada";
+
+        Object[] data = new Object[]{dishName, dishCode, amountDish, drinkName, drinkCode, amountDrink, totalOrder};
         getTableModelFood().addRow(data);
         this.totalSale += totalOrder;
         getTxt_totalSale().setText(String.valueOf(this.totalSale));
+    }
+
+    protected boolean isDishOrDrinkAlreadyAdded(Dish dish, Drink drink) {
+        if (dish != null && isDishAlreadyInTable(dish.getCode())) {
+            return true;
+        }
+
+        if (drink != null && isDrinkAlreadyInTable(drink.getCode())) {
+            return true;
+        }
+
+        return false;
+    }
+
+    protected boolean isDishAlreadyInTable(int dishCode) {
+        int rows = getJtbl_food().getRowCount();
+
+        for (int i = 0; i < rows; i++) {
+            int currentDishCode = Integer.parseInt(getJtbl_food().getValueAt(i, 1).toString());
+
+            if (currentDishCode == dishCode && dishCode != 0) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    protected boolean isDrinkAlreadyInTable(int drinkCode) {
+        int rows = getJtbl_food().getRowCount();
+
+        for (int i = 0; i < rows; i++) {
+            int currentDrinkCode = Integer.parseInt(getJtbl_food().getValueAt(i, 4).toString());
+
+            if (currentDrinkCode == drinkCode && drinkCode != 0) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     protected void registerSale() {
@@ -212,8 +355,6 @@ public abstract class AbstractFoodController implements Observer {
 
             addSale(customerId, currentDishCode, Integer.parseInt(amountDish), currentDrinkCode, Integer.parseInt(amountDrink), saleSubtotal);
         }
-
-        sendConfirmationSale(customerName, customerEmail, details, String.valueOf(this.totalSale));
     }
 
     protected void addDetailsIfValid(List<String> details, String name, String amount, String invalidText) {
@@ -256,18 +397,6 @@ public abstract class AbstractFoodController implements Observer {
         sale.setClientId(Integer.parseInt(customerId));
         sale.setTotal(saleSubtotal);
         sale.setDate(LocalDate.now());
-    }
-
-    protected final void sendConfirmationSale(String customerName, String customerEmail, List<String> details, String totalSale) {
-        try {
-            new Thread(() -> {
-                ServiceEmailjS serviceEmailjS = new ServiceEmailjS();
-                String response = serviceEmailjS.sendEmail(customerName, customerEmail, details, totalSale);
-                System.out.println(response);
-            }).start();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     protected void clearDataSale() {
