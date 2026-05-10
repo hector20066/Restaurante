@@ -61,6 +61,7 @@ public class ControllerDashboard implements Observer {
                 loadGraphicalData();
                 loadCardsData();
             } catch (Exception e) {
+                e.printStackTrace();
                 SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(dashboard, "Ha ocurrido un error al cargar la información del dashboard", "", JOptionPane.ERROR_MESSAGE));
             }
         }).start();
@@ -111,7 +112,7 @@ public class ControllerDashboard implements Observer {
     }
 
     private void processDrink(SaleDetail saleDetail, int month, int[] colombian, int[] italian, int[] chinese) throws Exception {
-        if (saleDetail.getDrinkId() == 0) return;
+        if (saleDetail.getDrinkId() == null || saleDetail.getDrinkId() == 0) return;
 
         Drink drink = daoDrink.getData(saleDetail.getDrinkId());
         if (drink == null) return;

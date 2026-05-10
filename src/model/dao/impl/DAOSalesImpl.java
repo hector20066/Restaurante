@@ -63,7 +63,7 @@ public class DAOSalesImpl extends DataBase implements IDAOSales {
     @Override
     public synchronized Sale getData(int code) throws Exception {
         Sale sale = null;
-        String sql = "SELECT * FROM venta WHERE numVenta = ? LIMIT 1;";
+        String sql = "SELECT * FROM venta WHERE num_venta = ? LIMIT 1;";
         this.connect();
 
         try (PreparedStatement st = this.connection.prepareStatement(sql)) {
@@ -72,8 +72,8 @@ public class DAOSalesImpl extends DataBase implements IDAOSales {
             try (ResultSet rs = st.executeQuery()) {
                 if (rs.next()) {
                     sale = new Sale();
-                    sale.setSaleNumber(rs.getInt("numVenta"));
-                    sale.setClientId(rs.getInt("idCliente"));
+                    sale.setSaleNumber(rs.getInt("num_venta"));
+                    sale.setClientId(rs.getInt("id_cliente"));
                     sale.setDate(rs.getDate("fecha").toLocalDate());
                     sale.setTotal(rs.getFloat("total"));
                 }
@@ -97,8 +97,8 @@ public class DAOSalesImpl extends DataBase implements IDAOSales {
             try (ResultSet rs = st.executeQuery()) {
                 while (rs.next()) {
                     Sale sale = new Sale();
-                    sale.setSaleNumber(rs.getInt("numVenta"));
-                    sale.setClientId(rs.getInt("idCliente"));
+                    sale.setSaleNumber(rs.getInt("num_venta"));
+                    sale.setClientId(rs.getInt("id_cliente"));
                     sale.setDate(rs.getDate("fecha").toLocalDate());
                     sale.setTotal(rs.getFloat("total"));
                     list.add(sale);
@@ -113,7 +113,7 @@ public class DAOSalesImpl extends DataBase implements IDAOSales {
 
     @Override
     public boolean exists(int id) throws Exception {
-        String sql = "SELECT 1 FROM venta WHERE numVenta = ?";
+        String sql = "SELECT 1 FROM venta WHERE num_venta = ?";
         this.connect();
 
         try (PreparedStatement st = this.connection.prepareStatement(sql)) {
@@ -132,7 +132,7 @@ public class DAOSalesImpl extends DataBase implements IDAOSales {
         List<SaleDetailsDTO> list;
         String sql = """
                      SELECT
-                        v.numVenta,
+                        v.num_venta,
                         c.nombre AS cliente,
                         p.nombre AS plato,
                         d.cantPlato,
@@ -141,8 +141,8 @@ public class DAOSalesImpl extends DataBase implements IDAOSales {
                         v.fecha,
                         v.total
                      FROM detalle_venta d
-                     INNER JOIN venta v ON d.idVenta = v.numVenta
-                     INNER JOIN cliente c ON v.idCliente = c.id
+                     INNER JOIN venta v ON d.idVenta = v.num_venta
+                     INNER JOIN cliente c ON v.id_cliente = c.id
                      INNER JOIN platos p ON d.idPlato = p.codigo
                      INNER JOIN bebidas b ON d.idBebida = b.codigo;
                      """;
