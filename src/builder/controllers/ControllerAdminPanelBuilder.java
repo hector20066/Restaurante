@@ -18,6 +18,7 @@ public class ControllerAdminPanelBuilder {
     private RegisterDish registerDish;
     private RegisterDrink registerDrink;
     private ViewLogsDB viewLogsDB;
+    private SalesReport salesReport;
     private ControllerRegisterDish controllerRegisterDish;
     private ControllerRegisterDrink controllerRegisterDrink;
 
@@ -48,6 +49,11 @@ public class ControllerAdminPanelBuilder {
 
     public ControllerAdminPanelBuilder withViewLogsDB(ViewLogsDB viewLogsDB) {
         this.viewLogsDB = viewLogsDB;
+        return this;
+    }
+    
+    public ControllerAdminPanelBuilder withViewSalesReport(SalesReport salesReport) {
+        this.salesReport = salesReport;
         return this;
     }
 
@@ -87,6 +93,11 @@ public class ControllerAdminPanelBuilder {
 
     public ViewLogsDB getViewLogsDB() {
         return viewLogsDB;
+    }
+    
+    
+    public SalesReport getSalesReport() {
+        return salesReport;
     }
 
     public ControllerRegisterDish getControllerRegisterDish() {

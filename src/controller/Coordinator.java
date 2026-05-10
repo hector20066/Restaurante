@@ -31,6 +31,7 @@ public class Coordinator {
     private ItalianFood italianFood;
     private ColombianFood colombianFood;
     private RatingsPanel ratingsPanel;
+    private SalesReport salesReport;
 
     private ControllerLogin controllerLogin;
     private ControllerAdminPanel controllerAdminPanel;
@@ -68,6 +69,7 @@ public class Coordinator {
         italianFood = new ItalianFood();
         colombianFood = new ColombianFood();
         ratingsPanel = new RatingsPanel();
+        salesReport = new SalesReport();
     }
 
     private void startDrivers () {
@@ -80,6 +82,7 @@ public class Coordinator {
                 .withViewRegisterDish(registerDish)
                 .withViewRegisterDrink(registerDrink)
                 .withViewLogsDB(viewLogsDB)
+                .withViewSalesReport(salesReport)
                 .withControllerRegisterDish(controllerRegisterDish)
                 .withControllerRegisterDrink(controllerRegisterDrink)
                 .build();

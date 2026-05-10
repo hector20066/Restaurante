@@ -26,6 +26,7 @@ public class ControllerAdminPanel {
     private final RegisterDish registerDish;
     private final RegisterDrink registerDrink;
     private final ViewLogsDB viewLogsDB;
+    private final SalesReport salesReport;
     private final ControllerRegisterDish controllerRegisterDish;
     private final ControllerRegisterDrink controllerRegisterDrink;
 
@@ -36,6 +37,7 @@ public class ControllerAdminPanel {
         this.registerDish = builder.getRegisterDish();
         this.registerDrink = builder.getRegisterDrink();
         this.viewLogsDB = builder.getViewLogsDB();
+        this.salesReport = builder.getSalesReport();
         this.controllerRegisterDish = builder.getControllerRegisterDish();
         this.controllerRegisterDrink = builder.getControllerRegisterDrink();
 
@@ -47,6 +49,7 @@ public class ControllerAdminPanel {
         adminPanel.setControllerRegisterDish(e -> showRegisterDish());
         adminPanel.setControllerRegisterDrink(e -> showRegisterDrink());
         adminPanel.setControllerSeeAvailableMeals(e -> seeAvailableMeals());
+        adminPanel.setControllerSalesReport(e -> showSalesReport());
         adminPanel.setControllerMenu(e -> actionMenu());
         adminPanel.setControllerExit(e -> logout());
     }
@@ -96,6 +99,7 @@ public class ControllerAdminPanel {
         adminPanel.getBtn_registerDish().setText(expandedMenu ? "  REGISTRAR PLATOS" : "");
         adminPanel.getBtn_registerDrinks().setText(expandedMenu ? "  REGISTRAR BEBIDAS" : "");
         adminPanel.getBtn_seeAvailableMeals().setText(expandedMenu ? "  COMIDAS DISPONIBLES" : "");
+        adminPanel.getBtn_salesReport().setText(expandedMenu ? "  REPORTE DE VENTAS" : "");
         adminPanel.getBtn_exit().setText(expandedMenu ? "  SALIR" : "");
     }
 
@@ -123,6 +127,16 @@ public class ControllerAdminPanel {
         registerDish.getTxt_description().setText("");
         registerDish.getTxt_price().setText("");
         registerDish.getCbo_typeDish().setSelectedIndex(0);
+    }
+    
+    public void showSalesReport() {
+        resetColors();
+        resetIcons();
+        resetForeground();
+        NavigatorUtils.showFormManagement(AdminPanel.getJpl_content(), salesReport);
+        adminPanel.getBtn_salesReport().setIcon(new ImageIcon(getClass().getResource("/view/image/chart-no-axes-combined-selected.png")));
+        adminPanel.getBtn_dashboard().setBackground(new Color(187,222,251));
+        adminPanel.getBtn_dashboard().setForeground(new Color(0, 49, 245));
     }
 
     public void showRegisterDrink() {
@@ -158,6 +172,7 @@ public class ControllerAdminPanel {
         adminPanel.getBtn_registerDrinks().setBackground(normal);
         adminPanel.getBtn_seeAvailableMeals().setBackground(normal);
         adminPanel.getBtn_exit().setBackground(normal);
+        adminPanel.getBtn_salesReport().setBackground(normal);
     }
 
     private void resetIcons() {
@@ -166,6 +181,7 @@ public class ControllerAdminPanel {
         adminPanel.getBtn_registerDrinks().setIcon(new ImageIcon(getClass().getResource("/view/image/wine.png")));
         adminPanel.getBtn_seeAvailableMeals().setIcon(new ImageIcon(getClass().getResource("/view/image/database.png")));
         adminPanel.getBtn_exit().setIcon(new ImageIcon(getClass().getResource("/view/image/log-out.png")));
+        adminPanel.getBtn_salesReport().setIcon(new ImageIcon(getClass().getResource("/view/image/chart-no-axes-combined.png")));
     }
 
     private void resetForeground() {
@@ -175,6 +191,7 @@ public class ControllerAdminPanel {
         adminPanel.getBtn_registerDrinks().setForeground(normal);
         adminPanel.getBtn_seeAvailableMeals().setForeground(normal);
         adminPanel.getBtn_exit().setForeground(normal);
+        adminPanel.getBtn_salesReport().setForeground(normal);
     }
 
     private void logout() {

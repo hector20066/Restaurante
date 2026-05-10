@@ -42,6 +42,7 @@ public class AdminPanel extends javax.swing.JFrame {
         btn_seeAvailableMeals = new view.swing.ButtonAction();
         btn_exit = new view.swing.ButtonAction();
         btn_menu = new view.swing.ButtonAction();
+        btn_salesReport = new view.swing.ButtonAction();
         jpl_content = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -105,6 +106,12 @@ public class AdminPanel extends javax.swing.JFrame {
         btn_menu.setBackground(new java.awt.Color(255, 255, 255));
         btn_menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/menu.png"))); // NOI18N
 
+        btn_salesReport.setBackground(new java.awt.Color(255, 255, 255));
+        btn_salesReport.setForeground(new java.awt.Color(33, 37, 41));
+        btn_salesReport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/chart-no-axes-combined.png"))); // NOI18N
+        btn_salesReport.setText("  REPORTE DE VENTAS");
+        btn_salesReport.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
+
         javax.swing.GroupLayout jpl_menuLayout = new javax.swing.GroupLayout(jpl_menu);
         jpl_menu.setLayout(jpl_menuLayout);
         jpl_menuLayout.setHorizontalGroup(
@@ -119,7 +126,8 @@ public class AdminPanel extends javax.swing.JFrame {
                     .addComponent(btn_exit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jpl_menuLayout.createSequentialGroup()
                         .addComponent(btn_menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(btn_salesReport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jpl_menuLayout.setVerticalGroup(
@@ -135,6 +143,8 @@ public class AdminPanel extends javax.swing.JFrame {
                 .addComponent(btn_registerDrinks, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btn_seeAvailableMeals, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(btn_salesReport, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_exit, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -231,6 +241,10 @@ public class AdminPanel extends javax.swing.JFrame {
     public void setControllerRegisterDrink(ActionListener action) {
         btn_registerDrinks.addActionListener(action);
     }
+    
+    public void setControllerSalesReport(ActionListener action) {
+        btn_salesReport.addActionListener(action);
+    }
 
     public void setControllerSeeAvailableMeals(ActionListener action) {
         btn_seeAvailableMeals.addActionListener(action);
@@ -260,6 +274,10 @@ public class AdminPanel extends javax.swing.JFrame {
         return btn_seeAvailableMeals;
     }
 
+    public ButtonAction getBtn_salesReport() {
+        return btn_salesReport;
+    }
+
     public JPanel getJpl_body() {
         return jpl_body;
     }
@@ -286,6 +304,7 @@ public class AdminPanel extends javax.swing.JFrame {
     private view.swing.ButtonAction btn_menu;
     private view.swing.ButtonAction btn_registerDish;
     private view.swing.ButtonAction btn_registerDrinks;
+    private view.swing.ButtonAction btn_salesReport;
     private view.swing.ButtonAction btn_seeAvailableMeals;
     private javax.swing.JPanel jpl_body;
     private static javax.swing.JPanel jpl_content;
