@@ -63,6 +63,41 @@ public abstract class AbstractFoodController implements Observer {
         }
     }
 
+    private static class CustomerData {
+        final String name;
+        final int id;
+        final String email;
+        final String address;
+
+        CustomerData(String name, int id, String email, String address) {
+            this.name = name;
+            this.id = id;
+            this.email = email;
+            this.address = address;
+        }
+    }
+
+    private static class SaleRowData {
+        final String dishName;
+        final int dishCode;
+        final int dishAmount;
+        final String drinkName;
+        final int drinkCode;
+        final int drinkAmount;
+        final float total;
+
+        SaleRowData(String dishName, int dishCode, int dishAmount, 
+                   String drinkName, int drinkCode, int drinkAmount, float total) {
+            this.dishName = dishName;
+            this.dishCode = dishCode;
+            this.dishAmount = dishAmount;
+            this.drinkName = drinkName;
+            this.drinkCode = drinkCode;
+            this.drinkAmount = drinkAmount;
+            this.total = total;
+        }
+    }
+
     public AbstractFoodController() {
         this.daoDish = DAODishImpl.getInstance();
         this.daoDrink = DAODrinkImpl.getInstance();
@@ -134,6 +169,7 @@ public abstract class AbstractFoodController implements Observer {
             showWarningMessage("Seleccione un plato o una bebida.");
             return false;
         }
+
         return true;
     }
 
@@ -150,6 +186,7 @@ public abstract class AbstractFoodController implements Observer {
             showWarningMessage("Ingrese la cantidad de la bebida.");
             return false;
         }
+
         return true;
     }
 
@@ -195,8 +232,7 @@ public abstract class AbstractFoodController implements Observer {
         }).start();
     }
 
-    private void processLoadedOrder(Dish dish, int dishAmount, float dishPrice, 
-                                    Drink drink, int drinkAmount, float drinkPrice) {
+    private void processLoadedOrder(Dish dish, int dishAmount, float dishPrice, Drink drink, int drinkAmount, float drinkPrice) {
         if (isDishOrDrinkAlreadyAdded(dish, drink)) {
             showDuplicateWarning(dish, drink);
             return;
@@ -293,110 +329,134 @@ public abstract class AbstractFoodController implements Observer {
     }
 
     protected final void carryOutTransaction() {
-        /*String customerName = getTxt_customerName().getText();
+        String customerName = getTxt_customerName().getText();
         String customerId = getTxt_customerId().getText().trim();
         String customerEmail = getTxt_customerEmail().getText().trim();
         String customerAddress = getTxt_customerAddress().getText();
 
-        if (isInvalidCustomerData(customerName, customerId, customerEmail, customerAddress)) {
-            MessageUtils.warningMessage("Por favor ingrese todos los datos solicitados");
+        if (!validateCustomerData(customerName, customerId, customerEmail, customerAddress)) {
             return;
         }
 
-        Customer customer = new Customer();
-        assignValuesCustomer(customer, customerName, customerId, customerEmail, customerAddress);
+        CustomerData customerData = extractCustomerData(customerName, customerId, customerEmail, customerAddress);
+        processSaleInBackground(customerData);
+    }
 
+    private boolean validateCustomerData(String name, String id, String email, String address) {
+        if (isInvalidCustomerData(name, id, email, address)) {
+            showWarningMessage("Por favor ingrese todos los datos solicitados");
+            return false;
+        }
+
+        return true;
+    }
+
+    private CustomerData extractCustomerData(String name, String id, String email, String address) {
+        return new CustomerData(name, Integer.parseInt(id), email, address);
+    }
+
+    private void processSaleInBackground(CustomerData customerData) {
         new Thread(() -> {
             try {
-                if (!daoCustomer.exists(customer.getId())) {
-                    daoCustomer.save(customer);
-                }
+                registerCustomerIfNeeded(customerData);
 
                 SwingUtilities.invokeLater(() -> {
-                    saveAllSale(customerId, customerName, customerEmail);
-                    MessageUtils.informationMessage("Se ha registrado su compra\nEn un momento lo contactaremos para la entrega.");
+                    try {
+                        processAndSaveAllSales(customerData);
+                        showInformationMessage("Se ha registrado su compra\nEn un momento lo contactaremos para la entrega.");
+                        clearDataSale();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        showWarningMessage("Error al guardar las ventas: " + e.getMessage());
+                    }
                 });
             } catch (Exception e) {
                 e.printStackTrace();
+                SwingUtilities.invokeLater(() -> 
+                    showWarningMessage("Error al procesar el cliente: " + e.getMessage())
+                );
             }
-        }).start();*/
+        }).start();
+    }
+
+    private void registerCustomerIfNeeded(CustomerData customerData) throws Exception {
+        if (!daoCustomer.exists(customerData.id)) {
+            Customer customer = buildCustomerFromData(customerData);
+            daoCustomer.save(customer);
+        }
+    }
+
+    private Customer buildCustomerFromData(CustomerData customerData) {
+        Customer customer = new Customer();
+        customer.setName(customerData.name);
+        customer.setId(customerData.id);
+        customer.setEmail(customerData.email);
+        customer.setAddress(customerData.address);
+        return customer;
+    }
+
+    private void processAndSaveAllSales(CustomerData customerData) throws Exception {
+        List<SaleRowData> saleRows = extractSaleRowsFromTable();
+        
+        for (SaleRowData rowData : saleRows) {
+            saveSaleWithDetails(customerData.id, rowData);
+        }
+    }
+
+    private List<SaleRowData> extractSaleRowsFromTable() {
+        List<SaleRowData> rows = new ArrayList<>();
+        int tableRowCount = getJtbl_food().getRowCount();
+
+        for (int i = 0; i < tableRowCount; i++) {
+            SaleRowData rowData = new SaleRowData(
+                getJtbl_food().getValueAt(i, 0).toString(),
+                Integer.parseInt(getJtbl_food().getValueAt(i, 1).toString()),
+                Integer.parseInt(getJtbl_food().getValueAt(i, 2).toString()),
+                getJtbl_food().getValueAt(i, 3).toString(),
+                Integer.parseInt(getJtbl_food().getValueAt(i, 4).toString()),
+                Integer.parseInt(getJtbl_food().getValueAt(i, 5).toString()),
+                Float.parseFloat(getJtbl_food().getValueAt(i, 6).toString())
+            );
+
+            rows.add(rowData);
+        }
+
+        return rows;
+    }
+
+    private void saveSaleWithDetails(int customerId, SaleRowData rowData) throws Exception {
+        Sale sale = buildSaleFromRowData(customerId, rowData);
+        int saleId = daoSales.saveAndGetId(sale);
+        
+        SaleDetail saleDetail = buildSaleDetailFromRowData(saleId, rowData);
+        daoSaleDetail.save(saleDetail);
+    }
+
+    private Sale buildSaleFromRowData(int customerId, SaleRowData rowData) {
+        Sale sale = new Sale();
+        sale.setClientId(customerId);
+        sale.setTotal(rowData.total);
+        sale.setDate(LocalDate.now());
+        return sale;
+    }
+
+    private SaleDetail buildSaleDetailFromRowData(int saleId, SaleRowData rowData) {
+        SaleDetail detail = new SaleDetail();
+        detail.setSaleId(saleId);
+        detail.setDishId(rowData.dishCode > 0 ? rowData.dishCode : null);
+        detail.setDrinkId(rowData.drinkCode > 0 ? rowData.drinkCode : null);
+        detail.setDishAmount(rowData.dishAmount > 0 ? rowData.dishAmount : null);
+        detail.setDrinkAmount(rowData.drinkAmount > 0 ? rowData.drinkAmount : null);
+        detail.setDishPrice(new java.math.BigDecimal(rowData.total));
+        return detail;
+    }
+
+    private void showInformationMessage(String message) {
+        JOptionPane.showMessageDialog(getJpl_contentFood(), message, null, JOptionPane.INFORMATION_MESSAGE);
     }
 
     protected boolean isInvalidCustomerData(String customerName, String customerId, String customerEmail, String customerAddress) {
         return customerName.isBlank() || customerId.isBlank() || customerEmail.isBlank() || customerAddress.isBlank();
-    }
-
-    protected void assignValuesCustomer(Customer customer, String name, String id, String email, String address) {
-        customer.setName(name);
-        customer.setId(Integer.parseInt(id));
-        customer.setEmail(email);
-        customer.setAddress(address);
-    }
-
-    protected final void saveAllSale(String customerId, String customerName, String customerEmail) {
-        int rows = getJtbl_food().getRowCount();
-        String dishName;
-        String amountDish;
-        String drinkName;
-        String amountDrink;
-        List<String> details = new ArrayList<>();
-
-        for (int i = 0; i < rows; i++) {
-            dishName = getJtbl_food().getValueAt(i, 0).toString();
-            int currentDishCode = Integer.parseInt(getJtbl_food().getValueAt(i, 1).toString());
-            amountDish = getJtbl_food().getValueAt(i, 2).toString();
-            drinkName = getJtbl_food().getValueAt(i, 3).toString();
-            int currentDrinkCode = Integer.parseInt(getJtbl_food().getValueAt(i, 4).toString());
-            amountDrink = getJtbl_food().getValueAt(i, 5).toString();
-            float saleSubtotal = Float.parseFloat(getJtbl_food().getValueAt(i, 6).toString());
-
-            addDetailsIfValid(details, dishName, amountDish, "No seleccionado");
-            addDetailsIfValid(details, drinkName, amountDrink, "No seleccionada");
-
-            addSale(customerId, currentDishCode, Integer.parseInt(amountDish), currentDrinkCode, Integer.parseInt(amountDrink), saleSubtotal);
-        }
-    }
-
-    protected void addDetailsIfValid(List<String> details, String name, String amount, String invalidText) {
-        if (!name.equals(invalidText) && amount != null && !amount.equals("0") && !amount.isBlank()) {
-            details.add(name + " x " + amount);
-        }
-    }
-
-    protected final void addSale(String customerId, int dishCode, int amountDish, int drinkCode, int amountDrink, float saleSubtotal) {
-         Sale sale = new Sale();
-         assignValuesSale(sale, customerId, dishCode, amountDish, drinkCode, amountDrink, saleSubtotal);
-
-         new Thread(() -> {
-            try {
-                int numSale = daoSales.saveAndGetId(sale);
-                saveSaleDetail(sale.getSaleNumber(), dishCode, amountDish, drinkCode, amountDrink, saleSubtotal);
-                SwingUtilities.invokeLater(this::clearDataSale);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-         }).start();
-    }
-
-    protected final void saveSaleDetail(int saleId, int dishCode, int amountDish, int drinkCode, int amountDrink, float saleSubtotal) {
-        try {
-            SaleDetail saleDetail = new SaleDetail();
-            saleDetail.setSaleId(saleId);
-            saleDetail.setDishId(dishCode > 0 ? dishCode : null);
-            saleDetail.setDrinkId(drinkCode > 0 ? drinkCode : null);
-            saleDetail.setDishAmount(amountDish > 0 ? amountDish : null);
-            saleDetail.setDrinkAmount(amountDrink > 0 ? amountDrink : null);
-            saleDetail.setDishPrice(new java.math.BigDecimal(saleSubtotal));
-            daoSaleDetail.save(saleDetail);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    protected void assignValuesSale(Sale sale, String customerId, int dishCode, int amountDish, int drinkCode, int amountDrink, float saleSubtotal) {
-        sale.setClientId(Integer.parseInt(customerId));
-        sale.setTotal(saleSubtotal);
-        sale.setDate(LocalDate.now());
     }
 
     protected void clearDataSale() {
