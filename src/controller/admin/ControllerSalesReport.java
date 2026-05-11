@@ -5,9 +5,13 @@ import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
-import javax.swing.*;
+
+import javax.swing.RowFilter;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.TableModel;
@@ -113,10 +117,76 @@ public class ControllerSalesReport implements Observer{
             int amountDrink = dto.getQuantityDrinksSold();
             LocalDate date = dto.getDate();
             float total = dto.getTotalSale();
-            
+
             Object[] data = new Object[] {numSale, customer, dish, amountDish, drink, amountDrink, date, total};
             salesReport.getModel().addRow(data);
         });
+
+        // Calcular y mostrar plato y bebida más vendida
+        displayMostSoldDish(list);
+        displayMostSoldDrink(list);
+    }
+
+    private void displayMostSoldDish(List<SaleDetailsDTO> list) {
+        Map<String, Integer> dishCount = new HashMap<>();
+
+        for (SaleDetailsDTO dto : list) {
+            String dish = dto.getDish();
+            int amount = dto.getQuantityDishesSold();
+
+            if (dish != null && !dish.isBlank() && amount > 0) {
+                dishCount.put(dish, dishCount.getOrDefault(dish, 0) + amount);
+            }
+        }
+
+        if (dishCount.isEmpty()) {
+            // Establecer valores por defecto si no hay datos
+            // salesReport.getTxt_mostSoldDish().setText("Sin datos");
+            // salesReport.getTxt_mostSoldDishAmount().setText("0");
+            return;
+        }
+
+        String mostSoldDish = dishCount.entrySet().stream()
+            .max(Map.Entry.comparingByValue())
+            .map(Map.Entry::getKey)
+            .orElse("Sin datos");
+
+        int totalAmount = dishCount.get(mostSoldDish);
+
+        // Establecer los valores en los textfields/labels
+        // salesReport.getTxt_mostSoldDish().setText(mostSoldDish);
+        // salesReport.getTxt_mostSoldDishAmount().setText(String.valueOf(totalAmount));
+    }
+
+    private void displayMostSoldDrink(List<SaleDetailsDTO> list) {
+        Map<String, Integer> drinkCount = new HashMap<>();
+
+        for (SaleDetailsDTO dto : list) {
+            String drink = dto.getDrink();
+            int amount = dto.getQuantityDrinksSold();
+
+            if (drink != null && !drink.isBlank() && amount > 0) {
+                drinkCount.put(drink, drinkCount.getOrDefault(drink, 0) + amount);
+            }
+        }
+
+        if (drinkCount.isEmpty()) {
+            // Establecer valores por defecto si no hay datos
+            // salesReport.getTxt_mostSoldDrink().setText("Sin datos");
+            // salesReport.getTxt_mostSoldDrinkAmount().setText("0");
+            return;
+        }
+
+        String mostSoldDrink = drinkCount.entrySet().stream()
+            .max(Map.Entry.comparingByValue())
+            .map(Map.Entry::getKey)
+            .orElse("Sin datos");
+
+        int totalAmount = drinkCount.get(mostSoldDrink);
+
+        // Establecer los valores en los textfields/labels
+        // salesReport.getTxt_mostSoldDrink().setText(mostSoldDrink);
+        // salesReport.getTxt_mostSoldDrinkAmount().setText(String.valueOf(totalAmount));
     }
     
 }
