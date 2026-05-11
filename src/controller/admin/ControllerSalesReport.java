@@ -88,8 +88,7 @@ public class ControllerSalesReport implements Observer {
 
                 SwingUtilities.invokeLater(() -> {
                     loadData(saleDetails);
-                    displayMostSoldDish(saleDetails);
-                    displayMostSoldDrink(saleDetails);
+                    displayMostSold(saleDetails);
                 });
             } catch (Exception e) {
                 e.printStackTrace();
@@ -127,8 +126,9 @@ public class ControllerSalesReport implements Observer {
         });
     }
 
-    private void displayMostSoldDish(List<SaleDetailsDTO> list) {
+    private void displayMostSold(List<SaleDetailsDTO> list) {
         Map<String, Integer> dishCount = new HashMap<>();
+        Map<String, Integer> drinkCount = new HashMap<>();
 
         for (SaleDetailsDTO dto : list) {
             String dish = dto.getDish();
@@ -138,27 +138,7 @@ public class ControllerSalesReport implements Observer {
                 dishCount.put(dish, dishCount.getOrDefault(dish, 0) + amount);
             }
         }
-
-        if (dishCount.isEmpty()) {
-            salesReport.getJlb_bestSellingDish().setText("Sin datos");
-            salesReport.getJlb_amountDish().setText("0");
-            return;
-        }
-
-        String mostSoldDish = dishCount.entrySet().stream()
-                .max(Map.Entry.comparingByValue())
-                .map(Map.Entry::getKey)
-                .orElse("Sin datos");
-
-        int totalAmount = dishCount.get(mostSoldDish);
-
-        salesReport.getJlb_bestSellingDish().setText(mostSoldDish);
-        salesReport.getJlb_amountDish().setText(String.valueOf(totalAmount));
-    }
-
-    private void displayMostSoldDrink(List<SaleDetailsDTO> list) {
-        Map<String, Integer> drinkCount = new HashMap<>();
-
+        
         for (SaleDetailsDTO dto : list) {
             String drink = dto.getDrink();
             int amount = dto.getQuantityDrinksSold();
@@ -168,21 +148,29 @@ public class ControllerSalesReport implements Observer {
             }
         }
 
-        if (drinkCount.isEmpty()) {
-            salesReport.getJlb_bestSellingDrink().setText("Sin datos");
-            salesReport.getJlb_amountDrink().setText("0");
+        if (dishCount.isEmpty()) {
+            return;
+        }
+        
+        if (drinkCount.isEmpty() && dishCount.isEmpty()) {
+            salesReport.updateCards("Sin datos", "Sin datos", 0, 0);
             return;
         }
 
-        String mostSoldDrink = drinkCount.entrySet().stream()
+        String mostSoldDish = dishCount.entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey)
+                .orElse("Sin datos");
+        
+         String mostSoldDrink = drinkCount.entrySet().stream()
                 .max(Map.Entry.comparingByValue())
                 .map(Map.Entry::getKey)
                 .orElse("Sin datos");
 
-        int totalAmount = drinkCount.get(mostSoldDrink);
+        int totalAmountDrink = drinkCount.get(mostSoldDrink);
+        int totalAmountDish = dishCount.get(mostSoldDish);
 
-        salesReport.getJlb_bestSellingDrink().setText(mostSoldDrink);
-        salesReport.getJlb_amountDrink().setText(String.valueOf(totalAmount));
+        salesReport.updateCards(mostSoldDish, mostSoldDrink, totalAmountDish, totalAmountDrink);
     }
 
 }
