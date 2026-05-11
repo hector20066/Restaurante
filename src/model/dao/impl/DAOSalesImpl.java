@@ -8,15 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import database.DataBase;
-import model.dao.SaleDetailsDTO;
-import model.dao.interfaces.IDAOSales;
+import model.dao.interfaces.DAOWithAutoIncrement;
 import model.entities.Sale;
 
 /**
  *
  * @author Andres Cardenas
  */
-public class DAOSalesImpl extends DataBase implements IDAOSales {
+public class DAOSalesImpl extends DataBase implements DAOWithAutoIncrement<Sale> {
 
     private static DAOSalesImpl instance;
 
@@ -125,51 +124,6 @@ public class DAOSalesImpl extends DataBase implements IDAOSales {
         } finally {
             this.close();
         }
-    }
-
-    @Override
-    public List<SaleDetailsDTO> getAllData() throws Exception {
-        List<SaleDetailsDTO> list;
-        String sql = """
-                     SELECT
-                        v.num_venta,
-                        c.nombre AS cliente,
-                        p.nombre AS plato,
-                        d.cantPlato,
-                        b.nombre AS bebida,
-                        d.cantBebida,
-                        v.fecha,
-                        v.total
-                     FROM detalle_venta d
-                     INNER JOIN venta v ON d.idVenta = v.num_venta
-                     INNER JOIN cliente c ON v.id_cliente = c.id
-                     LEFT JOIN platos p ON d.idPlato = p.codigo
-                     LEFT JOIN bebidas b ON d.idBebida = b.codigo;
-                     """;
-        this.connect();
-
-        try (PreparedStatement st = this.connection.prepareStatement(sql)) {
-            list = new ArrayList<>();
-
-            try (ResultSet rs = st.executeQuery()) {
-                while (rs.next()) {
-                    SaleDetailsDTO sale = new SaleDetailsDTO();
-                    sale.setNumSale(rs.getInt("numVenta"));
-                    sale.setCustomer(rs.getString("cliente"));
-                    sale.setDish(rs.getString("plato"));
-                    sale.setQuantityDishesSold(rs.getInt("cantPlato"));
-                    sale.setDrink(rs.getString("bebida"));
-                    sale.setQuantityDrinksSold(rs.getInt("cantBebida"));
-                    sale.setDate(rs.getDate("fecha").toLocalDate());
-                    sale.setTotalSale(rs.getFloat("total"));
-                    list.add(sale);
-                }
-            }
-        } finally {
-            this.close();
-        }
-
-        return list;
     }
 
 }

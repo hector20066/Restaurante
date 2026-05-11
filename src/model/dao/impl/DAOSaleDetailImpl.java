@@ -7,14 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import database.DataBase;
+import model.dao.SaleDetailsDTO;
 import model.dao.interfaces.IDAO;
+import model.dao.interfaces.IDAOSalesDetails;
 import model.entities.SaleDetail;
 
 /**
  *
  * @author Andres Cardenas
  */
-public class DAOSaleDetailImpl extends DataBase implements IDAO<SaleDetail> {
+public class DAOSaleDetailImpl extends DataBase implements IDAOSalesDetails {
 
     private static DAOSaleDetailImpl instance;
 
@@ -99,6 +101,51 @@ public class DAOSaleDetailImpl extends DataBase implements IDAO<SaleDetail> {
                     saleDetail.setDishPrice(rs.getBigDecimal("precioPlato"));
                     saleDetail.setDrinkPrice(rs.getBigDecimal("precioBebida"));
                     list.add(saleDetail);
+                }
+            }
+        } finally {
+            this.close();
+        }
+
+        return list;
+    }
+
+    @Override
+    public List<SaleDetailsDTO> getAllData() throws Exception {
+        List<SaleDetailsDTO> list;
+        String sql = """
+                     SELECT
+                        v.num_venta,
+                        c.nombre AS cliente,
+                        p.nombre AS plato,
+                        d.cantPlato,
+                        b.nombre AS bebida,
+                        d.cantBebida,
+                        v.fecha,
+                        v.total
+                     FROM detalle_venta d
+                     INNER JOIN venta v ON d.idVenta = v.num_venta
+                     INNER JOIN cliente c ON v.id_cliente = c.id
+                     LEFT JOIN platos p ON d.idPlato = p.codigo
+                     LEFT JOIN bebidas b ON d.idBebida = b.codigo;
+                     """;
+        this.connect();
+
+        try (PreparedStatement st = this.connection.prepareStatement(sql)) {
+            list = new ArrayList<>();
+
+            try (ResultSet rs = st.executeQuery()) {
+                while (rs.next()) {
+                    SaleDetailsDTO sale = new SaleDetailsDTO();
+                    sale.setNumSale(rs.getInt("num_venta"));
+                    sale.setCustomer(rs.getString("cliente"));
+                    sale.setDish(rs.getString("plato"));
+                    sale.setQuantityDishesSold(rs.getInt("cantPlato"));
+                    sale.setDrink(rs.getString("bebida"));
+                    sale.setQuantityDrinksSold(rs.getInt("cantBebida"));
+                    sale.setDate(rs.getDate("fecha").toLocalDate());
+                    sale.setTotalSale(rs.getFloat("total"));
+                    list.add(sale);
                 }
             }
         } finally {

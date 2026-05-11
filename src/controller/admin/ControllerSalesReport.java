@@ -4,14 +4,18 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.regex.Pattern;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.RowFilter;
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+
+import model.dao.SaleDetailsDTO;
+import model.dao.impl.DAOSaleDetailImpl;
+import model.dao.interfaces.IDAOSalesDetails;
 import observer.Observer;
 import observer.Subject;
 import view.administrators.SalesReport;
@@ -23,11 +27,13 @@ import view.administrators.SalesReport;
 public class ControllerSalesReport implements Observer{
 
     private final SalesReport salesReport;
+    private final IDAOSalesDetails daoSaleDetail;
     
     public ControllerSalesReport(SalesReport salesReport, Subject subject) {
         this.salesReport = salesReport;
         
         subject.register(this);
+        this.daoSaleDetail = DAOSaleDetailImpl.getInstance();
         
         connectEvents();
     }
@@ -72,7 +78,15 @@ public class ControllerSalesReport implements Observer{
     
     @Override
     public void update() {
-        
+        new Thread(() -> {
+            try {
+                List<SaleDetailsDTO> saleDetails = daoSaleDetail.getAllData();
+
+                SwingUtilities.invokeLater(() -> loadData(saleDetails));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
     
     private void filterTable() {
@@ -87,6 +101,22 @@ public class ControllerSalesReport implements Observer{
     
     private void export() {
         
+    }
+
+    private void loadData(List<SaleDetailsDTO> list) {
+        list.forEach(dto -> {
+            int numSale = dto.getNumSale();
+            String customer = dto.getCustomer();
+            String dish = dto.getDish();
+            int amountDish = dto.getQuantityDishesSold();
+            String drink = dto.getDrink();
+            int amountDrink = dto.getQuantityDrinksSold();
+            LocalDate date = dto.getDate();
+            float total = dto.getTotalSale();
+            
+            Object[] data = new Object[] {numSale, customer, dish, amountDish, drink, amountDrink, date, total};
+            salesReport.getModel().addRow(data);
+        });
     }
     
 }
