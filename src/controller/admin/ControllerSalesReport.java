@@ -138,7 +138,7 @@ public class ControllerSalesReport implements Observer {
                 dishCount.put(dish, dishCount.getOrDefault(dish, 0) + amount);
             }
         }
-        
+
         for (SaleDetailsDTO dto : list) {
             String drink = dto.getDrink();
             int amount = dto.getQuantityDrinksSold();
@@ -148,27 +148,37 @@ public class ControllerSalesReport implements Observer {
             }
         }
 
-        if (dishCount.isEmpty()) {
-            return;
-        }
-        
-        if (drinkCount.isEmpty() && dishCount.isEmpty()) {
-            salesReport.updateCards("Sin datos", "Sin datos", 0, 0);
-            return;
+        String mostSoldDish = "Sin datos";
+        int totalAmountDish = 0;
+
+        if (!dishCount.isEmpty()) {
+            mostSoldDish = dishCount.entrySet().stream()
+                    .max(Map.Entry.comparingByValue())
+                    .map(Map.Entry::getKey)
+                    .orElse("Sin datos");
+            
+            Integer dishAmount = dishCount.get(mostSoldDish);
+            
+            if (dishAmount != null) {
+                totalAmountDish = dishAmount;
+            }
         }
 
-        String mostSoldDish = dishCount.entrySet().stream()
-                .max(Map.Entry.comparingByValue())
-                .map(Map.Entry::getKey)
-                .orElse("Sin datos");
-        
-         String mostSoldDrink = drinkCount.entrySet().stream()
-                .max(Map.Entry.comparingByValue())
-                .map(Map.Entry::getKey)
-                .orElse("Sin datos");
+        String mostSoldDrink = "Sin datos";
+        int totalAmountDrink = 0;
 
-        int totalAmountDrink = drinkCount.get(mostSoldDrink);
-        int totalAmountDish = dishCount.get(mostSoldDish);
+        if (!drinkCount.isEmpty()) {
+            mostSoldDrink = drinkCount.entrySet().stream()
+                    .max(Map.Entry.comparingByValue())
+                    .map(Map.Entry::getKey)
+                    .orElse("Sin datos");
+            
+            Integer drinkAmount = drinkCount.get(mostSoldDrink);
+            
+            if (drinkAmount != null) {
+                totalAmountDrink = drinkAmount;
+            }
+        }
 
         salesReport.updateCards(mostSoldDish, mostSoldDrink, totalAmountDish, totalAmountDrink);
     }

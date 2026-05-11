@@ -136,11 +136,12 @@ public class SalesReport extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(0, 150, 199));
         jLabel2.setText("Platos y bebidas mas vendidas");
 
-        card1.setColor1(new java.awt.Color(21, 101, 192));
-        card1.setColor2(new java.awt.Color(66, 165, 245));
+        card1.setColor1(new java.awt.Color(199, 125, 255));
+        card1.setColor2(new java.awt.Color(123, 44, 191));
 
-        card2.setColor1(new java.awt.Color(66, 165, 245));
-        card2.setColor2(new java.awt.Color(66, 165, 245));
+        card2.setForeground(new java.awt.Color(255, 255, 255));
+        card2.setColor1(new java.awt.Color(144, 224, 239));
+        card2.setColor2(new java.awt.Color(0, 119, 182));
 
         jLayeredPane1.setLayer(card1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(card2, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -211,12 +212,13 @@ public class SalesReport extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(scroll)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(scroll)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
