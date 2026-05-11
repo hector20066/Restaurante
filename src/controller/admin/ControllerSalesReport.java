@@ -28,20 +28,20 @@ import view.administrators.SalesReport;
  *
  * @author Mi PC
  */
-public class ControllerSalesReport implements Observer{
+public class ControllerSalesReport implements Observer {
 
     private final SalesReport salesReport;
     private final IDAOSalesDetails daoSaleDetail;
-    
+
     public ControllerSalesReport(SalesReport salesReport, Subject subject) {
         this.salesReport = salesReport;
-        
+
         subject.register(this);
         this.daoSaleDetail = DAOSaleDetailImpl.getInstance();
-        
+
         connectEvents();
     }
-    
+
     private void connectEvents() {
         salesReport.setControllerExport(e -> export());
         salesReport.setControllerSearchDocument(new DocumentListener() {
@@ -60,7 +60,7 @@ public class ControllerSalesReport implements Observer{
                 filterTable();
             }
         });
-        
+
         salesReport.setControllerSearchFocus(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
@@ -79,20 +79,24 @@ public class ControllerSalesReport implements Observer{
             }
         });
     }
-    
+
     @Override
     public void update() {
         new Thread(() -> {
             try {
                 List<SaleDetailsDTO> saleDetails = daoSaleDetail.getAllData();
 
-                SwingUtilities.invokeLater(() -> loadData(saleDetails));
+                SwingUtilities.invokeLater(() -> {
+                    loadData(saleDetails);
+                    displayMostSoldDish(saleDetails);
+                    displayMostSoldDrink(saleDetails);
+                });
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }).start();
     }
-    
+
     private void filterTable() {
         if (!salesReport.getTxt_search().getText().equals("Buscar Venta")) {
             String texto = salesReport.getTxt_search().getText();
@@ -102,9 +106,9 @@ public class ControllerSalesReport implements Observer{
             sorter.setRowFilter(RowFilter.regexFilter("(?i)" + Pattern.quote(texto)));
         }
     }
-    
+
     private void export() {
-        
+
     }
 
     private void loadData(List<SaleDetailsDTO> list) {
@@ -118,13 +122,9 @@ public class ControllerSalesReport implements Observer{
             LocalDate date = dto.getDate();
             float total = dto.getTotalSale();
 
-            Object[] data = new Object[] {numSale, customer, dish, amountDish, drink, amountDrink, date, total};
+            Object[] data = new Object[]{numSale, customer, dish, amountDish, drink, amountDrink, date, total};
             salesReport.getModel().addRow(data);
         });
-
-        // Calcular y mostrar plato y bebida más vendida
-        displayMostSoldDish(list);
-        displayMostSoldDrink(list);
     }
 
     private void displayMostSoldDish(List<SaleDetailsDTO> list) {
@@ -140,22 +140,20 @@ public class ControllerSalesReport implements Observer{
         }
 
         if (dishCount.isEmpty()) {
-            // Establecer valores por defecto si no hay datos
-            // salesReport.getTxt_mostSoldDish().setText("Sin datos");
-            // salesReport.getTxt_mostSoldDishAmount().setText("0");
+            salesReport.getJlb_bestSellingDish().setText("Sin datos");
+            salesReport.getJlb_amountDish().setText("0");
             return;
         }
 
         String mostSoldDish = dishCount.entrySet().stream()
-            .max(Map.Entry.comparingByValue())
-            .map(Map.Entry::getKey)
-            .orElse("Sin datos");
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey)
+                .orElse("Sin datos");
 
         int totalAmount = dishCount.get(mostSoldDish);
 
-        // Establecer los valores en los textfields/labels
-        // salesReport.getTxt_mostSoldDish().setText(mostSoldDish);
-        // salesReport.getTxt_mostSoldDishAmount().setText(String.valueOf(totalAmount));
+        salesReport.getJlb_bestSellingDish().setText(mostSoldDish);
+        salesReport.getJlb_amountDish().setText(String.valueOf(totalAmount));
     }
 
     private void displayMostSoldDrink(List<SaleDetailsDTO> list) {
@@ -171,22 +169,20 @@ public class ControllerSalesReport implements Observer{
         }
 
         if (drinkCount.isEmpty()) {
-            // Establecer valores por defecto si no hay datos
-            // salesReport.getTxt_mostSoldDrink().setText("Sin datos");
-            // salesReport.getTxt_mostSoldDrinkAmount().setText("0");
+            salesReport.getJlb_bestSellingDrink().setText("Sin datos");
+            salesReport.getJlb_amountDrink().setText("0");
             return;
         }
 
         String mostSoldDrink = drinkCount.entrySet().stream()
-            .max(Map.Entry.comparingByValue())
-            .map(Map.Entry::getKey)
-            .orElse("Sin datos");
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey)
+                .orElse("Sin datos");
 
         int totalAmount = drinkCount.get(mostSoldDrink);
 
-        // Establecer los valores en los textfields/labels
-        // salesReport.getTxt_mostSoldDrink().setText(mostSoldDrink);
-        // salesReport.getTxt_mostSoldDrinkAmount().setText(String.valueOf(totalAmount));
+        salesReport.getJlb_bestSellingDrink().setText(mostSoldDrink);
+        salesReport.getJlb_amountDrink().setText(String.valueOf(totalAmount));
     }
-    
+
 }
