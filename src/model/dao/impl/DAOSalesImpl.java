@@ -88,7 +88,7 @@ public class DAOSalesImpl extends DataBase implements IDAOSales {
     @Override
     public synchronized List<Sale> getData() throws Exception {
         List<Sale> list;
-        String sql = "SELECT * FROM venta";
+        String sql = "SELECT * FROM venta;";
         this.connect();
 
         try (PreparedStatement st = this.connection.prepareStatement(sql)) {
@@ -143,8 +143,8 @@ public class DAOSalesImpl extends DataBase implements IDAOSales {
                      FROM detalle_venta d
                      INNER JOIN venta v ON d.idVenta = v.num_venta
                      INNER JOIN cliente c ON v.id_cliente = c.id
-                     INNER JOIN platos p ON d.idPlato = p.codigo
-                     INNER JOIN bebidas b ON d.idBebida = b.codigo;
+                     LEFT JOIN platos p ON d.idPlato = p.codigo
+                     LEFT JOIN bebidas b ON d.idBebida = b.codigo;
                      """;
         this.connect();
 

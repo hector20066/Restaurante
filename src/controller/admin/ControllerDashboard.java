@@ -1,6 +1,20 @@
 package controller.admin;
 
+import java.awt.Color;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.format.TextStyle;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+
+import model.dao.impl.DAODishImpl;
+import model.dao.impl.DAODrinkImpl;
 import model.dao.impl.DAOSaleDetailImpl;
+import model.dao.impl.DAOSalesImpl;
 import model.dao.interfaces.DAORestaurantDb;
 import model.dao.interfaces.DAOWithAutoIncrement;
 import model.dao.interfaces.IDAO;
@@ -13,18 +27,6 @@ import observer.Observer;
 import observer.Subject;
 import view.administrators.DashboardAdmin;
 import view.model.ModelChart;
-
-import java.awt.*;
-import java.time.LocalDate;
-import java.time.Month;
-import java.time.format.TextStyle;
-import java.util.List;
-import java.util.Locale;
-import model.dao.impl.DAODishImpl;
-import model.dao.impl.DAODrinkImpl;
-import model.dao.impl.DAOSalesImpl;
-
-import javax.swing.*;
 
 /**
  *
@@ -61,7 +63,6 @@ public class ControllerDashboard implements Observer {
                 loadGraphicalData();
                 loadCardsData();
             } catch (Exception e) {
-                e.printStackTrace();
                 SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(dashboard, "Ha ocurrido un error al cargar la información del dashboard", "", JOptionPane.ERROR_MESSAGE));
             }
         }).start();
@@ -83,45 +84,61 @@ public class ControllerDashboard implements Observer {
         int[] italian = new int[12];
         int[] chinese = new int[12];
 
+        List<SaleDetail> allSaleDetails = daoSaleDetails.getData();
+
         for (Sale sale : sales) {
-            SaleDetail saleDetail = daoSaleDetails.getData(sale.getSaleNumber());
             LocalDate date = sale.getDate();
             if (date.getYear() != currentYear) continue;
 
             int month = date.getMonthValue() - 1;
 
-            processDish(saleDetail, month, colombian, italian, chinese);
-            processDrink(saleDetail, month, colombian, italian, chinese);
+            List<SaleDetail> saleDetails = new ArrayList<>();
+            for (SaleDetail detail : allSaleDetails) {
+                if (detail.getSaleId() == sale.getSaleNumber()) {
+                    saleDetails.add(detail);
+                }
+            }
+
+            countSaleByType(saleDetails, month, colombian, italian, chinese);
         }
 
         return new int[][]{ colombian, italian, chinese };
     }
 
-    private void processDish(SaleDetail saleDetail, int month, int[] colombian, int[] italian, int[] chinese) throws Exception {
-        if (saleDetail.getDishId() == 0) return;
+    private void countSaleByType(List<SaleDetail> saleDetails, int month, int[] colombian, int[] italian, int[] chinese) throws Exception {
+        boolean hasColombian = false;
+        boolean hasItalian = false;
+        boolean hasChinese = false;
 
-        Dish dish = daoDish.getData(saleDetail.getDishId());
+        for (SaleDetail detail : saleDetails) {
+            if (detail.getDishId() != null && detail.getDishId() != 0) {
+                Dish dish = daoDish.getData(detail.getDishId());
 
-        if (dish == null) return;
+                if (dish != null) {
+                    switch (dish.getTypeDish()) {
+                        case TypeFood.COLOMBIAN -> hasColombian = true;
+                        case TypeFood.ITALIAN -> hasItalian = true;
+                        case TypeFood.CHINESE -> hasChinese = true;
+                    }
+                }
+            }
 
-        switch (dish.getTypeDish()) {
-            case TypeFood.COLOMBIAN -> colombian[month] += saleDetail.getDishAmount();
-            case TypeFood.ITALIAN -> italian[month] += saleDetail.getDishAmount();
-            case TypeFood.CHINESE -> chinese[month] += saleDetail.getDishAmount();
+            if (detail.getDrinkId() != null && detail.getDrinkId() != 0) {
+                Drink drink = daoDrink.getData(detail.getDrinkId());
+
+                if (drink != null) {
+                    switch (drink.getTypeDrink()) {
+                        case TypeFood.COLOMBIAN -> hasColombian = true;
+                        case TypeFood.ITALIAN -> hasItalian = true;
+                        case TypeFood.CHINESE -> hasChinese = true;
+                    }
+                }
+            }
         }
-    }
 
-    private void processDrink(SaleDetail saleDetail, int month, int[] colombian, int[] italian, int[] chinese) throws Exception {
-        if (saleDetail.getDrinkId() == null || saleDetail.getDrinkId() == 0) return;
-
-        Drink drink = daoDrink.getData(saleDetail.getDrinkId());
-        if (drink == null) return;
-
-        switch (drink.getTypeDrink()) {
-            case TypeFood.COLOMBIAN -> colombian[month] += saleDetail.getDrinkAmount();
-            case TypeFood.ITALIAN -> italian[month] += saleDetail.getDrinkAmount();
-            case TypeFood.CHINESE -> chinese[month] += saleDetail.getDrinkAmount();
-        }
+        if (hasColombian) colombian[month]++;
+        if (hasItalian) italian[month]++;
+        if (hasChinese) chinese[month]++;
     }
 
     private void setupChartLegend() {
@@ -157,7 +174,9 @@ public class ControllerDashboard implements Observer {
         int amount = 0;
 
         for (SaleDetail sale : sales) {
-            amount += sale.getDishAmount();
+            if (sale.getDishAmount() != null) {
+                amount += sale.getDishAmount();
+            }
         }
 
         return amount;
@@ -168,7 +187,9 @@ public class ControllerDashboard implements Observer {
         int amount = 0;
 
         for (SaleDetail sale : sales) {
-            amount += sale.getDrinkAmount();
+            if (sale.getDrinkAmount() != null) {
+                amount += sale.getDrinkAmount();
+            }
         }
 
         return amount;
