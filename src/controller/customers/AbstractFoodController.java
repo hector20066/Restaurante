@@ -118,7 +118,7 @@ public abstract class AbstractFoodController implements Observer {
                     loadDrinks(drinks, getTypeFood());
                 });
             } catch (Exception e) {
-                e.printStackTrace();
+                SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(getJpl_contentFood(), "Error al cargar la informacion", null, JOptionPane.ERROR_MESSAGE));
             }
         }).start();
     }
@@ -227,7 +227,9 @@ public abstract class AbstractFoodController implements Observer {
                     processLoadedOrder(dish, orderData.dishAmount, orderData.dishPrice, drink, orderData.drinkAmount, orderData.drinkPrice);
                 });
             } catch (Exception e) {
-                e.printStackTrace();
+                SwingUtilities.invokeLater(() -> {
+                    JOptionPane.showMessageDialog(getJpl_contentFood(), "No se ha encontrado encontrado registros para el plato o la bebida", null, JOptionPane.ERROR_MESSAGE);
+                });
             }
         }).start();
     }
@@ -324,18 +326,18 @@ public abstract class AbstractFoodController implements Observer {
         try {
             carryOutTransaction();
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(getJpl_contentFood(), e.getMessage(), null, JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    protected final void carryOutTransaction() {
+    protected final void carryOutTransaction() throws Exception {
         String customerName = getTxt_customerName().getText();
         String customerId = getTxt_customerId().getText().trim();
         String customerEmail = getTxt_customerEmail().getText().trim();
         String customerAddress = getTxt_customerAddress().getText();
 
         if (!validateCustomerData(customerName, customerId, customerEmail, customerAddress)) {
-            return;
+            throw new Exception("Debe ingresar toda la informacion del cliente");
         }
 
         CustomerData customerData = extractCustomerData(customerName, customerId, customerEmail, customerAddress);
@@ -366,12 +368,10 @@ public abstract class AbstractFoodController implements Observer {
                         showInformationMessage("Se ha registrado su compra\nEn un momento lo contactaremos para la entrega.");
                         clearDataSale();
                     } catch (Exception e) {
-                        e.printStackTrace();
                         showWarningMessage("Error al guardar las ventas: " + e.getMessage());
                     }
                 });
             } catch (Exception e) {
-                e.printStackTrace();
                 SwingUtilities.invokeLater(() -> 
                     showWarningMessage("Error al procesar el cliente: " + e.getMessage())
                 );
@@ -495,7 +495,7 @@ public abstract class AbstractFoodController implements Observer {
                     loadDishData(dish);
                 });
             } catch (Exception e) {
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(getJpl_contentFood(), "Error al cargar la informacion del plato", null, JOptionPane.ERROR_MESSAGE);
             }
         }).start();
     }
@@ -518,7 +518,7 @@ public abstract class AbstractFoodController implements Observer {
                    loadDrinkData(drink);
                });
            } catch (Exception e) {
-               e.printStackTrace();
+               JOptionPane.showMessageDialog(getJpl_contentFood(), "Error al cargar la informacion de la bebida", null, JOptionPane.ERROR_MESSAGE);
            }
         }).start();
     }
@@ -539,7 +539,7 @@ public abstract class AbstractFoodController implements Observer {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(getJpl_contentFood(), "Error al cargar los platos", null, JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -557,7 +557,8 @@ public abstract class AbstractFoodController implements Observer {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(getJpl_contentFood(), "Error al cargar las bebidas", null, JOptionPane.ERROR_MESSAGE);
         }
     }
+
 }
