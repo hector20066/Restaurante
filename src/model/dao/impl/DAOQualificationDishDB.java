@@ -1,19 +1,20 @@
 package model.dao.impl;
 
-import database.DataBase;
-
-import java.sql.*;
-import java.time.LocalDate;
+import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import model.dao.interfaces.IDAO;
+
+import database.DataBase;
+import model.dao.interfaces.IDAOQualification;
 import model.entities.QualificationDish;
 
 /**
  *
  * @author Andres Cardenas
  */
-public class DAOQualificationDishDB extends DataBase implements IDAO<QualificationDish> {
+public class DAOQualificationDishDB extends DataBase implements IDAOQualification<QualificationDish> {
 
     private static DAOQualificationDishDB instance;
 
@@ -110,6 +111,50 @@ public class DAOQualificationDishDB extends DataBase implements IDAO<Qualificati
             try (ResultSet rs = st.executeQuery()) {
                 return rs.next();
             }
+        } finally {
+            this.close();
+        }
+    }
+
+    @Override
+    public synchronized QualificationDish findByCustomerAndProduct(int idCustomer, int idProduct) throws Exception {
+        QualificationDish qualification = null;
+        String sql = "SELECT id, num_estrellas, comentario, idPlato, idCliente, fecha FROM calificacion_plato WHERE idCliente = ? AND idPlato = ? LIMIT 1;";
+        this.connect();
+
+        try (PreparedStatement st = this.connection.prepareStatement(sql)) {
+            st.setInt(1, idCustomer);
+            st.setInt(2, idProduct);
+
+            try (ResultSet rs = st.executeQuery()) {
+                if (rs.next()) {
+                    qualification = new QualificationDish();
+                    qualification.setCode(rs.getInt("id"));
+                    qualification.setStars(rs.getInt("num_estrellas"));
+                    qualification.setComment(rs.getString("comentario"));
+                    qualification.setIdDish(rs.getInt("idPlato"));
+                    qualification.setIdCustomer(rs.getInt("idCliente"));
+                    qualification.setDate(rs.getDate("fecha").toLocalDate());
+                }
+            }
+        } finally {
+            this.close();
+        }
+
+        return qualification;
+    }
+
+    @Override
+    public void modify(QualificationDish data) throws Exception {
+        String sql = "UPDATE calificacion_plato SET num_estrellas = ?, comentario = ?, fecha = ? WHERE id = ?";
+        this.connect();
+
+        try (PreparedStatement st = this.connection.prepareStatement(sql)) {
+            st.setInt(1, data.getStars());
+            st.setString(2, data.getComment());
+            st.setDate(3, java.sql.Date.valueOf(data.getDate()));
+            st.setInt(4, data.getCode());
+            st.executeUpdate();
         } finally {
             this.close();
         }
