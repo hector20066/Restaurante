@@ -122,7 +122,7 @@ public class ControllerSalesReport implements Observer {
 
     private void loadData(List<SaleDetailsDTO> list) {
         salesReport.getModel().setRowCount(0);
-        
+
         list.forEach(dto -> {
             int numSale = dto.getNumSale();
             String customer = dto.getCustomer();
