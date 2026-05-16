@@ -22,7 +22,10 @@ import model.dao.impl.DAOSaleDetailImpl;
 import model.dao.interfaces.IDAOSalesDetails;
 import observer.Observer;
 import observer.Subject;
+import utils.NavigatorUtils;
+import view.administrators.AdminPanel;
 import view.administrators.SalesReport;
+import view.administrators.ShowQualifications;
 
 /**
  *
@@ -31,10 +34,12 @@ import view.administrators.SalesReport;
 public class ControllerSalesReport implements Observer {
 
     private final SalesReport salesReport;
+    private final ShowQualifications showQualifications;
     private final IDAOSalesDetails daoSaleDetail;
 
-    public ControllerSalesReport(SalesReport salesReport, Subject subject) {
+    public ControllerSalesReport(SalesReport salesReport, ShowQualifications showQualifications, Subject subject) {
         this.salesReport = salesReport;
+        this.showQualifications = showQualifications;
 
         subject.register(this);
         this.daoSaleDetail = DAOSaleDetailImpl.getInstance();
@@ -44,6 +49,7 @@ public class ControllerSalesReport implements Observer {
 
     private void connectEvents() {
         salesReport.setControllerExport(e -> export());
+        salesReport.setControllerShowQualification(e -> showQualification());
         salesReport.setControllerSearchDocument(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -110,7 +116,13 @@ public class ControllerSalesReport implements Observer {
 
     }
 
+    private void showQualification() {
+        NavigatorUtils.showFormManagement(AdminPanel.getJpl_content(), showQualifications);
+    }
+
     private void loadData(List<SaleDetailsDTO> list) {
+        salesReport.getModel().setRowCount(0);
+        
         list.forEach(dto -> {
             int numSale = dto.getNumSale();
             String customer = dto.getCustomer();

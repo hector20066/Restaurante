@@ -32,6 +32,7 @@ public class Coordinator {
     private ColombianFood colombianFood;
     private RatingsPanel ratingsPanel;
     private SalesReport salesReport;
+    private ShowQualifications showQualifications;
 
     private ControllerLogin controllerLogin;
     private ControllerAdminPanel controllerAdminPanel;
@@ -46,6 +47,7 @@ public class Coordinator {
     private ControllerItalianFood controllerItalianFood;
     private ControllerRatingPanel controllerRatingPanel;
     private ControllerSalesReport controllerSalesReport;
+    private ControllerShowQualifications controllerShowQualifications;
 
     public void startApp() {
         subject = ConcreteSubject.getInstance();
@@ -71,6 +73,7 @@ public class Coordinator {
         colombianFood = new ColombianFood();
         ratingsPanel = new RatingsPanel();
         salesReport = new SalesReport();
+        showQualifications = new ShowQualifications();
     }
 
     private void startDrivers () {
@@ -123,7 +126,8 @@ public class Coordinator {
                 .build();
 
         controllerDashboard = new ControllerDashboard(dashboardAdmin, subject);
-        controllerSalesReport = new ControllerSalesReport(salesReport, subject);
+        controllerSalesReport = new ControllerSalesReport(salesReport, showQualifications, subject);
+        controllerShowQualifications = new ControllerShowQualifications(showQualifications, subject);
     }
 
     private void startDriversUser () {

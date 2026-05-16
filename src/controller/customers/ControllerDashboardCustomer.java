@@ -47,31 +47,32 @@ public class ControllerDashboardCustomer implements Observer {
         new Thread(()-> {
             try {
                 dashboardCustomers.cleanPanel();
-
-                // Cargar calificaciones de platos
                 List<QualificationDish> dishRatings = daoQualificationDish.getData();
+
                 for (QualificationDish qualification : dishRatings) {
                     if (qualification.getStars() >= 3) {
                         Dish dish = daoDish.getData(qualification.getIdDish());
+
                         if (dish != null) {
                             String dishName = dish.getName();
-                            SwingUtilities.invokeLater(() -> {
-                                dashboardCustomers.addRatingPanelDish(dishName, qualification.getStars());
-                            });
+                            int numStars = qualification.getStars();
+
+                            SwingUtilities.invokeLater(() -> dashboardCustomers.addRatingPanelDish(dishName, numStars));
                         }
                     }
                 }
 
-                // Cargar calificaciones de bebidas
                 List<QualificationDrink> drinkRatings = daoQualificationDrink.getData();
+
                 for (QualificationDrink qualification : drinkRatings) {
                     if (qualification.getStars() >= 3) {
                         Drink drink = daoDrink.getData(qualification.getIdDrink());
+
                         if (drink != null) {
                             String drinkName = drink.getName();
-                            SwingUtilities.invokeLater(() -> {
-                                dashboardCustomers.addRatingPanelDrink(drinkName, qualification.getStars());
-                            });
+                            int numStars = qualification.getStars();
+
+                            SwingUtilities.invokeLater(() -> dashboardCustomers.addRatingPanelDrink(drinkName, numStars));
                         }
                     }
                 }

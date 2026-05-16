@@ -2,7 +2,12 @@ package controller.customers;
 
 import java.time.LocalDate;
 import java.util.List;
-import javax.swing.*;
+
+import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+
 import model.dao.impl.DAOCustomersImpl;
 import model.dao.impl.DAODishImpl;
 import model.dao.impl.DAODrinkImpl;
@@ -10,6 +15,7 @@ import model.dao.impl.DAOQualificationDishDB;
 import model.dao.impl.DAOQualificationDrinkImpl;
 import model.dao.interfaces.DAORestaurantDb;
 import model.dao.interfaces.IDAO;
+import model.dao.interfaces.IDAOQualification;
 import model.entities.Customer;
 import model.entities.Dish;
 import model.entities.Drink;
@@ -17,7 +23,6 @@ import model.entities.QualificationDish;
 import model.entities.QualificationDrink;
 import model.enums.TypeFood;
 import observer.Subject;
-import utils.MessageUtils;
 import view.customers.RatingsPanel;
 
 /**
@@ -29,8 +34,8 @@ public class ControllerRatingPanel {
     private final RatingsPanel ratingsPanel;
     private final Subject subject;
 
-    private final IDAO<QualificationDish> daoQualificationDish;
-    private final IDAO<QualificationDrink> daoQualificationDrink;
+    private final IDAOQualification<QualificationDish> daoQualificationDish;
+    private final IDAOQualification<QualificationDrink> daoQualificationDrink;
     private final IDAO<Customer> daoCustomer;
     private final DAORestaurantDb<Dish> daoDish;
     private final DAORestaurantDb<Drink> daoDrink;
@@ -90,13 +95,13 @@ public class ControllerRatingPanel {
 
     private void qualificationDish() {
         try {
-            /*String idCustomer = ratingsPanel.getTxt_customerId().getText().trim();
+            String idCustomer = ratingsPanel.getTxt_customerId().getText().trim();
             String dishName = ratingsPanel.getCbo_dish().getSelectedItem().toString();
             int selectedStars = 0;
             String comment = ratingsPanel.getTxa_opinionsDish().getText();
 
             if (idCustomer.isBlank()) {
-                MessageUtils.warningMessage("Por favor ingrese su cedula para continuar con la calificacion.");
+                JOptionPane.showMessageDialog(ratingsPanel, "Por favor ingrese su cedula para continuar con la calificacion.", null, JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
@@ -107,11 +112,11 @@ public class ControllerRatingPanel {
             }
 
             if (selectedStars == 0) {
-                MessageUtils.warningMessage("Por favor indique cuantas estrellas desea calificar");
+                JOptionPane.showMessageDialog(ratingsPanel, "Por favor indique cuantas estrellas desea calificar", null, JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
-            saveRatingsDish(idCustomer, dishName, selectedStars, comment);*/
+            saveRatingsDish(idCustomer, dishName, selectedStars, comment);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -127,10 +132,20 @@ public class ControllerRatingPanel {
 
                 Dish dish = daoDish.getData(dishName);
                 int idDish = dish.getCode();
+                int idCustomerInt = Integer.parseInt(idCustomer);
 
-                QualificationDish qualification = new QualificationDish();
-                assignValuesQualificationDish(qualification, idCustomer, idDish, selectedStars, comment);
-                daoQualificationDish.save(qualification);
+                QualificationDish existingQualification = daoQualificationDish.findByCustomerAndProduct(idCustomerInt, idDish);
+
+                if (existingQualification != null) {
+                    existingQualification.setStars(selectedStars);
+                    existingQualification.setComment(comment);
+                    existingQualification.setDate(LocalDate.now());
+                    daoQualificationDish.modify(existingQualification);
+                } else {
+                    QualificationDish qualification = new QualificationDish();
+                    assignValuesQualificationDish(qualification, idCustomer, idDish, selectedStars, comment);
+                    daoQualificationDish.save(qualification);
+                }
 
                 SwingUtilities.invokeLater(this::refreshWindow);
             } catch (Exception e) {
@@ -149,13 +164,13 @@ public class ControllerRatingPanel {
 
     private void qualificationDrink() {
         try {
-            /*String idCustomer = ratingsPanel.getTxt_customerId().getText().trim();
+            String idCustomer = ratingsPanel.getTxt_customerId().getText().trim();
             String drinkName = ratingsPanel.getCbo_drink().getSelectedItem().toString();
             int selectedStars = 0;
             String comment = ratingsPanel.getTxa_opinionsDrink().getText();
 
             if (idCustomer.isBlank()) {
-                MessageUtils.warningMessage("Por favor ingrese su cedula para continuar con la calificacion.");
+                JOptionPane.showMessageDialog(ratingsPanel, "Por favor ingrese su cedula para continuar con la calificacion.", null, JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
@@ -166,11 +181,11 @@ public class ControllerRatingPanel {
             }
 
             if (selectedStars == 0) {
-                MessageUtils.warningMessage("Por favor indique cuantas estrellas desea calificar");
+                JOptionPane.showMessageDialog(ratingsPanel, "Por favor indique cuantas estrellas desea calificar", null, JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
-            saveRatingsDrink(idCustomer, drinkName, selectedStars, comment);*/
+            saveRatingsDrink(idCustomer, drinkName, selectedStars, comment);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -186,10 +201,20 @@ public class ControllerRatingPanel {
 
                 Drink drink = daoDrink.getData(drinkName);
                 int idDrink = drink.getCode();
+                int idCustomerInt = Integer.parseInt(idCustomer);
 
-                QualificationDrink qualification = new QualificationDrink();
-                assignValuesQualificationDrink(qualification, idCustomer, idDrink, selectedStars, comment);
-                daoQualificationDrink.save(qualification);
+                QualificationDrink existingQualification = daoQualificationDrink.findByCustomerAndProduct(idCustomerInt, idDrink);
+
+                if (existingQualification != null) {
+                    existingQualification.setStars(selectedStars);
+                    existingQualification.setComment(comment);
+                    existingQualification.setDate(LocalDate.now());
+                    daoQualificationDrink.modify(existingQualification);
+                } else {
+                    QualificationDrink qualification = new QualificationDrink();
+                    assignValuesQualificationDrink(qualification, idCustomer, idDrink, selectedStars, comment);
+                    daoQualificationDrink.save(qualification);
+                }
 
                 SwingUtilities.invokeLater(this::refreshWindow);
             } catch (Exception e) {
@@ -207,11 +232,13 @@ public class ControllerRatingPanel {
     }
 
     private void messageInvalidUser() {
-        MessageUtils.warningMessage("Debe haber realizado una compra antes para poder realizar una calificacion.\nNo se encontraron registros de este numero de cedula en el sistema");
+        JOptionPane.showMessageDialog(ratingsPanel,
+                "Debe haber realizado una compra antes para poder realizar una calificacion.\nNo se encontraron registros de este numero de cedula en el sistema",
+                null, JOptionPane.WARNING_MESSAGE);
     }
 
     private void refreshWindow() {
-        MessageUtils.informationMessage("Gracias por su calificación.");
+        JOptionPane.showMessageDialog(ratingsPanel, "Gracias por su calificación.", null, JOptionPane.INFORMATION_MESSAGE);
         clearFieldsDrinks();
         clearFieldsDish();
         subject.notifyObserver();
@@ -258,7 +285,7 @@ public class ControllerRatingPanel {
 
             loadDishType(typeDish);
         } catch (Exception e) {
-            MessageUtils.errorMessage("Ha ocurrido un error al cargar los platos.\nIntentelo nuevamente");
+            JOptionPane.showMessageDialog(ratingsPanel, "Ha ocurrido un error al cargar los platos.\nInténtelo nuevamente", null, JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -271,7 +298,7 @@ public class ControllerRatingPanel {
                     loadDishes(listDishes, type);
                 });
             } catch (Exception e) {
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(ratingsPanel, "Error al cargar los platos", null, JOptionPane.ERROR_MESSAGE);
             }
         }).start();
     }
@@ -309,8 +336,7 @@ public class ControllerRatingPanel {
 
             loadDrinkType(typeDrink);
         } catch (Exception e) {
-            e.printStackTrace();
-            MessageUtils.errorMessage("Ha ocurrido un error al cargar las bebidas.\nIntentelo nuevamente");
+            JOptionPane.showMessageDialog(ratingsPanel, "Ha ocurrido un error al cargar las bebidas.\nIntentelo nuevamente", null, JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -323,7 +349,7 @@ public class ControllerRatingPanel {
                     loadDrinks(listDrinks, type);
                 });
             } catch (Exception e) {
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(ratingsPanel, "Error al cargar las bebidas", null, JOptionPane.ERROR_MESSAGE);
             }
         }).start();
     }
