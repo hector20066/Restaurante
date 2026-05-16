@@ -27,6 +27,7 @@ public class ControllerAdminPanel {
     private final RegisterDrink registerDrink;
     private final ViewLogsDB viewLogsDB;
     private final SalesReport salesReport;
+    private final ShowQualifications showQualifications;
     private final ControllerRegisterDish controllerRegisterDish;
     private final ControllerRegisterDrink controllerRegisterDrink;
 
@@ -38,6 +39,7 @@ public class ControllerAdminPanel {
         this.registerDrink = builder.getRegisterDrink();
         this.viewLogsDB = builder.getViewLogsDB();
         this.salesReport = builder.getSalesReport();
+        this.showQualifications = builder.getShowQualifications();
         this.controllerRegisterDish = builder.getControllerRegisterDish();
         this.controllerRegisterDrink = builder.getControllerRegisterDrink();
 
@@ -51,6 +53,7 @@ public class ControllerAdminPanel {
         adminPanel.setControllerSeeAvailableMeals(e -> seeAvailableMeals());
         adminPanel.setControllerSalesReport(e -> showSalesReport());
         adminPanel.setControllerMenu(e -> actionMenu());
+        adminPanel.setControllerShowQualification(e -> showQualifications());
         adminPanel.setControllerExit(e -> logout());
     }
 
@@ -100,6 +103,7 @@ public class ControllerAdminPanel {
         adminPanel.getBtn_registerDrinks().setText(expandedMenu ? "  REGISTRAR BEBIDAS" : "");
         adminPanel.getBtn_seeAvailableMeals().setText(expandedMenu ? "  COMIDAS DISPONIBLES" : "");
         adminPanel.getBtn_salesReport().setText(expandedMenu ? "  REPORTE DE VENTAS" : "");
+        adminPanel.getBtn_showQualifications().setText(expandedMenu ? "  CALIFICACIONES" : "");
         adminPanel.getBtn_exit().setText(expandedMenu ? "  SALIR" : "");
     }
 
@@ -154,6 +158,16 @@ public class ControllerAdminPanel {
         registerDrink.getTxt_price().setText("");
         registerDrink.getCbo_typeDrink().setSelectedIndex(0);
     }
+    
+    private void showQualifications() {
+        resetColors();
+        resetIcons();
+        resetForeground();
+        NavigatorUtils.showFormManagement(AdminPanel.getJpl_content(), showQualifications);
+        adminPanel.getBtn_showQualifications().setIcon(new ImageIcon(getClass().getResource("/view/image/starMenu-selected.png")));
+        adminPanel.getBtn_showQualifications().setBackground(new Color(187,222,251));
+        adminPanel.getBtn_showQualifications().setForeground(new Color(0, 49, 245));
+    }
 
     private void seeAvailableMeals() {
         resetColors();
@@ -173,6 +187,7 @@ public class ControllerAdminPanel {
         adminPanel.getBtn_seeAvailableMeals().setBackground(normal);
         adminPanel.getBtn_exit().setBackground(normal);
         adminPanel.getBtn_salesReport().setBackground(normal);
+        adminPanel.getBtn_showQualifications().setBackground(normal);
     }
 
     private void resetIcons() {
@@ -182,6 +197,7 @@ public class ControllerAdminPanel {
         adminPanel.getBtn_seeAvailableMeals().setIcon(new ImageIcon(getClass().getResource("/view/image/database.png")));
         adminPanel.getBtn_exit().setIcon(new ImageIcon(getClass().getResource("/view/image/log-out.png")));
         adminPanel.getBtn_salesReport().setIcon(new ImageIcon(getClass().getResource("/view/image/chart-no-axes-combined.png")));
+        adminPanel.getBtn_showQualifications().setIcon(new ImageIcon(getClass().getResource("/view/image/starMenu.png")));
     }
 
     private void resetForeground() {
@@ -192,6 +208,7 @@ public class ControllerAdminPanel {
         adminPanel.getBtn_seeAvailableMeals().setForeground(normal);
         adminPanel.getBtn_exit().setForeground(normal);
         adminPanel.getBtn_salesReport().setForeground(normal);
+        adminPanel.getBtn_showQualifications().setForeground(normal);
     }
 
     private void logout() {

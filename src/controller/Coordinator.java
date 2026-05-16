@@ -87,6 +87,7 @@ public class Coordinator {
                 .withViewRegisterDrink(registerDrink)
                 .withViewLogsDB(viewLogsDB)
                 .withViewSalesReport(salesReport)
+                .withViewShowQualifications(showQualifications)
                 .withControllerRegisterDish(controllerRegisterDish)
                 .withControllerRegisterDrink(controllerRegisterDrink)
                 .build();

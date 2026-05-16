@@ -19,6 +19,7 @@ public class ControllerAdminPanelBuilder {
     private RegisterDrink registerDrink;
     private ViewLogsDB viewLogsDB;
     private SalesReport salesReport;
+    private ShowQualifications showQualifications;
     private ControllerRegisterDish controllerRegisterDish;
     private ControllerRegisterDrink controllerRegisterDrink;
 
@@ -54,6 +55,11 @@ public class ControllerAdminPanelBuilder {
     
     public ControllerAdminPanelBuilder withViewSalesReport(SalesReport salesReport) {
         this.salesReport = salesReport;
+        return this;
+    }
+    
+    public ControllerAdminPanelBuilder withViewShowQualifications(ShowQualifications showQualifications) {
+        this.showQualifications = showQualifications;
         return this;
     }
 
@@ -98,6 +104,10 @@ public class ControllerAdminPanelBuilder {
     
     public SalesReport getSalesReport() {
         return salesReport;
+    }
+
+    public ShowQualifications getShowQualifications() {
+        return showQualifications;
     }
 
     public ControllerRegisterDish getControllerRegisterDish() {
