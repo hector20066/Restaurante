@@ -14,6 +14,8 @@ public class LogIn extends javax.swing.JFrame {
 
     public LogIn() {
         initComponents();
+        setResizable(false);
+        
         Icon normalIcon = new ImageIcon(getClass().getResource("/view/image/view.png"));
         Icon iconOff = new ImageIcon(getClass().getResource("/view/image/viewOff.png"));
         jrb_seePassword.setIcon(normalIcon);

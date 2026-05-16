@@ -43,6 +43,7 @@ public class ControllerLogin {
     private void connectEvents() {
         login.setControllerLogin(e -> loginAdmin());
         login.setControllerLoginAsGuest(e -> loginGuest());
+
         login.setControllerSeePassword(e -> {
             if (login.getJrb_seePassword().isSelected()) {
                 login.getJpld_password().setEchoChar((char) 0);
@@ -68,24 +69,21 @@ public class ControllerLogin {
 
     private void loginAdmin() {
         try {
-            showAdminWindow();
-            subject.notifyObserver();
-            /*String user = login.getTxt_user().getText().trim();
+            String user = login.getTxt_user().getText().trim();
             String password = new String(login.getJpld_password().getPassword());
 
-            if (user.isBlank() || password.isBlank()) {
-                MessageUtils.warningMessage("Por favor complete todos los campos");
-                return;
+            if (user.isBlank() || password.isBlank() || user.equalsIgnoreCase("Ingrese su usuario") || password.equals("••••••••")) {
+                throw new Exception("Por favor complete todos los campos");
             }
 
             if (loginService.login(user, password)) {
                 showAdminWindow();
                 subject.notifyObserver();
             } else {
-                MessageUtils.errorMessage("No se ha encontrado la cuenta. Por favor si no es empleado\ninicie sesion como invitado");
-            }*/
+                JOptionPane.showMessageDialog(login, "No se ha encontrado la cuenta. Por favor si no es empleado\ninicie sesion como invitado", null, JOptionPane.WARNING_MESSAGE);
+            }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(login, "Ha ocurrido un error al iniciar sesión.\nLamentamos los inconvenientes", null, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(login, e.getMessage(), null, JOptionPane.ERROR_MESSAGE);
         }
     }
 
