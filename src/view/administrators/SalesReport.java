@@ -254,6 +254,10 @@ public class SalesReport extends javax.swing.JPanel {
     public void setControllerSearchFocus(FocusListener listen) {
         txt_search.addFocusListener(listen);
     }
+
+    public void setControllerShowQualification(ActionListener action) {
+        btn_showQualifications.addActionListener(action);
+    }
     
     public void setControllerSearchDocument(DocumentListener listen) {
         txt_search.getDocument().addDocumentListener(listen);
