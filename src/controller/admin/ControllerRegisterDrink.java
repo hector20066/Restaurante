@@ -1,6 +1,9 @@
 package controller.admin;
 
-import factory.*;
+import factory.AbstractFactory;
+import factory.ChineseRestaurant;
+import factory.ColombianRestaurant;
+import factory.ItalianRestaurant;
 import model.dao.impl.DAODrinkImpl;
 import model.dao.interfaces.DAORestaurantDb;
 import model.entities.Drink;
@@ -76,7 +79,6 @@ public class ControllerRegisterDrink {
             registerOfModify(colombianDrink);
             runSwingUtilities("Colombiana");
         } catch (Exception e) {
-            e.printStackTrace();
             JOptionPane.showMessageDialog(registerDrink, "No se ha podido registrar la bebida Colombiana", "", JOptionPane.ERROR_MESSAGE);
         }
     }

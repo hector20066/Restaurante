@@ -1,16 +1,14 @@
 package model.dao.impl;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 import database.DataBase;
 import model.dao.SaleDetailsDTO;
-import model.dao.interfaces.IDAO;
 import model.dao.interfaces.IDAOSalesDetails;
 import model.entities.SaleDetail;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -114,21 +112,21 @@ public class DAOSaleDetailImpl extends DataBase implements IDAOSalesDetails {
     public List<SaleDetailsDTO> getAllData() throws Exception {
         List<SaleDetailsDTO> list;
         String sql = """
-                     SELECT
-                        v.num_venta,
-                        c.nombre AS cliente,
-                        p.nombre AS plato,
-                        d.cantPlato,
-                        b.nombre AS bebida,
-                        d.cantBebida,
-                        v.fecha,
-                        v.total
-                     FROM detalle_venta d
-                     INNER JOIN venta v ON d.idVenta = v.num_venta
-                     INNER JOIN cliente c ON v.id_cliente = c.id
-                     LEFT JOIN platos p ON d.idPlato = p.codigo
-                     LEFT JOIN bebidas b ON d.idBebida = b.codigo;
-                     """;
+                SELECT
+                   v.num_venta,
+                   c.nombre AS cliente,
+                   p.nombre AS plato,
+                   d.cantPlato,
+                   b.nombre AS bebida,
+                   d.cantBebida,
+                   v.fecha,
+                   v.total
+                FROM detalle_venta d
+                INNER JOIN venta v ON d.idVenta = v.num_venta
+                INNER JOIN cliente c ON v.id_cliente = c.id
+                LEFT JOIN platos p ON d.idPlato = p.codigo
+                LEFT JOIN bebidas b ON d.idBebida = b.codigo;
+                """;
         this.connect();
 
         try (PreparedStatement st = this.connection.prepareStatement(sql)) {

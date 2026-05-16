@@ -1,7 +1,6 @@
 package controller.admin;
 
 import builder.controllers.ControllerAdminPanelBuilder;
-import utils.MessageUtils;
 import utils.NavigatorUtils;
 import view.LogIn;
 import view.administrators.*;
@@ -93,7 +92,7 @@ public class ControllerAdminPanel {
 
             animation.start();
         }catch(Exception e){
-            MessageUtils.errorMessage("Ha ocurrido un error al ocultar el menu");
+            JOptionPane.showMessageDialog(adminPanel, "Ha ocurrido un error al ocultar el menu", null, JOptionPane.ERROR_MESSAGE);
         }
     }
 

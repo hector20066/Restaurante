@@ -1,29 +1,17 @@
 package controller.customers;
 
-import java.time.LocalDate;
-import java.util.List;
-
-import javax.swing.ImageIcon;
-import javax.swing.JCheckBox;
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-
-import model.dao.impl.DAOCustomersImpl;
-import model.dao.impl.DAODishImpl;
-import model.dao.impl.DAODrinkImpl;
-import model.dao.impl.DAOQualificationDishDB;
-import model.dao.impl.DAOQualificationDrinkImpl;
+import model.dao.impl.*;
 import model.dao.interfaces.DAORestaurantDb;
 import model.dao.interfaces.IDAO;
 import model.dao.interfaces.IDAOQualification;
-import model.entities.Customer;
-import model.entities.Dish;
-import model.entities.Drink;
-import model.entities.QualificationDish;
-import model.entities.QualificationDrink;
+import model.entities.*;
 import model.enums.TypeFood;
 import observer.Subject;
 import view.customers.RatingsPanel;
+
+import javax.swing.*;
+import java.time.LocalDate;
+import java.util.List;
 
 /**
  *
@@ -101,8 +89,7 @@ public class ControllerRatingPanel {
             String comment = ratingsPanel.getTxa_opinionsDish().getText();
 
             if (idCustomer.isBlank()) {
-                JOptionPane.showMessageDialog(ratingsPanel, "Por favor ingrese su cedula para continuar con la calificacion.", null, JOptionPane.WARNING_MESSAGE);
-                return;
+                throw new Exception("Por favor ingrese su cedula para continuar con la calificacion.");
             }
 
             for (int i = 0; i < starsDishes.length; i++) {
@@ -112,13 +99,12 @@ public class ControllerRatingPanel {
             }
 
             if (selectedStars == 0) {
-                JOptionPane.showMessageDialog(ratingsPanel, "Por favor indique cuantas estrellas desea calificar", null, JOptionPane.WARNING_MESSAGE);
-                return;
+                throw new Exception("Por favor indique cuantas estrellas desea calificar");
             }
 
             saveRatingsDish(idCustomer, dishName, selectedStars, comment);
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(ratingsPanel, e.getMessage(), null, JOptionPane.WARNING_MESSAGE);
         }
     }
 
@@ -149,7 +135,9 @@ public class ControllerRatingPanel {
 
                 SwingUtilities.invokeLater(this::refreshWindow);
             } catch (Exception e) {
-                e.printStackTrace();
+                SwingUtilities.invokeLater(() -> {
+                    JOptionPane.showMessageDialog(ratingsPanel, "Ha ocurrido un error al registrar la calificacion", null, JOptionPane.ERROR_MESSAGE);
+                });
             }
         }).start();
     }
@@ -170,8 +158,7 @@ public class ControllerRatingPanel {
             String comment = ratingsPanel.getTxa_opinionsDrink().getText();
 
             if (idCustomer.isBlank()) {
-                JOptionPane.showMessageDialog(ratingsPanel, "Por favor ingrese su cedula para continuar con la calificacion.", null, JOptionPane.WARNING_MESSAGE);
-                return;
+                throw new Exception("Por favor ingrese su cedula para continuar con la calificacion.");
             }
 
             for (int i = 0; i < starsDrinks.length; i++) {
@@ -181,13 +168,12 @@ public class ControllerRatingPanel {
             }
 
             if (selectedStars == 0) {
-                JOptionPane.showMessageDialog(ratingsPanel, "Por favor indique cuantas estrellas desea calificar", null, JOptionPane.WARNING_MESSAGE);
-                return;
+                throw new Exception("Por favor indique cuantas estrellas desea calificar");
             }
 
             saveRatingsDrink(idCustomer, drinkName, selectedStars, comment);
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(ratingsPanel, e.getMessage(), null, JOptionPane.WARNING_MESSAGE);
         }
     }
 
@@ -218,7 +204,9 @@ public class ControllerRatingPanel {
 
                 SwingUtilities.invokeLater(this::refreshWindow);
             } catch (Exception e) {
-                e.printStackTrace();
+                SwingUtilities.invokeLater(() -> {
+                    JOptionPane.showMessageDialog(ratingsPanel, "Ha ocurrido un error al registrar la calificacion", null, JOptionPane.ERROR_MESSAGE);
+                });
             }
         }).start();
     }
@@ -269,19 +257,13 @@ public class ControllerRatingPanel {
     private void showDishesType() {
         try {
             String type = (String) ratingsPanel.getCbo_typeDish().getSelectedItem();
-            TypeFood typeDish = null;
 
-            switch (type) {
-                case "Colombiano" -> {
-                    typeDish = TypeFood.COLOMBIAN;
-                }
-                case "Italiano" -> {
-                    typeDish = TypeFood.ITALIAN;
-                }
-                case "Chino" -> {
-                    typeDish = TypeFood.CHINESE;
-                }
-            }
+            TypeFood typeDish = switch (type) {
+                case "Colombiano" -> TypeFood.COLOMBIAN;
+                case "Italiano" -> TypeFood.ITALIAN;
+                case "Chino" -> TypeFood.CHINESE;
+                default -> throw new IllegalStateException("Unexpected value: " + type);
+            };
 
             loadDishType(typeDish);
         } catch (Exception e) {
@@ -320,19 +302,13 @@ public class ControllerRatingPanel {
     private void showDrinksType() {
         try {
             String type = ratingsPanel.getCbo_typeDrink().getSelectedItem().toString();
-            TypeFood typeDrink = null;
 
-            switch (type) {
-                case "Colombiana" -> {
-                    typeDrink = TypeFood.COLOMBIAN;
-                }
-                case "Italiana" -> {
-                    typeDrink = TypeFood.ITALIAN;
-                }
-                case "China" -> {
-                    typeDrink = TypeFood.CHINESE;
-                }
-            }
+            TypeFood typeDrink = switch (type) {
+                case "Colombiana" -> TypeFood.COLOMBIAN;
+                case "Italiana" -> TypeFood.ITALIAN;
+                case "China" -> TypeFood.CHINESE;
+                default -> throw new IllegalStateException("Unexpected value: " + type);
+            };
 
             loadDrinkType(typeDrink);
         } catch (Exception e) {

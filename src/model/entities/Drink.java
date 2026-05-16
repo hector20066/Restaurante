@@ -13,49 +13,49 @@ public abstract class Drink {
     protected String description;
     protected float price;
 
-    public Drink () {
+    public Drink() {
 
     }
 
-    public Drink (String name, int code, String description, float price) {
+    public Drink(String name, int code, String description, float price) {
         this.name = name;
         this.code = code;
         this.description = description;
         this.price = price;
     }
 
-    public void setName (String name) {
-        this.name = name;
-    }
-
-    public void setCode (int code) {
-        this.code = code;
-    }
-
-    public void setDescription (String description) {
-        this.description = description;
-    }
-
-    public void setPrice (float price) {
-        this.price = price;
-    }
-
-    public String getName () {
+    public String getName() {
         return name;
     }
 
-    public int getCode () {
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getCode() {
         return code;
     }
 
-    public String getDescription () {
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public String getDescription() {
         return description;
     }
 
-    public float getPrice () {
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public float getPrice() {
         return price;
     }
 
-    public abstract TypeFood getTypeDrink ();
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public abstract TypeFood getTypeDrink();
 
 }

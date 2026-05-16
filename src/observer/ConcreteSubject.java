@@ -9,8 +9,8 @@ import java.util.List;
  */
 public class ConcreteSubject implements Subject {
 
-    private final List<Observer> list = new ArrayList<>();
     private static ConcreteSubject instance;
+    private final List<Observer> list = new ArrayList<>();
 
     private ConcreteSubject() {
 

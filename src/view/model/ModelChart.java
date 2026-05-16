@@ -5,10 +5,10 @@ package view.model;
  * @author Andres Cardenas
  */
 public class ModelChart {
-    
+
     private String label;
-    private double values[];
-    
+    private double[] values;
+
     public ModelChart(String label, double[] values) {
         this.label = label;
         this.values = values;
@@ -16,7 +16,7 @@ public class ModelChart {
 
     public ModelChart() {
     }
-    
+
     public String getLabel() {
         return label;
     }
@@ -42,5 +42,5 @@ public class ModelChart {
         }
         return max;
     }
-    
+
 }

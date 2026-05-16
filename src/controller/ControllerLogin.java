@@ -5,11 +5,11 @@ import controller.admin.ControllerAdminPanel;
 import controller.customers.ControllerUsersPanel;
 import observer.Subject;
 import service.LoginService;
-import utils.MessageUtils;
 import view.LogIn;
 import view.administrators.AdminPanel;
 import view.customers.UserPanel;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -85,7 +85,7 @@ public class ControllerLogin {
                 MessageUtils.errorMessage("No se ha encontrado la cuenta. Por favor si no es empleado\ninicie sesion como invitado");
             }*/
         } catch (Exception e) {
-            MessageUtils.errorMessage("Ha ocurrido un error al iniciar sesión.\nLamentamos los inconvenientes");
+            JOptionPane.showMessageDialog(login, "Ha ocurrido un error al iniciar sesión.\nLamentamos los inconvenientes", null, JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -102,7 +102,7 @@ public class ControllerLogin {
             showUserWindow();
             subject.notifyObserver();
         } catch (Exception e) {
-            MessageUtils.errorMessage("Ha ocurrido un error al iniciar sesión.\nLamentamos los inconvenientes");
+            JOptionPane.showMessageDialog(login, "Ha ocurrido un error al iniciar sesión.\nLamentamos los inconvenientes", null, JOptionPane.ERROR_MESSAGE);
         }
     }
 

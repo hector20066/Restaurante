@@ -20,60 +20,60 @@ public class Qualification {
 
     }
 
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public void setStars(int stars) {
-        this.stars = stars;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public void setIdDish(int idDish) {
-        this.idDish = idDish;
-    }
-
-    public void setIdDrink(int idDrink) {
-        this.idDrink = idDrink;
-    }
-
-    public void setIdCustomer(int idCustomer) {
-        this.idCustomer = idCustomer;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
     public int getCode() {
         return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 
     public int getStars() {
         return stars;
     }
 
+    public void setStars(int stars) {
+        this.stars = stars;
+    }
+
     public String getComment() {
         return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public int getIdDish() {
         return idDish;
     }
 
+    public void setIdDish(int idDish) {
+        this.idDish = idDish;
+    }
+
     public int getIdDrink() {
         return idDrink;
+    }
+
+    public void setIdDrink(int idDrink) {
+        this.idDrink = idDrink;
     }
 
     public int getIdCustomer() {
         return idCustomer;
     }
 
+    public void setIdCustomer(int idCustomer) {
+        this.idCustomer = idCustomer;
+    }
+
     public LocalDate getDate() {
         return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
 }

@@ -127,7 +127,7 @@ public class Coordinator {
                 .build();
 
         controllerDashboard = new ControllerDashboard(dashboardAdmin, subject);
-        controllerSalesReport = new ControllerSalesReport(salesReport, showQualifications, subject);
+        controllerSalesReport = new ControllerSalesReport(salesReport, subject);
         controllerShowQualifications = new ControllerShowQualifications(showQualifications, subject);
     }
 

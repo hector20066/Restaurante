@@ -1,32 +1,18 @@
 package controller.customers;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
-import javax.swing.table.DefaultTableModel;
-
-import model.dao.impl.DAOCustomersImpl;
-import model.dao.impl.DAODishImpl;
-import model.dao.impl.DAODrinkImpl;
-import model.dao.impl.DAOSaleDetailImpl;
-import model.dao.impl.DAOSalesImpl;
+import model.dao.impl.*;
 import model.dao.interfaces.DAORestaurantDb;
 import model.dao.interfaces.DAOWithAutoIncrement;
 import model.dao.interfaces.IDAO;
-import model.entities.Customer;
-import model.entities.Dish;
-import model.entities.Drink;
-import model.entities.Sale;
-import model.entities.SaleDetail;
+import model.entities.*;
 import model.enums.TypeFood;
 import observer.Observer;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -34,69 +20,14 @@ import observer.Observer;
  */
 public abstract class AbstractFoodController implements Observer {
 
-    protected Dish dish;
-    protected Drink drink;
-    protected float totalSale;
-
     private final DAORestaurantDb<Dish> daoDish;
     private final DAORestaurantDb<Drink> daoDrink;
     private final IDAO<Customer> daoCustomer;
     private final DAOWithAutoIncrement<Sale> daoSales;
     private final IDAO<SaleDetail> daoSaleDetail;
-
-    private static class OrderData {
-        final String dishName;
-        final int dishAmount;
-        final float dishPrice;
-        final String drinkName;
-        final int drinkAmount;
-        final float drinkPrice;
-
-        OrderData(String dishName, int dishAmount, float dishPrice, 
-                 String drinkName, int drinkAmount, float drinkPrice) {
-            this.dishName = dishName;
-            this.dishAmount = dishAmount;
-            this.dishPrice = dishPrice;
-            this.drinkName = drinkName;
-            this.drinkAmount = drinkAmount;
-            this.drinkPrice = drinkPrice;
-        }
-    }
-
-    private static class CustomerData {
-        final String name;
-        final int id;
-        final String email;
-        final String address;
-
-        CustomerData(String name, int id, String email, String address) {
-            this.name = name;
-            this.id = id;
-            this.email = email;
-            this.address = address;
-        }
-    }
-
-    private static class SaleRowData {
-        final String dishName;
-        final int dishCode;
-        final int dishAmount;
-        final String drinkName;
-        final int drinkCode;
-        final int drinkAmount;
-        final float total;
-
-        SaleRowData(String dishName, int dishCode, int dishAmount, 
-                   String drinkName, int drinkCode, int drinkAmount, float total) {
-            this.dishName = dishName;
-            this.dishCode = dishCode;
-            this.dishAmount = dishAmount;
-            this.drinkName = drinkName;
-            this.drinkCode = drinkCode;
-            this.drinkAmount = drinkAmount;
-            this.total = total;
-        }
-    }
+    protected Dish dish;
+    protected Drink drink;
+    protected float totalSale;
 
     public AbstractFoodController() {
         this.daoDish = DAODishImpl.getInstance();
@@ -125,7 +56,6 @@ public abstract class AbstractFoodController implements Observer {
 
     protected abstract TypeFood getTypeFood();
     protected abstract void connectEvents();
-
     protected abstract JTextField getTxt_amountDish();
     protected abstract JTextField getTxt_priceDish();
     protected abstract JTextField getTxt_amountDrink();
@@ -137,10 +67,8 @@ public abstract class AbstractFoodController implements Observer {
     protected abstract JTextField getTxt_customerId();
     protected abstract JTextField getTxt_customerEmail();
     protected abstract JTextField getTxt_customerAddress();
-
     protected abstract JComboBox<String> getCbo_drink();
     protected abstract JComboBox<String> getCbo_dish();
-
     protected abstract JTable getJtbl_food();
     protected abstract DefaultTableModel getTableModelFood();
     protected abstract JPanel getJpl_contentFood();
@@ -287,11 +215,7 @@ public abstract class AbstractFoodController implements Observer {
             return true;
         }
 
-        if (drink != null && isDrinkAlreadyInTable(drink.getCode())) {
-            return true;
-        }
-
-        return false;
+        return drink != null && isDrinkAlreadyInTable(drink.getCode());
     }
 
     protected boolean isDishAlreadyInTable(int dishCode) {
@@ -372,8 +296,8 @@ public abstract class AbstractFoodController implements Observer {
                     }
                 });
             } catch (Exception e) {
-                SwingUtilities.invokeLater(() -> 
-                    showWarningMessage("Error al procesar el cliente: " + e.getMessage())
+                SwingUtilities.invokeLater(() ->
+                        showWarningMessage("Error al procesar el cliente: " + e.getMessage())
                 );
             }
         }).start();
@@ -397,7 +321,7 @@ public abstract class AbstractFoodController implements Observer {
 
     private void processAndSaveAllSales(CustomerData customerData) throws Exception {
         List<SaleRowData> saleRows = extractSaleRowsFromTable();
-        
+
         for (SaleRowData rowData : saleRows) {
             saveSaleWithDetails(customerData.id, rowData);
         }
@@ -409,13 +333,13 @@ public abstract class AbstractFoodController implements Observer {
 
         for (int i = 0; i < tableRowCount; i++) {
             SaleRowData rowData = new SaleRowData(
-                getJtbl_food().getValueAt(i, 0).toString(),
-                Integer.parseInt(getJtbl_food().getValueAt(i, 1).toString()),
-                Integer.parseInt(getJtbl_food().getValueAt(i, 2).toString()),
-                getJtbl_food().getValueAt(i, 3).toString(),
-                Integer.parseInt(getJtbl_food().getValueAt(i, 4).toString()),
-                Integer.parseInt(getJtbl_food().getValueAt(i, 5).toString()),
-                Float.parseFloat(getJtbl_food().getValueAt(i, 6).toString())
+                    getJtbl_food().getValueAt(i, 0).toString(),
+                    Integer.parseInt(getJtbl_food().getValueAt(i, 1).toString()),
+                    Integer.parseInt(getJtbl_food().getValueAt(i, 2).toString()),
+                    getJtbl_food().getValueAt(i, 3).toString(),
+                    Integer.parseInt(getJtbl_food().getValueAt(i, 4).toString()),
+                    Integer.parseInt(getJtbl_food().getValueAt(i, 5).toString()),
+                    Float.parseFloat(getJtbl_food().getValueAt(i, 6).toString())
             );
 
             rows.add(rowData);
@@ -427,7 +351,7 @@ public abstract class AbstractFoodController implements Observer {
     private void saveSaleWithDetails(int customerId, SaleRowData rowData) throws Exception {
         Sale sale = buildSaleFromRowData(customerId, rowData);
         int saleId = daoSales.saveAndGetId(sale);
-        
+
         SaleDetail saleDetail = buildSaleDetailFromRowData(saleId, rowData);
         daoSaleDetail.save(saleDetail);
     }
@@ -509,17 +433,17 @@ public abstract class AbstractFoodController implements Observer {
         String drinkName = (String) getCbo_drink().getSelectedItem();
 
         new Thread(() -> {
-           try {
-               Drink drink = daoDrink.getData(drinkName);
+            try {
+                Drink drink = daoDrink.getData(drinkName);
 
-               if (drink == null) return;
+                if (drink == null) return;
 
-               SwingUtilities.invokeLater(() -> {
-                   loadDrinkData(drink);
-               });
-           } catch (Exception e) {
-               JOptionPane.showMessageDialog(getJpl_contentFood(), "Error al cargar la informacion de la bebida", null, JOptionPane.ERROR_MESSAGE);
-           }
+                SwingUtilities.invokeLater(() -> {
+                    loadDrinkData(drink);
+                });
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(getJpl_contentFood(), "Error al cargar la informacion de la bebida", null, JOptionPane.ERROR_MESSAGE);
+            }
         }).start();
     }
 
@@ -559,6 +483,15 @@ public abstract class AbstractFoodController implements Observer {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(getJpl_contentFood(), "Error al cargar las bebidas", null, JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    private record OrderData(String dishName, int dishAmount, float dishPrice, String drinkName, int drinkAmount, float drinkPrice) {
+    }
+
+    private record CustomerData(String name, int id, String email, String address) {
+    }
+
+    private record SaleRowData(String dishName, int dishCode, int dishAmount, String drinkName, int drinkCode, int drinkAmount, float total) {
     }
 
 }

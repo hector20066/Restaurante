@@ -1,15 +1,15 @@
 package model.dao.impl;
 
+import database.DataBase;
+import model.dao.interfaces.DAOWithAutoIncrement;
+import model.entities.Sale;
+
 import java.sql.CallableStatement;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-
-import database.DataBase;
-import model.dao.interfaces.DAOWithAutoIncrement;
-import model.entities.Sale;
 
 /**
  *

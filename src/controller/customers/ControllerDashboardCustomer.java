@@ -6,7 +6,10 @@ import model.dao.impl.DAOQualificationDishDB;
 import model.dao.impl.DAOQualificationDrinkImpl;
 import model.dao.interfaces.DAORestaurantDb;
 import model.dao.interfaces.IDAO;
-import model.entities.*;
+import model.entities.Dish;
+import model.entities.Drink;
+import model.entities.QualificationDish;
+import model.entities.QualificationDrink;
 import observer.Observer;
 import observer.Subject;
 import view.customers.DashboardCustomers;
@@ -44,7 +47,7 @@ public class ControllerDashboardCustomer implements Observer {
     }
 
     private void loadRatings() {
-        new Thread(()-> {
+        new Thread(() -> {
             try {
                 dashboardCustomers.cleanPanel();
                 List<QualificationDish> dishRatings = daoQualificationDish.getData();
@@ -77,7 +80,7 @@ public class ControllerDashboardCustomer implements Observer {
                     }
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(dashboardCustomers, "Error al cargar las calificaciones", null, JOptionPane.ERROR_MESSAGE));
             }
         }).start();
     }

@@ -173,7 +173,6 @@ public class ControllerViewLogs implements Observer {
                     loadDrinks(drinks, viewLogs.getModelDrinks());
                 });
             } catch (Exception e) {
-                e.printStackTrace();
                 SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(viewLogs, "Error al cargar los platos en el reporte", "", JOptionPane.ERROR_MESSAGE));
             }
         }).start();

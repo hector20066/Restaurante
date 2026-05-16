@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Andres Cardenas
  */
-public class ControllerColombianFood extends AbstractFoodController  {
+public class ControllerColombianFood extends AbstractFoodController {
 
     private final ColombianFood colombianFood;
 

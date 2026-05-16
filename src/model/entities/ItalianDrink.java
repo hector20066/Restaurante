@@ -8,11 +8,11 @@ import model.enums.TypeFood;
  */
 public class ItalianDrink extends Drink {
 
-    public ItalianDrink () {
+    public ItalianDrink() {
 
     }
 
-    public ItalianDrink (String name, int code, String description, float price) {
+    public ItalianDrink(String name, int code, String description, float price) {
         super(name, code, description, price);
     }
 

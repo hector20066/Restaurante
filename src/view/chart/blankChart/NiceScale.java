@@ -65,11 +65,6 @@ public class NiceScale {
         calculate();
     }
 
-    public void setMaxTicks(final int MAX_TICKS) {
-        maxTicks = MAX_TICKS;
-        calculate();
-    }
-
     public double getTickSpacing() {
         return tickSpacing;
     }
@@ -84,6 +79,11 @@ public class NiceScale {
 
     public int getMaxTicks() {
         return maxTicks;
+    }
+
+    public void setMaxTicks(final int MAX_TICKS) {
+        maxTicks = MAX_TICKS;
+        calculate();
     }
 
     public double getMin() {

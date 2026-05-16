@@ -46,7 +46,6 @@ public class ControllerShowQualifications implements Observer {
         new Thread(()-> {
             try {
                 showQualifications.cleanPanel();
-
                 List<QualificationDish> dishRatings = daoQualificationDish.getData();
 
                 for (QualificationDish qualification : dishRatings) {
@@ -77,7 +76,7 @@ public class ControllerShowQualifications implements Observer {
                     }
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(showQualifications, "Error al cargar las calificaciones", null, JOptionPane.ERROR_MESSAGE));
             }
         }).start();
     }

@@ -104,7 +104,7 @@ public class BlankPlotChart extends JComponent {
 
         for (int i = 0; i <= niceScale.getMaxTicks(); i++) {
             int y = (int) (getHeight() - locationY);
-            g2.drawLine((int) (insets.left + textWidth + spaceText), y, (int) getWidth() - insets.right, y);
+            g2.drawLine((int) (insets.left + textWidth + spaceText), y, getWidth() - insets.right, y);
             locationY += space;
         }
 
@@ -206,7 +206,7 @@ public class BlankPlotChart extends JComponent {
 
     public SeriesSize getRectangle(int index, double height, double space, double startX, double startY) {
         double x = startX + space * index;
-        SeriesSize size = new SeriesSize(x, startY+1, space, height);
+        SeriesSize size = new SeriesSize(x, startY + 1, space, height);
         return size;
     }
 
@@ -215,5 +215,5 @@ public class BlankPlotChart extends JComponent {
         double percentValues = values * 100d / max;
         return height * percentValues / 100d;
     }
-    
+
 }

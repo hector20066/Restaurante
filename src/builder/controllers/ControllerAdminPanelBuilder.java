@@ -101,7 +101,6 @@ public class ControllerAdminPanelBuilder {
         return viewLogsDB;
     }
     
-    
     public SalesReport getSalesReport() {
         return salesReport;
     }

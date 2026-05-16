@@ -1,5 +1,17 @@
 package controller.admin;
 
+import model.dao.SaleDetailsDTO;
+import model.dao.impl.DAOSaleDetailImpl;
+import model.dao.interfaces.IDAOSalesDetails;
+import observer.Observer;
+import observer.Subject;
+import view.administrators.SalesReport;
+
+import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
@@ -10,23 +22,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import javax.swing.RowFilter;
-import javax.swing.SwingUtilities;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
-
-import model.dao.SaleDetailsDTO;
-import model.dao.impl.DAOSaleDetailImpl;
-import model.dao.interfaces.IDAOSalesDetails;
-import observer.Observer;
-import observer.Subject;
-import utils.NavigatorUtils;
-import view.administrators.AdminPanel;
-import view.administrators.SalesReport;
-import view.administrators.ShowQualifications;
-
 /**
  *
  * @author Mi PC
@@ -34,12 +29,10 @@ import view.administrators.ShowQualifications;
 public class ControllerSalesReport implements Observer {
 
     private final SalesReport salesReport;
-    private final ShowQualifications showQualifications;
     private final IDAOSalesDetails daoSaleDetail;
 
-    public ControllerSalesReport(SalesReport salesReport, ShowQualifications showQualifications, Subject subject) {
+    public ControllerSalesReport(SalesReport salesReport, Subject subject) {
         this.salesReport = salesReport;
-        this.showQualifications = showQualifications;
 
         subject.register(this);
         this.daoSaleDetail = DAOSaleDetailImpl.getInstance();
@@ -96,7 +89,7 @@ public class ControllerSalesReport implements Observer {
                     displayMostSold(saleDetails);
                 });
             } catch (Exception e) {
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(salesReport, "Ha ocurrido un error al cargar la informacion", null, JOptionPane.ERROR_MESSAGE);
             }
         }).start();
     }

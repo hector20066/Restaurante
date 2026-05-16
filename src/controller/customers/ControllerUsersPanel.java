@@ -1,7 +1,6 @@
 package controller.customers;
 
 import builder.controllers.ControllerUserPanelBuilder;
-import utils.MessageUtils;
 import utils.NavigatorUtils;
 import view.LogIn;
 import view.customers.*;
@@ -17,9 +16,6 @@ import java.awt.event.ActionListener;
  */
 public class ControllerUsersPanel {
 
-    private boolean expandedMenu = true;
-    private Timer animation;
-
     private final UserPanel userPanel;
     private final DashboardCustomers dashboard;
     private final ChineseFood chineseFood;
@@ -27,6 +23,8 @@ public class ControllerUsersPanel {
     private final ColombianFood colombianFood;
     private final LogIn login;
     private final RatingsPanel ratingsPanel;
+    private boolean expandedMenu = true;
+    private Timer animation;
 
     public ControllerUsersPanel(ControllerUserPanelBuilder builder) {
         this.userPanel = builder.getUserPanel();
@@ -51,12 +49,12 @@ public class ControllerUsersPanel {
     }
 
     private void actionMenu() {
-        try{
+        try {
             int initialWidth = userPanel.getJpl_menu().getWidth();
             int finalWidth = expandedMenu ? 65 : 264;
             int passed = (finalWidth - initialWidth) / 14;
 
-            if(animation != null && animation.isRunning()){
+            if (animation != null && animation.isRunning()) {
                 return;
             }
 
@@ -70,7 +68,7 @@ public class ControllerUsersPanel {
 
                     boolean endAnimation = (passed > 0 && currentWidth >= finalWidth) || (passed < 0 && currentWidth <= finalWidth);
 
-                    if(endAnimation){
+                    if (endAnimation) {
                         currentWidth = finalWidth;
                         animation.stop();
                         expandedMenu = !expandedMenu;
@@ -85,8 +83,8 @@ public class ControllerUsersPanel {
             });
 
             animation.start();
-        }catch(Exception e){
-            MessageUtils.errorMessage("Ha ocurrido un error al ocultar el menu");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(userPanel, "Ha ocurrido un error al ocultar el menu", null, JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -105,7 +103,7 @@ public class ControllerUsersPanel {
         resetIcons();
         resetForeground();
         NavigatorUtils.showFormManagement(UserPanel.getJpl_content(), dashboard);
-        userPanel.getBtn_dashboard().setBackground(new Color(187,222,251));
+        userPanel.getBtn_dashboard().setBackground(new Color(187, 222, 251));
         userPanel.getBtn_dashboard().setForeground(new Color(0, 49, 245));
         userPanel.getBtn_dashboard().setIcon(new ImageIcon(getClass().getResource("/view/image/dashboardSelected.png")));
     }
@@ -115,7 +113,7 @@ public class ControllerUsersPanel {
         resetIcons();
         resetForeground();
         NavigatorUtils.showFormManagement(UserPanel.getJpl_content(), chineseFood);
-        userPanel.getBtn_chineseFood().setBackground(new Color(187,222,251));
+        userPanel.getBtn_chineseFood().setBackground(new Color(187, 222, 251));
         userPanel.getBtn_chineseFood().setForeground(new Color(0, 49, 245));
         userPanel.getBtn_chineseFood().setIcon(new ImageIcon(getClass().getResource("/view/image/soupSelected.png")));
         clearFieldsChineseFood();
@@ -143,7 +141,7 @@ public class ControllerUsersPanel {
         resetIcons();
         resetForeground();
         NavigatorUtils.showFormManagement(UserPanel.getJpl_content(), italianFood);
-        userPanel.getBtn_italianFood().setBackground(new Color(187,222,251));
+        userPanel.getBtn_italianFood().setBackground(new Color(187, 222, 251));
         userPanel.getBtn_italianFood().setForeground(new Color(0, 49, 245));
         userPanel.getBtn_italianFood().setIcon(new ImageIcon(getClass().getResource("/view/image/pizzaSelected.png")));
         clearFieldsItalianFood();
@@ -171,7 +169,7 @@ public class ControllerUsersPanel {
         resetIcons();
         resetForeground();
         NavigatorUtils.showFormManagement(UserPanel.getJpl_content(), colombianFood);
-        userPanel.getBtn_colombianFood().setBackground(new Color(187,222,251));
+        userPanel.getBtn_colombianFood().setBackground(new Color(187, 222, 251));
         userPanel.getBtn_colombianFood().setForeground(new Color(0, 49, 245));
         userPanel.getBtn_colombianFood().setIcon(new ImageIcon(getClass().getResource("/view/image/egg-friedSelected.png")));
         clearFieldsColombianFood();
@@ -199,13 +197,13 @@ public class ControllerUsersPanel {
         resetColors();
         resetIcons();
         NavigatorUtils.showFormManagement(UserPanel.getJpl_content(), ratingsPanel);
-        userPanel.getBtn_ratings().setBackground(new Color(187,222,251));
+        userPanel.getBtn_ratings().setBackground(new Color(187, 222, 251));
         userPanel.getBtn_ratings().setForeground(new Color(0, 49, 245));
         userPanel.getBtn_ratings().setIcon(new ImageIcon(getClass().getResource("/view/image/starSelected.png")));
     }
 
     private void resetColors() {
-        Color normal = new Color(255,255,255);
+        Color normal = new Color(255, 255, 255);
         userPanel.getBtn_dashboard().setBackground(normal);
         userPanel.getBtn_chineseFood().setBackground(normal);
         userPanel.getBtn_italianFood().setBackground(normal);
@@ -224,7 +222,7 @@ public class ControllerUsersPanel {
     }
 
     public void resetForeground() {
-        Color normal = new Color(33,37,41);
+        Color normal = new Color(33, 37, 41);
         userPanel.getBtn_dashboard().setForeground(normal);
         userPanel.getBtn_chineseFood().setForeground(normal);
         userPanel.getBtn_italianFood().setForeground(normal);

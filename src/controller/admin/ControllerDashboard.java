@@ -1,16 +1,5 @@
 package controller.admin;
 
-import java.awt.Color;
-import java.time.LocalDate;
-import java.time.Month;
-import java.time.format.TextStyle;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-
 import model.dao.impl.DAODishImpl;
 import model.dao.impl.DAODrinkImpl;
 import model.dao.impl.DAOSaleDetailImpl;
@@ -27,6 +16,15 @@ import observer.Observer;
 import observer.Subject;
 import view.administrators.DashboardAdmin;
 import view.model.ModelChart;
+
+import javax.swing.*;
+import java.awt.*;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.format.TextStyle;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 /**
  *
@@ -88,11 +86,12 @@ public class ControllerDashboard implements Observer {
 
         for (Sale sale : sales) {
             LocalDate date = sale.getDate();
+
             if (date.getYear() != currentYear) continue;
 
             int month = date.getMonthValue() - 1;
-
             List<SaleDetail> saleDetails = new ArrayList<>();
+
             for (SaleDetail detail : allSaleDetails) {
                 if (detail.getSaleId() == sale.getSaleNumber()) {
                     saleDetails.add(detail);

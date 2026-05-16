@@ -1,6 +1,9 @@
 package model.dao.impl;
 
 import database.DataBase;
+import model.dao.interfaces.DAORestaurantDb;
+import model.entities.Drink;
+import model.enums.TypeFood;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
@@ -8,9 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import model.dao.interfaces.DAORestaurantDb;
-import model.entities.Drink;
-import model.enums.TypeFood;
 
 /**
  *

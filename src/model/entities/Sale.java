@@ -13,40 +13,40 @@ public class Sale {
     private LocalDate date;
     private float total;
 
-    public Sale () {
+    public Sale() {
 
     }
 
-    public void setSaleNumber (int saleNumber) {
-        this.saleNumber = saleNumber;
-    }
-
-    public void setClientId (int clientId) {
-        this.clientId = clientId;
-    }
-
-    public void setDate (LocalDate date) {
-        this.date = date;
-    }
-
-    public void setTotal (float total) {
-        this.total = total;
-    }
-
-    public int getSaleNumber () {
+    public int getSaleNumber() {
         return saleNumber;
     }
 
-    public int getClientId () {
+    public void setSaleNumber(int saleNumber) {
+        this.saleNumber = saleNumber;
+    }
+
+    public int getClientId() {
         return clientId;
     }
 
-    public LocalDate getDate () {
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
+    }
+
+    public LocalDate getDate() {
         return date;
     }
 
-    public float getTotal () {
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public float getTotal() {
         return total;
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
     }
 
 }
