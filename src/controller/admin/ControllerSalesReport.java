@@ -49,7 +49,6 @@ public class ControllerSalesReport implements Observer {
 
     private void connectEvents() {
         salesReport.setControllerExport(e -> export());
-        salesReport.setControllerShowQualification(e -> showQualification());
         salesReport.setControllerSearchDocument(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -114,10 +113,6 @@ public class ControllerSalesReport implements Observer {
 
     private void export() {
 
-    }
-
-    private void showQualification() {
-        NavigatorUtils.showFormManagement(AdminPanel.getJpl_content(), showQualifications);
     }
 
     private void loadData(List<SaleDetailsDTO> list) {
