@@ -298,8 +298,8 @@ public class DashboardCustomers extends javax.swing.JPanel {
         jpl_contentRatingsDish.revalidate();
         jpl_contentRatingsDish.repaint();
     }
-    
-     public void addRatingPanelDrink(String food, int numStars) {
+
+    public void addRatingPanelDrink(String food, int numStars) {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBackground(Color.WHITE);
