@@ -24,7 +24,7 @@ public class DashboardCustomers extends javax.swing.JPanel {
         initComponents();
 
         jpl_contentRatingsDish.setLayout(new BoxLayout(jpl_contentRatingsDish, BoxLayout.Y_AXIS));
-         jpl_contentRatingsDrink.setLayout(new BoxLayout(jpl_contentRatingsDrink, BoxLayout.Y_AXIS));
+        jpl_contentRatingsDrink.setLayout(new BoxLayout(jpl_contentRatingsDrink, BoxLayout.Y_AXIS));
 
         jsp_scrollDish.getVerticalScrollBar().setUnitIncrement(15);
         jsp_scrollDrik.getVerticalScrollBar().setUnitIncrement(15);
