@@ -230,6 +230,7 @@ public class ShowQualifications extends javax.swing.JPanel {
             JLabel star = new JLabel(i < numStars ? fullStarIcon : emptyStarIcon);
             starsRow.add(star);
         }
+
         panel.add(starsRow);
 
         if (comment != null && !comment.trim().isEmpty()) {
@@ -257,38 +258,12 @@ public class ShowQualifications extends javax.swing.JPanel {
             ));
 
             txt_comment.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-            txt_comment.setSize(new Dimension(jpl_contentRatingsDish.getWidth() - 44, Integer.MAX_VALUE));
-            int naturalHeight = txt_comment.getPreferredSize().height;
-            int cappedHeight = Math.min(naturalHeight, 80);
-
-            txt_comment.setMinimumSize(new Dimension(100, cappedHeight));
-            txt_comment.setPreferredSize(new Dimension(jpl_contentRatingsDish.getWidth() - 44, cappedHeight));
-            txt_comment.setMaximumSize(new Dimension(Integer.MAX_VALUE, cappedHeight));
+            txt_comment.setMaximumSize(new Dimension(Integer.MAX_VALUE, 80));
 
             panel.add(txt_comment);
         }
 
-        panel.setMaximumSize(new Dimension(Integer.MAX_VALUE, panel.getPreferredSize().height + 120));
-
-        jpl_contentRatingsDish.addComponentListener(new java.awt.event.ComponentAdapter() {
-            @Override
-            public void componentResized(java.awt.event.ComponentEvent e) {
-                for (Component c : panel.getComponents()) {
-                    if (c instanceof JTextArea ta) {
-                        int newWidth = jpl_contentRatingsDish.getWidth() - 44;
-                        ta.setSize(new Dimension(newWidth, Integer.MAX_VALUE));
-                        int naturalH = ta.getPreferredSize().height;
-                        int h = Math.min(naturalH, 80);
-                        ta.setPreferredSize(new Dimension(newWidth, h));
-                        ta.setMaximumSize(new Dimension(Integer.MAX_VALUE, h));
-                        ta.setMinimumSize(new Dimension(100, h));
-                    }
-                }
-                panel.setMaximumSize(new Dimension(Integer.MAX_VALUE, panel.getPreferredSize().height + 120));
-                panel.revalidate();
-            }
-        });
+        panel.setMaximumSize(new Dimension(Integer.MAX_VALUE, Short.MAX_VALUE));
 
         jpl_contentRatingsDish.add(panel);
         jpl_contentRatingsDish.add(Box.createVerticalStrut(8));
@@ -359,39 +334,14 @@ public class ShowQualifications extends javax.swing.JPanel {
                     BorderFactory.createLineBorder(new Color(222, 226, 230), 1, true),
                     BorderFactory.createEmptyBorder(6, 8, 6, 8)
             ));
+
             txt_comment.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-            txt_comment.setSize(new Dimension(jpl_contentRatingsDrink.getWidth() - 44, Integer.MAX_VALUE));
-            int naturalHeight = txt_comment.getPreferredSize().height;
-            int cappedHeight = Math.min(naturalHeight, 80);
-
-            txt_comment.setMinimumSize(new Dimension(100, cappedHeight));
-            txt_comment.setPreferredSize(new Dimension(jpl_contentRatingsDrink.getWidth() - 44, cappedHeight));
-            txt_comment.setMaximumSize(new Dimension(Integer.MAX_VALUE, cappedHeight));
+            txt_comment.setMaximumSize(new Dimension(Integer.MAX_VALUE, 80));
 
             panel.add(txt_comment);
         }
 
-        panel.setMaximumSize(new Dimension(Integer.MAX_VALUE, panel.getPreferredSize().height + 120));
-
-        jpl_contentRatingsDrink.addComponentListener(new java.awt.event.ComponentAdapter() {
-            @Override
-            public void componentResized(java.awt.event.ComponentEvent e) {
-                for (Component c : panel.getComponents()) {
-                    if (c instanceof JTextArea ta) {
-                        int newWidth = jpl_contentRatingsDrink.getWidth() - 44;
-                        ta.setSize(new Dimension(newWidth, Integer.MAX_VALUE));
-                        int naturalH = ta.getPreferredSize().height;
-                        int h = Math.min(naturalH, 80);
-                        ta.setPreferredSize(new Dimension(newWidth, h));
-                        ta.setMaximumSize(new Dimension(Integer.MAX_VALUE, h));
-                        ta.setMinimumSize(new Dimension(100, h));
-                    }
-                }
-                panel.setMaximumSize(new Dimension(Integer.MAX_VALUE, panel.getPreferredSize().height + 120));
-                panel.revalidate();
-            }
-        });
+        panel.setMaximumSize(new Dimension(Integer.MAX_VALUE, Short.MAX_VALUE));
 
         jpl_contentRatingsDrink.add(panel);
         jpl_contentRatingsDrink.add(Box.createVerticalStrut(8));
