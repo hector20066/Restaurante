@@ -1,12 +1,16 @@
 package view.customers;
 
-import view.swing.ButtonAction;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionListener;
 
-import javax.swing.*;
+import javax.swing.JComboBox;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-import java.awt.*;
-import java.awt.event.ActionListener;
+
+import view.swing.ButtonAction;
 
 /**
  *
@@ -19,7 +23,7 @@ public class ChineseFood extends javax.swing.JPanel {
     public ChineseFood() {
         initComponents();
         
-        String[] titles = new String[]{"Plato", "Codigo Plato", "Cantidad Platos", "Bebida", "Codigo Bebida", "Cantidad Bebidas", "Total Compra"};
+        String[] titles = new String[]{"Plato", "Codigo Plato", "Cantidad Platos", "Precio Plato", "Bebida", "Codigo Bebida", "Cantidad Bebidas", "Precio Bebida", "Total Compra"};
         tableModel.setColumnIdentifiers(titles);
         jtbl_order.setModel(tableModel);
         

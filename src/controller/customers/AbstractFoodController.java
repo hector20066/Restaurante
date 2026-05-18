@@ -1,18 +1,32 @@
 package controller.customers;
 
-import model.dao.impl.*;
-import model.dao.interfaces.DAORestaurantDb;
-import model.dao.interfaces.DAOWithAutoIncrement;
-import model.dao.interfaces.IDAO;
-import model.entities.*;
-import model.enums.TypeFood;
-import observer.Observer;
-
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
+
+import model.dao.impl.DAOCustomersImpl;
+import model.dao.impl.DAODishImpl;
+import model.dao.impl.DAODrinkImpl;
+import model.dao.impl.DAOSaleDetailImpl;
+import model.dao.impl.DAOSalesImpl;
+import model.dao.interfaces.DAORestaurantDb;
+import model.dao.interfaces.DAOWithAutoIncrement;
+import model.dao.interfaces.IDAO;
+import model.entities.Customer;
+import model.entities.Dish;
+import model.entities.Drink;
+import model.entities.Sale;
+import model.entities.SaleDetail;
+import model.enums.TypeFood;
+import observer.Observer;
 
 /**
  *
@@ -204,7 +218,7 @@ public abstract class AbstractFoodController implements Observer {
         int drinkCode = drink != null ? drink.getCode() : 0;
         String drinkName = drink != null ? drink.getName() : "No seleccionada";
 
-        Object[] data = new Object[]{dishName, dishCode, amountDish, drinkName, drinkCode, amountDrink, totalOrder};
+        Object[] data = new Object[]{dishName, dishCode, amountDish, priceDish, drinkName, drinkCode, amountDrink, priceDrink, totalOrder};
         getTableModelFood().addRow(data);
         this.totalSale += totalOrder;
         getTxt_totalSale().setText(String.valueOf(this.totalSale));
@@ -236,7 +250,7 @@ public abstract class AbstractFoodController implements Observer {
         int rows = getJtbl_food().getRowCount();
 
         for (int i = 0; i < rows; i++) {
-            int currentDrinkCode = Integer.parseInt(getJtbl_food().getValueAt(i, 4).toString());
+            int currentDrinkCode = Integer.parseInt(getJtbl_food().getValueAt(i, 5).toString());
 
             if (currentDrinkCode == drinkCode && drinkCode != 0) {
                 return true;
@@ -322,8 +336,12 @@ public abstract class AbstractFoodController implements Observer {
     private void processAndSaveAllSales(CustomerData customerData) throws Exception {
         List<SaleRowData> saleRows = extractSaleRowsFromTable();
 
+        Sale sale = buildSaleFromCustomerData(customerData);
+        int saleId = daoSales.saveAndGetId(sale);
+
         for (SaleRowData rowData : saleRows) {
-            saveSaleWithDetails(customerData.id, rowData);
+            SaleDetail saleDetail = buildSaleDetailFromRowData(saleId, rowData);
+            daoSaleDetail.save(saleDetail);
         }
     }
 
@@ -336,10 +354,12 @@ public abstract class AbstractFoodController implements Observer {
                     getJtbl_food().getValueAt(i, 0).toString(),
                     Integer.parseInt(getJtbl_food().getValueAt(i, 1).toString()),
                     Integer.parseInt(getJtbl_food().getValueAt(i, 2).toString()),
-                    getJtbl_food().getValueAt(i, 3).toString(),
-                    Integer.parseInt(getJtbl_food().getValueAt(i, 4).toString()),
+                    Float.parseFloat(getJtbl_food().getValueAt(i, 3).toString()),
+                    getJtbl_food().getValueAt(i, 4).toString(),
                     Integer.parseInt(getJtbl_food().getValueAt(i, 5).toString()),
-                    Float.parseFloat(getJtbl_food().getValueAt(i, 6).toString())
+                    Integer.parseInt(getJtbl_food().getValueAt(i, 6).toString()),
+                    Float.parseFloat(getJtbl_food().getValueAt(i, 7).toString()),
+                    Float.parseFloat(getJtbl_food().getValueAt(i, 8).toString())
             );
 
             rows.add(rowData);
@@ -348,18 +368,10 @@ public abstract class AbstractFoodController implements Observer {
         return rows;
     }
 
-    private void saveSaleWithDetails(int customerId, SaleRowData rowData) throws Exception {
-        Sale sale = buildSaleFromRowData(customerId, rowData);
-        int saleId = daoSales.saveAndGetId(sale);
-
-        SaleDetail saleDetail = buildSaleDetailFromRowData(saleId, rowData);
-        daoSaleDetail.save(saleDetail);
-    }
-
-    private Sale buildSaleFromRowData(int customerId, SaleRowData rowData) {
+    private Sale buildSaleFromCustomerData(CustomerData customerData) {
         Sale sale = new Sale();
-        sale.setClientId(customerId);
-        sale.setTotal(rowData.total);
+        sale.setClientId(customerData.id);
+        sale.setTotal(Float.parseFloat(getTxt_totalSale().getText().trim()));
         sale.setDate(LocalDate.now());
         return sale;
     }
@@ -371,7 +383,8 @@ public abstract class AbstractFoodController implements Observer {
         detail.setDrinkId(rowData.drinkCode > 0 ? rowData.drinkCode : null);
         detail.setDishAmount(rowData.dishAmount > 0 ? rowData.dishAmount : null);
         detail.setDrinkAmount(rowData.drinkAmount > 0 ? rowData.drinkAmount : null);
-        detail.setDishPrice(new java.math.BigDecimal(rowData.total));
+        detail.setDishPrice(rowData.dishPrice > 0 ? new java.math.BigDecimal(rowData.dishPrice) : null);
+        detail.setDrinkPrice(rowData.drinkPrice > 0 ? new java.math.BigDecimal(rowData.drinkPrice) : null);
         return detail;
     }
 
@@ -491,7 +504,7 @@ public abstract class AbstractFoodController implements Observer {
     private record CustomerData(String name, int id, String email, String address) {
     }
 
-    private record SaleRowData(String dishName, int dishCode, int dishAmount, String drinkName, int drinkCode, int drinkAmount, float total) {
+    private record SaleRowData(String dishName, int dishCode, int dishAmount, float dishPrice, String drinkName, int drinkCode, int drinkAmount, float drinkPrice, float total) {
     }
 
 }
