@@ -54,9 +54,11 @@ public class Coordinator {
         startViews();
         startDrivers();
 
-        login.setVisible(true);
-        login.setLocationRelativeTo(null);
-        login.setResizable(false);
+        java.awt.EventQueue.invokeLater(() -> {
+            login.setVisible(true);
+            login.setLocationRelativeTo(null);
+            login.setResizable(false);
+        });
     }
 
     private void startViews() {

@@ -1,5 +1,6 @@
 package controller.customers;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -383,8 +384,8 @@ public abstract class AbstractFoodController implements Observer {
         detail.setDrinkId(rowData.drinkCode > 0 ? rowData.drinkCode : null);
         detail.setDishAmount(rowData.dishAmount > 0 ? rowData.dishAmount : null);
         detail.setDrinkAmount(rowData.drinkAmount > 0 ? rowData.drinkAmount : null);
-        detail.setDishPrice(rowData.dishPrice > 0 ? new java.math.BigDecimal(rowData.dishPrice) : null);
-        detail.setDrinkPrice(rowData.drinkPrice > 0 ? new java.math.BigDecimal(rowData.drinkPrice) : null);
+        detail.setDishPrice(rowData.dishPrice > 0 ? new BigDecimal(rowData.dishPrice) : null);
+        detail.setDrinkPrice(rowData.drinkPrice > 0 ? new BigDecimal(rowData.drinkPrice) : null);
         return detail;
     }
 
