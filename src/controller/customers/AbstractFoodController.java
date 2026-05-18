@@ -184,6 +184,7 @@ public abstract class AbstractFoodController implements Observer {
         }
 
         loadDataTable(dish, dishAmount, dishPrice, drink, drinkAmount, drinkPrice);
+        cleanFieldsFoods();
     }
 
     private void showDuplicateWarning(Dish dish, Drink drink) {
@@ -405,6 +406,12 @@ public abstract class AbstractFoodController implements Observer {
         getTxt_customerAddress().setText("");
         getTxt_customerEmail().setText("");
 
+        cleanFieldsFoods();
+
+        totalSale = 0;
+    }
+
+    protected final void cleanFieldsFoods() {
         getTxt_descriptionDish().setText("");
         getTxt_descriptionDrink().setText("");
         getTxt_amountDish().setText("");
@@ -413,8 +420,6 @@ public abstract class AbstractFoodController implements Observer {
         getTxt_priceDrink().setText("");
         getCbo_drink().setSelectedIndex(0);
         getCbo_dish().setSelectedIndex(0);
-
-        totalSale = 0;
     }
 
     protected final void showDishInfo() {
