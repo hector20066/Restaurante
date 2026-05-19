@@ -276,8 +276,15 @@ public abstract class AbstractFoodController implements Observer {
         String customerEmail = getTxt_customerEmail().getText().trim();
         String customerAddress = getTxt_customerAddress().getText();
 
+        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+
         if (!validateCustomerData(customerName, customerId, customerEmail, customerAddress)) {
-            throw new Exception("Debe ingresar toda la informacion del cliente");
+            throw new Exception("Debe ingresar toda la información del cliente");
+        }
+
+        if (!customerEmail.matches(emailRegex)) {
+            getTxt_customerEmail().grabFocus();
+            throw new Exception("Debe ingresar el correo electrónico con un formato correcto.");
         }
 
         CustomerData customerData = extractCustomerData(customerName, customerId, customerEmail, customerAddress);
