@@ -52,12 +52,12 @@ public class ControllerAdminPanelBuilder {
         this.viewLogsDB = viewLogsDB;
         return this;
     }
-    
+
     public ControllerAdminPanelBuilder withViewSalesReport(SalesReport salesReport) {
         this.salesReport = salesReport;
         return this;
     }
-    
+
     public ControllerAdminPanelBuilder withViewShowQualifications(ShowQualifications showQualifications) {
         this.showQualifications = showQualifications;
         return this;
@@ -100,7 +100,7 @@ public class ControllerAdminPanelBuilder {
     public ViewLogsDB getViewLogsDB() {
         return viewLogsDB;
     }
-    
+
     public SalesReport getSalesReport() {
         return salesReport;
     }

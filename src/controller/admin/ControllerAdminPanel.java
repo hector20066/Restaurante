@@ -16,9 +16,6 @@ import java.awt.event.ActionListener;
  */
 public class ControllerAdminPanel {
 
-    private boolean expandedMenu = true;
-    private Timer animation;
-    
     private final AdminPanel adminPanel;
     private final DashboardAdmin dashboard;
     private final LogIn login;
@@ -29,6 +26,8 @@ public class ControllerAdminPanel {
     private final ShowQualifications showQualifications;
     private final ControllerRegisterDish controllerRegisterDish;
     private final ControllerRegisterDrink controllerRegisterDrink;
+    private boolean expandedMenu = true;
+    private Timer animation;
 
     public ControllerAdminPanel(ControllerAdminPanelBuilder builder) {
         this.adminPanel = builder.getAdminPanel();
@@ -57,12 +56,12 @@ public class ControllerAdminPanel {
     }
 
     private void actionMenu() {
-        try{
+        try {
             int initialWidth = adminPanel.getJpl_menu().getWidth();
             int finalWidth = expandedMenu ? 60 : 245;
             int passed = (finalWidth - initialWidth) / 14;
 
-            if(animation != null && animation.isRunning()){
+            if (animation != null && animation.isRunning()) {
                 return;
             }
 
@@ -76,7 +75,7 @@ public class ControllerAdminPanel {
 
                     boolean endAnimation = (passed > 0 && currentWidth >= finalWidth) || (passed < 0 && currentWidth <= finalWidth);
 
-                    if(endAnimation){
+                    if (endAnimation) {
                         currentWidth = finalWidth;
                         animation.stop();
                         expandedMenu = !expandedMenu;
@@ -91,7 +90,7 @@ public class ControllerAdminPanel {
             });
 
             animation.start();
-        }catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(adminPanel, "Ha ocurrido un error al ocultar el menu", null, JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -112,7 +111,7 @@ public class ControllerAdminPanel {
         resetForeground();
         NavigatorUtils.showFormManagement(AdminPanel.getJpl_content(), dashboard);
         adminPanel.getBtn_dashboard().setIcon(new ImageIcon(getClass().getResource("/view/image/dashboardSelected.png")));
-        adminPanel.getBtn_dashboard().setBackground(new Color(187,222,251));
+        adminPanel.getBtn_dashboard().setBackground(new Color(187, 222, 251));
         adminPanel.getBtn_dashboard().setForeground(new Color(0, 49, 245));
     }
 
@@ -122,7 +121,7 @@ public class ControllerAdminPanel {
         resetForeground();
         NavigatorUtils.showFormManagement(AdminPanel.getJpl_content(), registerDish);
         adminPanel.getBtn_registerDish().setIcon(new ImageIcon(getClass().getResource("/view/image/saladSelected.png")));
-        adminPanel.getBtn_registerDish().setBackground(new Color(187,222,251));
+        adminPanel.getBtn_registerDish().setBackground(new Color(187, 222, 251));
         adminPanel.getBtn_registerDish().setForeground(new Color(0, 49, 245));
         controllerRegisterDish.setModify(false);
         registerDish.getBtn_register().setText("REGISTRAR PLATO");
@@ -131,14 +130,14 @@ public class ControllerAdminPanel {
         registerDish.getTxt_price().setText("");
         registerDish.getCbo_typeDish().setSelectedIndex(0);
     }
-    
+
     public void showSalesReport() {
         resetColors();
         resetIcons();
         resetForeground();
         NavigatorUtils.showFormManagement(AdminPanel.getJpl_content(), salesReport);
         adminPanel.getBtn_salesReport().setIcon(new ImageIcon(getClass().getResource("/view/image/chart-no-axes-combined-selected.png")));
-        adminPanel.getBtn_salesReport().setBackground(new Color(187,222,251));
+        adminPanel.getBtn_salesReport().setBackground(new Color(187, 222, 251));
         adminPanel.getBtn_salesReport().setForeground(new Color(0, 49, 245));
     }
 
@@ -148,7 +147,7 @@ public class ControllerAdminPanel {
         resetForeground();
         NavigatorUtils.showFormManagement(AdminPanel.getJpl_content(), registerDrink);
         adminPanel.getBtn_registerDrinks().setIcon(new ImageIcon(getClass().getResource("/view/image/wineSelected.png")));
-        adminPanel.getBtn_registerDrinks().setBackground(new Color(187,222,251));
+        adminPanel.getBtn_registerDrinks().setBackground(new Color(187, 222, 251));
         adminPanel.getBtn_registerDrinks().setForeground(new Color(0, 49, 245));
         controllerRegisterDrink.setModify(false);
         registerDrink.getBtn_register().setText("REGISTRAR BEBIDA");
@@ -157,14 +156,14 @@ public class ControllerAdminPanel {
         registerDrink.getTxt_price().setText("");
         registerDrink.getCbo_typeDrink().setSelectedIndex(0);
     }
-    
+
     private void showQualifications() {
         resetColors();
         resetIcons();
         resetForeground();
         NavigatorUtils.showFormManagement(AdminPanel.getJpl_content(), showQualifications);
         adminPanel.getBtn_showQualifications().setIcon(new ImageIcon(getClass().getResource("/view/image/starMenu-selected.png")));
-        adminPanel.getBtn_showQualifications().setBackground(new Color(187,222,251));
+        adminPanel.getBtn_showQualifications().setBackground(new Color(187, 222, 251));
         adminPanel.getBtn_showQualifications().setForeground(new Color(0, 49, 245));
     }
 
@@ -174,12 +173,12 @@ public class ControllerAdminPanel {
         resetForeground();
         NavigatorUtils.showFormManagement(AdminPanel.getJpl_content(), viewLogsDB);
         adminPanel.getBtn_seeAvailableMeals().setIcon(new ImageIcon(getClass().getResource("/view/image/databaseSelected.png")));
-        adminPanel.getBtn_seeAvailableMeals().setBackground(new Color(187,222,251));
+        adminPanel.getBtn_seeAvailableMeals().setBackground(new Color(187, 222, 251));
         adminPanel.getBtn_seeAvailableMeals().setForeground(new Color(0, 49, 245));
     }
 
     private void resetColors() {
-        Color normal = new Color(255,255,255);
+        Color normal = new Color(255, 255, 255);
         adminPanel.getBtn_dashboard().setBackground(normal);
         adminPanel.getBtn_registerDish().setBackground(normal);
         adminPanel.getBtn_registerDrinks().setBackground(normal);
@@ -200,7 +199,7 @@ public class ControllerAdminPanel {
     }
 
     private void resetForeground() {
-        Color normal = new Color(33,37,41);
+        Color normal = new Color(33, 37, 41);
         adminPanel.getBtn_dashboard().setForeground(normal);
         adminPanel.getBtn_registerDish().setForeground(normal);
         adminPanel.getBtn_registerDrinks().setForeground(normal);

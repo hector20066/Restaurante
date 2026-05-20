@@ -1,13 +1,16 @@
 package controller.admin;
 
-import factory.*;
+import factory.AbstractFactory;
+import factory.ChineseRestaurant;
+import factory.ColombianRestaurant;
+import factory.ItalianRestaurant;
 import model.dao.impl.DAODishImpl;
 import model.dao.interfaces.DAORestaurantDb;
 import model.entities.Dish;
+import observer.Subject;
 import view.administrators.RegisterDish;
 
 import javax.swing.*;
-import observer.Subject;
 
 /**
  *
@@ -15,13 +18,11 @@ import observer.Subject;
  */
 public class ControllerRegisterDish {
 
-    private int codeDish;
-    private boolean modify;
-
     private final RegisterDish registerDish;
     private final Subject subject;
     private final DAORestaurantDb<Dish> daoRestaurantDb;
-
+    private int codeDish;
+    private boolean modify;
     private AbstractFactory factory;
 
     public ControllerRegisterDish(RegisterDish registerDish, Subject subject) {
@@ -133,12 +134,12 @@ public class ControllerRegisterDish {
         this.codeDish = codeDish;
     }
 
-    public void setModify(boolean modify) {
-        this.modify = modify;
-    }
-
     public boolean isModify() {
         return modify;
+    }
+
+    public void setModify(boolean modify) {
+        this.modify = modify;
     }
 
 }

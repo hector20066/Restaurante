@@ -156,9 +156,9 @@ public class ControllerSalesReport implements Observer {
                     .max(Map.Entry.comparingByValue())
                     .map(Map.Entry::getKey)
                     .orElse("Sin datos");
-            
+
             Integer dishAmount = dishCount.get(mostSoldDish);
-            
+
             if (dishAmount != null) {
                 totalAmountDish = dishAmount;
             }
@@ -172,9 +172,9 @@ public class ControllerSalesReport implements Observer {
                     .max(Map.Entry.comparingByValue())
                     .map(Map.Entry::getKey)
                     .orElse("Sin datos");
-            
+
             Integer drinkAmount = drinkCount.get(mostSoldDrink);
-            
+
             if (drinkAmount != null) {
                 totalAmountDrink = drinkAmount;
             }

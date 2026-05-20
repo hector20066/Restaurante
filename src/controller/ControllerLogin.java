@@ -115,7 +115,7 @@ public class ControllerLogin {
     private void mousePressedUser() {
         if (login.getTxt_user().getText().equals("Ingrese su usuario")) {
             login.getTxt_user().setText("");
-            login.getTxt_user().setForeground(new Color(37,106,208));
+            login.getTxt_user().setForeground(new Color(37, 106, 208));
         }
 
         if (String.valueOf(login.getJpld_password().getPassword()).isBlank()) {
@@ -132,7 +132,7 @@ public class ControllerLogin {
 
         if (String.valueOf(login.getJpld_password().getPassword()).equals("••••••••")) {
             login.getJpld_password().setText("");
-            login.getJpld_password().setForeground(new Color(37,106,208));
+            login.getJpld_password().setForeground(new Color(37, 106, 208));
         }
     }
 

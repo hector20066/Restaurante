@@ -42,7 +42,7 @@ public class ControllerLoginBuilder {
     }
 
     public ControllerLoginBuilder withControllerUserPanel(ControllerUsersPanel controllerUsersPanel) {
-        this.controllerUsersPanel =  controllerUsersPanel;
+        this.controllerUsersPanel = controllerUsersPanel;
         return this;
     }
 

@@ -1,33 +1,19 @@
 package controller.customers;
 
+import model.dao.impl.*;
+import model.dao.interfaces.DAORestaurantDb;
+import model.dao.interfaces.DAOWithAutoIncrement;
+import model.dao.interfaces.IDAO;
+import model.entities.*;
+import model.enums.TypeFood;
+import observer.Observer;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
-import javax.swing.table.DefaultTableModel;
-
-import model.dao.impl.DAOCustomersImpl;
-import model.dao.impl.DAODishImpl;
-import model.dao.impl.DAODrinkImpl;
-import model.dao.impl.DAOSaleDetailImpl;
-import model.dao.impl.DAOSalesImpl;
-import model.dao.interfaces.DAORestaurantDb;
-import model.dao.interfaces.DAOWithAutoIncrement;
-import model.dao.interfaces.IDAO;
-import model.entities.Customer;
-import model.entities.Dish;
-import model.entities.Drink;
-import model.entities.Sale;
-import model.entities.SaleDetail;
-import model.enums.TypeFood;
-import observer.Observer;
 
 /**
  *
@@ -70,22 +56,39 @@ public abstract class AbstractFoodController implements Observer {
     }
 
     protected abstract TypeFood getTypeFood();
+
     protected abstract void connectEvents();
+
     protected abstract JTextField getTxt_amountDish();
+
     protected abstract JTextField getTxt_priceDish();
+
     protected abstract JTextField getTxt_amountDrink();
+
     protected abstract JTextField getTxt_priceDrink();
+
     protected abstract JTextField getTxt_descriptionDish();
+
     protected abstract JTextField getTxt_descriptionDrink();
+
     protected abstract JTextField getTxt_totalSale();
+
     protected abstract JTextField getTxt_customerName();
+
     protected abstract JTextField getTxt_customerId();
+
     protected abstract JTextField getTxt_customerEmail();
+
     protected abstract JTextField getTxt_customerAddress();
+
     protected abstract JComboBox<String> getCbo_drink();
+
     protected abstract JComboBox<String> getCbo_dish();
+
     protected abstract JTable getJtbl_food();
+
     protected abstract DefaultTableModel getTableModelFood();
+
     protected abstract JPanel getJpl_contentFood();
 
     protected final void addOrder() {
@@ -511,13 +514,15 @@ public abstract class AbstractFoodController implements Observer {
         }
     }
 
-    private record OrderData(String dishName, int dishAmount, float dishPrice, String drinkName, int drinkAmount, float drinkPrice) {
+    private record OrderData(String dishName, int dishAmount, float dishPrice, String drinkName, int drinkAmount,
+                             float drinkPrice) {
     }
 
     private record CustomerData(String name, int id, String email, String address) {
     }
 
-    private record SaleRowData(String dishName, int dishCode, int dishAmount, float dishPrice, String drinkName, int drinkCode, int drinkAmount, float drinkPrice, float total) {
+    private record SaleRowData(String dishName, int dishCode, int dishAmount, float dishPrice, String drinkName,
+                               int drinkCode, int drinkAmount, float drinkPrice, float total) {
     }
 
 }

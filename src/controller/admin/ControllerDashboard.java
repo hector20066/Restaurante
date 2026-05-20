@@ -101,7 +101,7 @@ public class ControllerDashboard implements Observer {
             countSaleByType(saleDetails, month, colombian, italian, chinese);
         }
 
-        return new int[][]{ colombian, italian, chinese };
+        return new int[][]{colombian, italian, chinese};
     }
 
     private void countSaleByType(List<SaleDetail> saleDetails, int month, int[] colombian, int[] italian, int[] chinese) throws Exception {
@@ -142,9 +142,9 @@ public class ControllerDashboard implements Observer {
 
     private void setupChartLegend() {
         dashboard.getChart().clear();
-        dashboard.getChart().addLegend("Comida Colombiana", new Color(255,209,102));
-        dashboard.getChart().addLegend("Comida Italiana", new Color(6,214,160));
-        dashboard.getChart().addLegend("Comida China", new Color(239,71,111));
+        dashboard.getChart().addLegend("Comida Colombiana", new Color(255, 209, 102));
+        dashboard.getChart().addLegend("Comida Italiana", new Color(6, 214, 160));
+        dashboard.getChart().addLegend("Comida China", new Color(239, 71, 111));
     }
 
     private void loadLastSixMonths(int[][] data) {

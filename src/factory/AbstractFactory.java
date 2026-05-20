@@ -10,6 +10,7 @@ import model.entities.Drink;
 public interface AbstractFactory {
 
     Dish createDish();
+
     Drink createDrink();
 
 }

@@ -78,7 +78,7 @@ public class Coordinator {
         showQualifications = new ShowQualifications();
     }
 
-    private void startDrivers () {
+    private void startDrivers() {
         controllerRegisterDish = new ControllerRegisterDish(registerDish, subject);
         controllerRegisterDrink = new ControllerRegisterDrink(registerDrink, subject);
         controllerAdminPanel = new ControllerAdminPanelBuilder()
@@ -117,7 +117,7 @@ public class Coordinator {
         startDriversUser();
     }
 
-    private void startDriversAdmin () {
+    private void startDriversAdmin() {
         controllerViewLogsDB = new ControllerViewLogsDbBuilder()
                 .withViewLogsDB(viewLogsDB)
                 .withViewRegisterDish(registerDish)
@@ -133,7 +133,7 @@ public class Coordinator {
         controllerShowQualifications = new ControllerShowQualifications(showQualifications, subject);
     }
 
-    private void startDriversUser () {
+    private void startDriversUser() {
         controllerChineseFood = new ControllerChineseFood(chineseFood, subject);
         controllerColombianFood = new ControllerColombianFood(colombianFood, subject);
         controllerItalianFood = new ControllerItalianFood(italianFood, subject);

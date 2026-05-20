@@ -18,13 +18,11 @@ import javax.swing.*;
  */
 public class ControllerRegisterDrink {
 
-    private int codeDrink;
-    private boolean modify;
-
     private final RegisterDrink registerDrink;
     private final Subject subject;
     private final DAORestaurantDb<Drink> daoRestaurantDb;
-
+    private int codeDrink;
+    private boolean modify;
     private AbstractFactory factory;
 
     public ControllerRegisterDrink(RegisterDrink registerDrink, Subject subject) {
@@ -136,12 +134,12 @@ public class ControllerRegisterDrink {
         this.codeDrink = codeDrink;
     }
 
-    public void setModify(boolean modify) {
-        this.modify = modify;
-    }
-
     public boolean isModify() {
         return modify;
+    }
+
+    public void setModify(boolean modify) {
+        this.modify = modify;
     }
 
 }

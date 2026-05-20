@@ -60,6 +60,36 @@ public class ControllerViewLogs implements Observer {
         connectEvents();
     }
 
+    public static void loadDrinks(List<Drink> listDrinks, DefaultTableModel modelDrinks) {
+        modelDrinks.setRowCount(0);
+
+        for (Drink drink : listDrinks) {
+            String name = drink.getName();
+            int code = drink.getCode();
+            float price = drink.getPrice();
+            TypeFood type = drink.getTypeDrink();
+            String description = drink.getDescription();
+
+            Object[] data = new Object[]{name, code, price, type.getValue(), description};
+            modelDrinks.addRow(data);
+        }
+    }
+
+    public static void loadDishes(List<Dish> listDishes, DefaultTableModel modelDishes) {
+        modelDishes.setRowCount(0);
+
+        for (Dish dish : listDishes) {
+            String name = dish.getName();
+            int code = dish.getCode();
+            float price = dish.getPrice();
+            TypeFood type = dish.getTypeDish();
+            String description = dish.getDescription();
+
+            Object[] data = new Object[]{name, code, price, type.getValue(), description};
+            modelDishes.addRow(data);
+        }
+    }
+
     private void connectEvents() {
         addDocumentSearchDish();
         addListenerSearchDish();
@@ -299,36 +329,6 @@ public class ControllerViewLogs implements Observer {
             } else {
                 registerDrink.getCbo_typeDrink().setSelectedIndex(2);
             }
-        }
-    }
-
-    public static void loadDrinks(List<Drink> listDrinks, DefaultTableModel modelDrinks) {
-        modelDrinks.setRowCount(0);
-
-        for (Drink drink : listDrinks) {
-            String name = drink.getName();
-            int code = drink.getCode();
-            float price = drink.getPrice();
-            TypeFood type = drink.getTypeDrink();
-            String description = drink.getDescription();
-
-            Object[] data = new Object[]{name, code, price, type.getValue(), description};
-            modelDrinks.addRow(data);
-        }
-    }
-
-    public static void loadDishes(List<Dish> listDishes, DefaultTableModel modelDishes) {
-        modelDishes.setRowCount(0);
-
-        for (Dish dish : listDishes) {
-            String name = dish.getName();
-            int code = dish.getCode();
-            float price = dish.getPrice();
-            TypeFood type = dish.getTypeDish();
-            String description = dish.getDescription();
-
-            Object[] data = new Object[]{name, code, price, type.getValue(), description};
-            modelDishes.addRow(data);
         }
     }
 

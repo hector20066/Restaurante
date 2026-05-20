@@ -43,7 +43,7 @@ public class ControllerShowQualifications implements Observer {
     }
 
     private void loadRatings() {
-        new Thread(()-> {
+        new Thread(() -> {
             try {
                 showQualifications.cleanPanel();
                 List<QualificationDish> dishRatings = daoQualificationDish.getData();
