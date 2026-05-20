@@ -1,14 +1,15 @@
 package view.chart;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.util.ArrayList;
+import java.util.List;
+
 import view.chart.blankChart.BlankPlotChart;
 import view.chart.blankChart.BlankPlotChatRender;
 import view.chart.blankChart.SeriesSize;
 import view.model.ModelChart;
 import view.model.ModelLegend;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -27,20 +28,25 @@ public class Chart extends javax.swing.JPanel {
         blankPlotChart.setBlankPlotChatRender(new BlankPlotChatRender() {
             @Override
             public String getLabelText(int index) {
-                return model.get(index).getLabel();
+                if (index >= 0 && index < model.size()) {
+                    return model.get(index).getLabel();
+                }
+                return "";
             }
 
             @Override
             public void renderSeries(BlankPlotChart chart, Graphics2D g2, SeriesSize size, int index) {
-                double totalSeriesWidth = (seriesSize * legends.size()) + (seriesSpace * (legends.size() - 1));
-                double x = (size.getWidth() - totalSeriesWidth) / 2;
+                if (index >= 0 && index < model.size()) {
+                    double totalSeriesWidth = (seriesSize * legends.size()) + (seriesSpace * (legends.size() - 1));
+                    double x = (size.getWidth() - totalSeriesWidth) / 2;
 
-                for (int i = 0; i < legends.size(); i++) {
-                    ModelLegend legend = legends.get(i);
-                    g2.setColor(legend.getColor());
-                    double seriesValues = chart.getSeriesValuesOf(model.get(index).getValues()[i], size.getHeight());
-                    g2.fillRect((int) (size.getX() + x), (int) (size.getY() + size.getHeight() - seriesValues), seriesSize, (int) seriesValues);
-                    x += seriesSpace + seriesSize;
+                    for (int i = 0; i < legends.size(); i++) {
+                        ModelLegend legend = legends.get(i);
+                        g2.setColor(legend.getColor());
+                        double seriesValues = chart.getSeriesValuesOf(model.get(index).getValues()[i], size.getHeight());
+                        g2.fillRect((int) (size.getX() + x), (int) (size.getY() + size.getHeight() - seriesValues), seriesSize, (int) seriesValues);
+                        x += seriesSpace + seriesSize;
+                    }
                 }
             }
         });

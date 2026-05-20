@@ -1,10 +1,16 @@
 package view.chart.blankChart;
 
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Insets;
+import java.awt.RenderingHints;
 import java.awt.geom.Rectangle2D;
 import java.text.DecimalFormat;
+
+import javax.swing.JComponent;
+import javax.swing.border.EmptyBorder;
 
 /**
  *
@@ -132,7 +138,7 @@ public class BlankPlotChart extends JComponent {
     }
 
     private void createLabelText(Graphics2D g2) {
-        if (labelCount > 0) {
+        if (labelCount > 0 && blankPlotChatRender != null) {
             Insets insets = getInsets();
             double textWidth = getMaxValuesTextWidth(g2);
             double spaceText = 5;
@@ -146,16 +152,20 @@ public class BlankPlotChart extends JComponent {
                 double centerX = ((locationX + space / 2));
                 g2.setColor(getForeground());
                 String text = getChartText(i);
-                Rectangle2D r2 = ft.getStringBounds(text, g2);
-                double textX = centerX - r2.getWidth() / 2;
-                g2.drawString(text, (int) textX, (int) locationText);
+                
+                if (text != null && !text.isEmpty()) {
+                    Rectangle2D r2 = ft.getStringBounds(text, g2);
+                    double textX = centerX - r2.getWidth() / 2;
+                    g2.drawString(text, (int) textX, (int) locationText);
+                }
+                
                 locationX += space;
             }
         }
     }
 
     private void renderSeries(Graphics2D g2) {
-        if (blankPlotChatRender != null) {
+        if (blankPlotChatRender != null && labelCount > 0) {
             Insets insets = getInsets();
             double textWidth = getMaxValuesTextWidth(g2);
             double textHeight = getLabelTextHeight(g2);
