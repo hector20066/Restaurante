@@ -1,0 +1,152 @@
+<!-- Created with Jaspersoft Studio version 7.0.6.final using JasperReports Library version 7.0.6-5d2a603fdc6b3db8f842a83383e594f41891534d  -->
+<jasperReport name="ReporteVentas" language="java" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c368610e-5bee-4e75-8f1e-ecda64380534">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="47"/>
+	<property name="ireport.y" value="451"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50.0" bold="false"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Times New Roman" fontSize="18.0" bold="false"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14.0" bold="true"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle mode="Opaque" backcolor="#F0EFEF">
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+		</conditionalStyle>
+	</style>
+	<dataset name="PieChartDataset" uuid="21b70311-b650-4678-a39c-887917366bf0"/>
+	<query language="sql"><![CDATA[]]></query>
+	<field name="bestSellingDish" class="java.lang.String"/>
+	<field name="quantityDishes" class="java.lang.Integer"/>
+	<field name="numSale" class="java.lang.Integer"/>
+	<field name="customer" class="java.lang.String"/>
+	<field name="dish" class="java.lang.String"/>
+	<field name="amountDish" class="java.lang.Integer"/>
+	<field name="drink" class="java.lang.String"/>
+	<field name="amountDrink" class="java.lang.Integer"/>
+	<field name="date" class="java.util.Date"/>
+	<field name="totalSale" class="java.math.BigDecimal"/>
+	<title height="280" splitType="Stretch">
+		<element kind="staticText" uuid="0dae0af3-dd1d-4b42-b346-386af21f0689" x="336" y="65" width="449" height="29" fontSize="22.0" bold="false" hTextAlign="Right" style="SubTitle">
+			<text><![CDATA[Reporte de Ventas]]></text>
+		</element>
+		<element kind="frame" uuid="83f5e806-cc04-4161-87a9-07633f604bc1" mode="Opaque" x="-20" y="0" width="822" height="65" forecolor="#006699" backcolor="#006699">
+			<element kind="staticText" uuid="f5cd9ee0-5caa-4e48-8946-c7e84d82a845" x="231" y="0" width="578" height="65" fontSize="54.0" bold="false" hTextAlign="Right" style="Title">
+				<text><![CDATA[La Casa Del Sabor]]></text>
+			</element>
+		</element>
+		<element kind="frame" uuid="37b379ec-c168-4b6b-8832-699686e3b029" mode="Opaque" x="20" y="120" width="230" height="130" forecolor="#C77DFF" backcolor="#C77DFF">
+			<element kind="staticText" uuid="f7427ae1-048f-4bb5-8092-6ba37194a250" x="10" y="10" width="181" height="22" forecolor="#FFFFFF" fontSize="16.0" bold="true" vTextAlign="Middle">
+				<text><![CDATA[Plato Mas Vendido]]></text>
+			</element>
+			<element kind="textField" uuid="6788dd76-7fb2-4a72-bb33-c8c89bc613de" x="10" y="80" width="160" height="30" forecolor="#FFFFFF" fontSize="14.0" vTextAlign="Middle">
+				<expression><![CDATA[$F{quantityDishes}]]></expression>
+			</element>
+			<element kind="textField" uuid="928c2a51-be75-4acf-a291-80a2bc8b2ff1" x="10" y="40" width="210" height="30" forecolor="#FFFFFF" fontSize="14.0" vTextAlign="Middle">
+				<expression><![CDATA[$F{bestSellingDish}]]></expression>
+			</element>
+			<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0"/>
+		</element>
+		<element kind="frame" uuid="b7624a47-1954-4629-9995-dfb1bbc2c335" mode="Opaque" x="280" y="120" width="230" height="130" forecolor="#42A5F5" backcolor="#42A5F5">
+			<element kind="staticText" uuid="6e0a02d9-5697-42bc-8d9d-feec6847a37f" x="10" y="10" width="141" height="22" forecolor="#FFFFFF" fontSize="16.0" bold="true" vTextAlign="Middle">
+				<text><![CDATA[Plato Mas Vendido]]></text>
+			</element>
+			<element kind="textField" uuid="aecacafc-c6a9-4b2f-954a-5c3c386bc35e" x="10" y="80" width="160" height="30" forecolor="#FFFFFF" fontSize="14.0" vTextAlign="Middle">
+				<expression><![CDATA[$F{quantityDishes}]]></expression>
+			</element>
+			<element kind="textField" uuid="9b45914b-e891-426b-8eb5-5d1e049bce50" x="10" y="40" width="210" height="30" forecolor="#FFFFFF" fontSize="14.0" vTextAlign="Middle">
+				<expression><![CDATA[$F{bestSellingDish}]]></expression>
+			</element>
+			<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0"/>
+		</element>
+		<element kind="image" uuid="211b569b-3081-4669-87af-e977bf4c642f" x="540" y="110" width="240" height="160" onErrorType="Icon">
+			<expression><![CDATA["image/foodDashboard.png"]]></expression>
+		</element>
+	</title>
+	<pageHeader splitType="Stretch"/>
+	<columnHeader height="28" splitType="Stretch">
+		<element kind="frame" uuid="2a3d298d-90eb-4db1-919a-c9b2ed28c222" x="-10" y="0" width="820" height="28">
+			<element kind="staticText" uuid="5485f6ba-8580-46fb-acba-93a6fedb3768" x="0" y="-1" width="80" height="29" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[Num. Venta]]></text>
+			</element>
+			<element kind="staticText" uuid="c8058ac8-7ac5-44bf-9a6e-d76741f4b2d3" x="80" y="0" width="100" height="28" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[Cliente]]></text>
+			</element>
+			<element kind="staticText" uuid="2c06b7b8-56c0-44e2-a0f0-14abe75e4c07" x="180" y="0" width="100" height="28" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[Plato]]></text>
+			</element>
+			<element kind="staticText" uuid="366b3bc6-0214-4b1e-9f68-2032ff6a9d4f" x="280" y="0" width="90" height="28" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[Cant. Vendida]]></text>
+			</element>
+			<element kind="staticText" uuid="6238ebf6-3230-492e-8c01-2eb3b4437d86" x="370" y="0" width="100" height="28" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[Bebida]]></text>
+			</element>
+			<element kind="staticText" uuid="0d22c699-4476-4bef-84aa-ac3e1baa9cd6" x="470" y="0" width="94" height="28" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[Cant. Vendida]]></text>
+			</element>
+			<element kind="staticText" uuid="21c3ef7c-5358-4bd0-86f9-e4d32d73501e" x="564" y="0" width="104" height="28" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[Fecha]]></text>
+			</element>
+			<element kind="staticText" uuid="30fac40b-a1de-4fb0-a51c-d2773bed8f1f" x="669" y="0" width="150" height="28" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[Total]]></text>
+			</element>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<element kind="frame" uuid="822bafe9-34ee-4b4f-aa76-3eae029c4911" x="-10" y="0" width="820" height="26">
+				<element kind="textField" uuid="58aea559-5c5c-453b-b2b2-f5cd0bd00ed1" x="0" y="0" width="80" height="25" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+					<expression><![CDATA[$F{numSale}]]></expression>
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4bb88588-9535-4630-b49a-4ce7ccd723ad"/>
+				</element>
+				<element kind="textField" uuid="f89f5c9f-8f46-471c-912d-942f25745960" x="80" y="0" width="100" height="26" fontSize="12.0" vTextAlign="Middle">
+					<expression><![CDATA[$F{customer}]]></expression>
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c289a339-f1ef-4cf1-863b-6c8e8a544ea3"/>
+				</element>
+				<element kind="textField" uuid="1ea73047-93ab-4c18-8e51-a78d2d2eee37" x="180" y="0" width="100" height="26" fontSize="12.0" vTextAlign="Middle">
+					<expression><![CDATA[$F{dish}]]></expression>
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="068beaff-9839-4c20-87c8-e2f27bd5afb9"/>
+				</element>
+				<element kind="textField" uuid="fe9ba9a4-bd1a-4e2e-bd20-d22c5cb89bac" x="280" y="0" width="90" height="25" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+					<expression><![CDATA[$F{amountDish}]]></expression>
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="da54a0a9-b6f8-4617-ac53-7cd23da2d8b7"/>
+				</element>
+				<element kind="textField" uuid="b7b88861-5b6f-452e-995d-7f1a4ae90a66" x="370" y="0" width="100" height="26" fontSize="12.0" vTextAlign="Middle">
+					<expression><![CDATA[$F{drink}]]></expression>
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="48c6cb46-23ed-472f-b526-225a31c15967"/>
+				</element>
+				<element kind="textField" uuid="d6945caa-e2a7-4cc8-9423-5c6c1e89e824" x="470" y="-2" width="94" height="29" fontSize="11.0" hTextAlign="Center" vTextAlign="Middle">
+					<expression><![CDATA[$F{amountDrink}]]></expression>
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f9a45ad5-84f1-4499-8a1d-e9daf812b2cb"/>
+				</element>
+				<element kind="textField" uuid="676410b3-cbb7-4e76-8903-4ccbaf75ff9a" x="565" y="0" width="104" height="26" fontSize="12.0" vTextAlign="Middle">
+					<expression><![CDATA[$F{date}]]></expression>
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4a30f4cd-bfd1-42e6-b2d0-3c6aba70d477"/>
+				</element>
+				<element kind="textField" uuid="5f10c9a8-655f-4cc8-b1ca-f229ce291245" x="669" y="0" width="150" height="25" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+					<expression><![CDATA[$F{totalSale}]]></expression>
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="27f920cd-0d37-47ec-a0bc-39353bdc5e5d"/>
+				</element>
+				<element kind="line" uuid="72090ff4-0486-474e-aef3-60be21e25313" positionType="FixRelativeToBottom" x="-1" y="0" width="820" height="1"/>
+			</element>
+			<element kind="line" uuid="ad4e998c-7071-4467-b7fa-4441cc53d3f6" positionType="FixRelativeToBottom" x="-10" y="26" width="820" height="1"/>
+		</band>
+	</detail>
+	<columnFooter height="7" splitType="Stretch">
+		<element kind="line" uuid="c23ffbf7-1928-41f8-ade3-5930d9a4871d" positionType="FixRelativeToBottom" x="-11" y="4" width="820" height="1">
+			<pen lineWidth="0.5" lineColor="#999999"/>
+		</element>
+	</columnFooter>
+	<pageFooter height="16" splitType="Stretch">
+		<element kind="frame" uuid="6f4fe8ef-88ca-4d5d-b46a-054826bb7893" mode="Opaque" x="-10" y="0" width="819" height="16" forecolor="#D0B48E" backcolor="#006699">
+			<element kind="textField" uuid="970781d6-87a0-4d3d-a07b-5ae173a1317a" x="753" y="0" width="40" height="16" forecolor="#FFFFFF" fontName="Arial" fontSize="12.0" evaluationTime="Report" bold="false" vTextAlign="Middle" style="Column header">
+				<expression><![CDATA[" " + $V{PAGE_NUMBER}]]></expression>
+			</element>
+			<element kind="textField" uuid="42664b34-c87b-42f8-911b-bd9c2ab9111e" x="673" y="0" width="80" height="16" forecolor="#FFFFFF" fontName="Arial" fontSize="12.0" bold="false" hTextAlign="Right" vTextAlign="Middle" style="Column header">
+				<expression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></expression>
+			</element>
+			<element kind="textField" uuid="06b3d6e8-b4a5-4251-b1fb-f640689933e8" x="2" y="0" width="197" height="16" forecolor="#FFFFFF" fontName="Arial" fontSize="12.0" pattern="EEEEE dd MMMMM yyyy" bold="false" vTextAlign="Middle" style="Column header">
+				<expression><![CDATA[new java.util.Date()]]></expression>
+			</element>
+		</element>
+	</pageFooter>
+	<summary splitType="Stretch"/>
+</jasperReport>
