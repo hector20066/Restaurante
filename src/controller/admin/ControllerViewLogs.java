@@ -319,10 +319,11 @@ public class ControllerViewLogs implements Observer {
         try {
             List<Dish> listDishes = daoDish.getData();
             String compileReport = "/reports/PlatosDisponibles.jrxml";
-            String path = System.getProperty("user.home") + File.separator + "Descargas" + File.separator + "PlatosDisponibles.pdf";
+            String path = System.getProperty("user.home") + File.separator + "Downloads" + File.separator + "PlatosDisponibles.pdf";
 
             export(listDishes, compileReport, path);
         } catch (Exception e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(viewLogs, "Ha ocurrido un error al exportar el reporte.", null, JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -331,10 +332,11 @@ public class ControllerViewLogs implements Observer {
         try {
             List<Drink> listDrinks = daoDrink.getData();
             String compileReport = "/reports/BebidasDisponibles.jrxml";
-            String path = System.getProperty("user.home") + File.separator + "Descargas" + File.separator + "BebidasDisponibles.pdf";
+            String path = System.getProperty("user.home") + File.separator + "Downloads" + File.separator + "BebidasDisponibles.pdf";
 
             export(listDrinks, compileReport, path);
         } catch (Exception e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(viewLogs, "Ha ocurrido un error al exportar el reporte.", null, JOptionPane.ERROR_MESSAGE);
         }
     }

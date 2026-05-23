@@ -126,7 +126,7 @@ public class ControllerSalesReport implements Observer {
             JasperViewer viewer = new JasperViewer(jasperPrint, false);
             viewer.setVisible(true);
 
-            String path = System.getProperty("user.home") + File.separator + "Descargas" + File.separator + "ReporteVentas.pdf";
+            String path = System.getProperty("user.home") + File.separator + "Downloads" + File.separator + "ReporteVentas.pdf";
             JasperExportManager.exportReportToPdfFile(jasperPrint, path);
             JOptionPane.showMessageDialog(salesReport, "Se ha exportado el reporte completo de ventas.\nUbicacion: " + path, null, JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
