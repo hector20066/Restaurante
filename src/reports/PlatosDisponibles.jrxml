@@ -2,9 +2,9 @@
 <jasperReport name="PlatosDisponibles" language="java" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9dc9e2e9-66bc-458f-9ef0-6c6f60369d3e">
 	<query language="sql"><![CDATA[]]></query>
 	<field name="name" class="java.lang.String"/>
-	<field name="id" class="java.lang.Integer"/>
+	<field name="code" class="java.lang.Integer"/>
 	<field name="price" class="java.lang.Float"/>
-	<field name="type" class="java.lang.String"/>
+	<field name="typeDish" class="java.lang.String"/>
 	<field name="description" class="java.lang.String"/>
 	<background/>
 	<title height="72">
@@ -44,7 +44,7 @@
 				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="58ada603-21eb-4d3e-8201-5d5d211a6a3e"/>
 			</element>
 			<element kind="textField" uuid="d3b55202-19e6-43f5-b1c2-e2d493899537" x="80" y="-1" width="90" height="22" fontSize="11.0" hTextAlign="Center">
-				<expression><![CDATA[$F{id}]]></expression>
+				<expression><![CDATA[$F{code}]]></expression>
 				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ae28b265-e515-41a4-9753-f9d6de7a2390"/>
 			</element>
 			<element kind="textField" uuid="acc2edcf-d352-4273-baaf-793ce64629cf" x="170" y="-1" width="90" height="22" fontSize="11.0" hTextAlign="Center">
@@ -52,7 +52,7 @@
 				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="960b5a37-f808-49db-8ea2-19b8d5e08d13"/>
 			</element>
 			<element kind="textField" uuid="5691e8cd-bdbb-4d41-8cff-d2fca6433705" x="260" y="0" width="100" height="22" fontSize="11.0" hTextAlign="Center">
-				<expression><![CDATA[$F{type}]]></expression>
+				<expression><![CDATA[$F{typeDish}]]></expression>
 				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4e30ec61-35b9-4234-b45c-4c5c09323fde"/>
 			</element>
 			<element kind="textField" uuid="da08d6a9-4ee5-4c82-bca5-410b429a1bb8" x="360" y="0" width="200" height="20" fontSize="11.0">

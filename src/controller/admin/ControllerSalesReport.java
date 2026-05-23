@@ -130,7 +130,6 @@ public class ControllerSalesReport implements Observer {
             JasperExportManager.exportReportToPdfFile(jasperPrint, path);
             JOptionPane.showMessageDialog(salesReport, "Se ha exportado el reporte completo de ventas.\nUbicacion: " + path, null, JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
-            e.printStackTrace();
             JOptionPane.showMessageDialog(salesReport, "Ha ocurrido un error al exportar el reporte.", null, JOptionPane.ERROR_MESSAGE);
         }
     }
