@@ -3,6 +3,9 @@ package controller.admin;
 import model.dao.SaleDetailsDTO;
 import model.dao.impl.DAOSaleDetailImpl;
 import model.dao.interfaces.IDAOSalesDetails;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 import observer.Observer;
 import observer.Subject;
 import view.administrators.SalesReport;
@@ -16,6 +19,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -107,9 +111,27 @@ public class ControllerSalesReport implements Observer {
     private void export() {
         try {
             List<SaleDetailsDTO> listSales = daoSaleDetail.getAllData();
+            ReportSummaryDTO summary = calculateMostSold(listSales);
 
+            JasperReport report = JasperCompileManager.compileReport(getClass().getResourceAsStream("/reports/ReporteVentas.jrxml"));
+            JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(listSales);
+            Map<String,Object> parameters = new HashMap<>();
+
+            parameters.put("bestSellingDish", summary.getBestDish());
+            parameters.put("quantityDishes", summary.getQtyDish());
+            parameters.put("bestSellingDrink", summary.getBestDrink());
+            parameters.put("quantityDrinks", summary.getQtyDrink());
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, dataSource);
+            JasperViewer viewer = new JasperViewer(jasperPrint, false);
+            viewer.setVisible(true);
+
+            String path = System.getProperty("user.home") + File.separator + "Descargas" + File.separator + "ReporteVentas.pdf";
+            JasperExportManager.exportReportToPdfFile(jasperPrint, path);
+            JOptionPane.showMessageDialog(salesReport, "Se ha exportado el reporte completo de ventas.\nUbicacion: " + path, null, JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
-
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(salesReport, "Ha ocurrido un error al exportar el reporte.", null, JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -120,9 +142,9 @@ public class ControllerSalesReport implements Observer {
             int numSale = dto.getNumSale();
             String customer = dto.getCustomer();
             String dish = dto.getDish();
-            int amountDish = dto.getQuantityDishesSold();
+            int amountDish = dto.getAmountDish();
             String drink = dto.getDrink();
-            int amountDrink = dto.getQuantityDrinksSold();
+            int amountDrink = dto.getAmountDrink();
             LocalDate date = dto.getDate();
             float total = dto.getTotalSale();
 
@@ -132,60 +154,46 @@ public class ControllerSalesReport implements Observer {
     }
 
     private void displayMostSold(List<SaleDetailsDTO> list) {
-        Map<String, Integer> dishCount = new HashMap<>();
-        Map<String, Integer> drinkCount = new HashMap<>();
+        ReportSummaryDTO summary = calculateMostSold(list);
+
+        salesReport.updateCards(summary.getBestDish(), summary.getBestDrink(), summary.getQtyDish(), summary.getQtyDrink());
+    }
+
+    private ReportSummaryDTO calculateMostSold(List<SaleDetailsDTO> list) {
+        Map<String,Integer> dishCount = new HashMap<>();
+        Map<String,Integer> drinkCount = new HashMap<>();
 
         for (SaleDetailsDTO dto : list) {
             String dish = dto.getDish();
-            int amount = dto.getQuantityDishesSold();
+            int dishAmount = dto.getAmountDish();
 
-            if (dish != null && !dish.isBlank() && amount > 0) {
-                dishCount.put(dish, dishCount.getOrDefault(dish, 0) + amount);
+            if (dish != null && !dish.isBlank() && dishAmount > 0) {
+                dishCount.merge(dish, dishAmount, Integer::sum);
             }
-        }
 
-        for (SaleDetailsDTO dto : list) {
             String drink = dto.getDrink();
-            int amount = dto.getQuantityDrinksSold();
+            int drinkAmount = dto.getAmountDrink();
 
-            if (drink != null && !drink.isBlank() && amount > 0) {
-                drinkCount.put(drink, drinkCount.getOrDefault(drink, 0) + amount);
+            if (drink != null && !drink.isBlank() && drinkAmount > 0) {
+                drinkCount.merge(drink, drinkAmount, Integer::sum);
             }
         }
 
-        String mostSoldDish = "Sin datos";
-        int totalAmountDish = 0;
+        String bestDish = dishCount.entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey)
+                .orElse("Sin datos");
 
-        if (!dishCount.isEmpty()) {
-            mostSoldDish = dishCount.entrySet().stream()
-                    .max(Map.Entry.comparingByValue())
-                    .map(Map.Entry::getKey)
-                    .orElse("Sin datos");
+        int qtyDish = dishCount.getOrDefault(bestDish, 0);
 
-            Integer dishAmount = dishCount.get(mostSoldDish);
+        String bestDrink = drinkCount.entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey)
+                .orElse("Sin datos");
 
-            if (dishAmount != null) {
-                totalAmountDish = dishAmount;
-            }
-        }
+        int qtyDrink = drinkCount.getOrDefault(bestDrink, 0);
 
-        String mostSoldDrink = "Sin datos";
-        int totalAmountDrink = 0;
-
-        if (!drinkCount.isEmpty()) {
-            mostSoldDrink = drinkCount.entrySet().stream()
-                    .max(Map.Entry.comparingByValue())
-                    .map(Map.Entry::getKey)
-                    .orElse("Sin datos");
-
-            Integer drinkAmount = drinkCount.get(mostSoldDrink);
-
-            if (drinkAmount != null) {
-                totalAmountDrink = drinkAmount;
-            }
-        }
-
-        salesReport.updateCards(mostSoldDish, mostSoldDrink, totalAmountDish, totalAmountDrink);
+        return new ReportSummaryDTO(bestDish, qtyDish, bestDrink, qtyDrink);
     }
 
 }
