@@ -58,4 +58,8 @@ public abstract class Dish {
 
     public abstract TypeFood getTypeDish();
 
+    public String getTypeDishValue() {
+        return getTypeDish() != null ? getTypeDish().getValue() : "";
+    }
+
 }

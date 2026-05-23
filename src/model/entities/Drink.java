@@ -58,4 +58,8 @@ public abstract class Drink {
 
     public abstract TypeFood getTypeDrink();
 
+    public String getTypeDrinkValue() {
+        return getTypeDrink() != null ? getTypeDrink().getValue() : "";
+    }
+
 }
