@@ -105,7 +105,12 @@ public class ControllerSalesReport implements Observer {
     }
 
     private void export() {
+        try {
+            List<SaleDetailsDTO> listSales = daoSaleDetail.getAllData();
 
+        } catch (Exception e) {
+
+        }
     }
 
     private void loadData(List<SaleDetailsDTO> list) {
