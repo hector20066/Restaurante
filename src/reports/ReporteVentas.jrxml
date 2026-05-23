@@ -31,7 +31,7 @@
 			<text><![CDATA[Reporte de Ventas]]></text>
 		</element>
 		<element kind="frame" uuid="83f5e806-cc04-4161-87a9-07633f604bc1" mode="Opaque" x="-20" y="0" width="822" height="65" forecolor="#006699" backcolor="#006699">
-			<element kind="staticText" uuid="f5cd9ee0-5caa-4e48-8946-c7e84d82a845" x="231" y="0" width="578" height="65" fontName="SansSerif" fontSize="54.0" bold="false" hTextAlign="Right" style="Title">
+			<element kind="staticText" uuid="f5cd9ee0-5caa-4e48-8946-c7e84d82a845" x="231" y="0" width="578" height="65" fontName="SansSerif" fontSize="50.0" bold="false" hTextAlign="Right" style="Title">
 				<text><![CDATA[La Casa Del Sabor]]></text>
 			</element>
 		</element>
@@ -60,7 +60,7 @@
 			<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0"/>
 		</element>
 		<element kind="image" uuid="211b569b-3081-4669-87af-e977bf4c642f" x="540" y="110" width="240" height="160" onErrorType="Icon">
-			<expression><![CDATA["view/image/foodDashboard.png"]]></expression>
+			<expression><![CDATA["image/foodDashboard.png"]]></expression>
 		</element>
 	</title>
 	<pageHeader splitType="Stretch"/>
