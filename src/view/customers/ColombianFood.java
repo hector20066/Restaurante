@@ -241,14 +241,14 @@ public class ColombianFood extends javax.swing.JPanel {
         btn_registerSale.setFont(new java.awt.Font("SansSerif", 1, 15)); // NOI18N
         btn_registerSale.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        jLabel19.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
+        jLabel19.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(33, 37, 41));
-        jLabel19.setText("Total de la compra:");
+        jLabel19.setText("Total de la compra:$");
 
         txt_totalSale.setEditable(false);
         txt_totalSale.setBackground(new java.awt.Color(255, 255, 255));
-        txt_totalSale.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        txt_totalSale.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 180, 216)));
+        txt_totalSale.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        txt_totalSale.setBorder(null);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -308,21 +308,24 @@ public class ColombianFood extends javax.swing.JPanel {
                                                 .addComponent(jLabel10)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(txt_descriptionDish, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE))))
-                                    .addComponent(jLabel2)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel8)
-                                            .addComponent(jLabel13)
-                                            .addComponent(jLabel18)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(6, 6, 6)
-                                                .addComponent(jLabel14))))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel19)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txt_totalSale, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
-                                        .addGap(665, 665, 665))))
+                                        .addComponent(txt_totalSale, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(6, 6, 6)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel8)
+                                                    .addComponent(jLabel13)
+                                                    .addComponent(jLabel18)
+                                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addGap(6, 6, 6)
+                                                        .addComponent(jLabel14)))))
+                                        .addGap(0, 0, Short.MAX_VALUE))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(342, 342, 342)
                                 .addComponent(btn_registerSale, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)

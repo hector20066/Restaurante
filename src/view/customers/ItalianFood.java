@@ -242,13 +242,14 @@ public class ItalianFood extends javax.swing.JPanel {
         btn_registerSale.setFont(new java.awt.Font("SansSerif", 1, 15)); // NOI18N
         btn_registerSale.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        jLabel19.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(33, 37, 41));
-        jLabel19.setText("Total de la compra:");
+        jLabel19.setText("Total de la compra:$");
 
         txt_totalSale.setEditable(false);
         txt_totalSale.setBackground(new java.awt.Color(255, 255, 255));
-        txt_totalSale.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        txt_totalSale.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 180, 216)));
+        txt_totalSale.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        txt_totalSale.setBorder(null);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -317,6 +318,21 @@ public class ItalianFood extends javax.swing.JPanel {
                         .addGap(16, 16, 16)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel19)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txt_totalSale, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel8)
+                                            .addComponent(jLabel13)
+                                            .addComponent(jLabel18))))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(24, 24, 24)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel9)
@@ -335,20 +351,8 @@ public class ItalianFood extends javax.swing.JPanel {
                                         .addGap(72, 72, 72)
                                         .addComponent(jLabel10)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txt_descriptionDish, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE))))
-                            .addComponent(jLabel2)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel18)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel19)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_totalSale, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
-                                .addGap(672, 672, 672)))
-                        .addGap(21, 21, 21)))
+                                        .addComponent(txt_descriptionDish, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)))
+                                .addGap(21, 21, 21)))))
                 .addGap(42, 42, 42))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)

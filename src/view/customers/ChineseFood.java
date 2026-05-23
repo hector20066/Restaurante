@@ -241,14 +241,14 @@ public class ChineseFood extends javax.swing.JPanel {
         btn_registerSale.setFont(new java.awt.Font("SansSerif", 1, 15)); // NOI18N
         btn_registerSale.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        jLabel19.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
+        jLabel19.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(33, 37, 41));
-        jLabel19.setText("Total de la compra:");
+        jLabel19.setText("Total de la compra:$");
 
         txt_totalSale.setEditable(false);
         txt_totalSale.setBackground(new java.awt.Color(255, 255, 255));
-        txt_totalSale.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        txt_totalSale.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 180, 216)));
+        txt_totalSale.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        txt_totalSale.setBorder(null);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -326,8 +326,7 @@ public class ChineseFood extends javax.swing.JPanel {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel19)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txt_totalSale)
-                                        .addGap(48, 48, 48)))
+                                        .addComponent(txt_totalSale, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(646, 646, 646)))))
                 .addGap(34, 34, 34))
             .addGroup(jPanel1Layout.createSequentialGroup()
