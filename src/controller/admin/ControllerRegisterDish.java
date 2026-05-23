@@ -123,7 +123,8 @@ public class ControllerRegisterDish {
     }
 
     private void runSwingUtilities(String typeDish) {
-        JOptionPane.showMessageDialog(registerDish, "Se ha registrado el plato " + typeDish + " correctamente.", "", JOptionPane.INFORMATION_MESSAGE);
+        String action = isModify() ? "modificado" : "registrado";
+        JOptionPane.showMessageDialog(registerDish, "Se ha " + action + " el plato " + typeDish + " correctamente.", "", JOptionPane.INFORMATION_MESSAGE);
         registerDish.getTxt_name().setText("");
         registerDish.getTxt_description().setText("");
         registerDish.getTxt_price().setText("");

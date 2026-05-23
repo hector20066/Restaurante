@@ -286,10 +286,10 @@ public class ControllerViewLogs implements Observer {
         registerDish.getTxt_description().setText(description);
         registerDish.getBtn_register().setText("MODIFICAR PLATO");
 
-        if (type.equals("Colombiano")) {
+        if (type.equals("Colombiana")) {
             registerDish.getCbo_typeDish().setSelectedIndex(0);
         } else {
-            if (type.equals("Italiano")) {
+            if (type.equals("Italiana")) {
                 registerDish.getCbo_typeDish().setSelectedIndex(1);
             } else {
                 registerDish.getCbo_typeDish().setSelectedIndex(2);
