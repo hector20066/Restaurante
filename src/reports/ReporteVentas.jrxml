@@ -60,7 +60,7 @@
 			<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0"/>
 		</element>
 		<element kind="image" uuid="211b569b-3081-4669-87af-e977bf4c642f" x="540" y="110" width="240" height="160" onErrorType="Icon">
-			<expression><![CDATA["image/foodDashboard.png"]]></expression>
+			<expression><![CDATA["view/image/foodDashboard.png"]]></expression>
 		</element>
 	</title>
 	<pageHeader splitType="Stretch"/>
