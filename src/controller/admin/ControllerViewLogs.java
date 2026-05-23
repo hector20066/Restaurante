@@ -7,6 +7,9 @@ import model.dao.interfaces.DAORestaurantDb;
 import model.entities.Dish;
 import model.entities.Drink;
 import model.enums.TypeFood;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 import observer.Observer;
 import observer.Subject;
 import view.administrators.RegisterDish;
@@ -23,7 +26,10 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
@@ -101,6 +107,8 @@ public class ControllerViewLogs implements Observer {
         viewLogs.setControllerDeleteDrink(e -> deleteDrink());
         viewLogs.setControllerModifyDish(e -> modifyDish());
         viewLogs.setControllerModifyDrink(e -> modifyDrink());
+        viewLogs.setControllerExportDishes(e -> exportDishes());
+        viewLogs.setControllerExportDrinks(e -> exportDrinks());
     }
 
     private void addDocumentSearchDish() {
@@ -305,6 +313,43 @@ public class ControllerViewLogs implements Observer {
         } else {
             JOptionPane.showMessageDialog(viewLogs, "Por favor seleccione la bebida a modificar", "", JOptionPane.WARNING_MESSAGE);
         }
+    }
+
+    private void exportDishes() {
+        try {
+            List<Dish> listDishes = daoDish.getData();
+            String compileReport = "/reports/PlatosDisponibles.jrxml";
+            String path = System.getProperty("user.home") + File.separator + "Descargas" + File.separator + "PlatosDisponibles.pdf";
+
+            export(listDishes, compileReport, path);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(viewLogs, "Ha ocurrido un error al exportar el reporte.", null, JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void exportDrinks() {
+        try {
+            List<Drink> listDrinks = daoDrink.getData();
+            String compileReport = "/reports/BebidasDisponibles.jrxml";
+            String path = System.getProperty("user.home") + File.separator + "Descargas" + File.separator + "BebidasDisponibles.pdf";
+
+            export(listDrinks, compileReport, path);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(viewLogs, "Ha ocurrido un error al exportar el reporte.", null, JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private <T> void export(List<T> list, String compileReport, String path) throws Exception {
+        JasperReport report = JasperCompileManager.compileReport(getClass().getResourceAsStream(compileReport));
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(list);
+        Map<String, Object> parameters = new HashMap<>();
+
+        JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, dataSource);
+        JasperViewer viewer = new JasperViewer(jasperPrint, false);
+        viewer.setVisible(true);
+
+        JasperExportManager.exportReportToPdfFile(jasperPrint, path);
+        JOptionPane.showMessageDialog(viewLogs, "Se ha exportado el reporte completo de ventas.\nUbicacion: " + path, null, JOptionPane.INFORMATION_MESSAGE);
     }
 
     private boolean verifySelectedRows(JTable table) {
