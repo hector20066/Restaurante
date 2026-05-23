@@ -52,6 +52,7 @@ public class RegisterDish extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(33, 37, 41));
         jLabel3.setText("Tipo de plato");
 
+        cbo_typeDish.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         cbo_typeDish.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Colombiano", "Italiano", "Chino" }));
 
         jLabel4.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
@@ -59,6 +60,7 @@ public class RegisterDish extends javax.swing.JPanel {
         jLabel4.setText("Nombre del plato:");
 
         txt_name.setBackground(new java.awt.Color(255, 255, 255));
+        txt_name.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         txt_name.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 180, 216)));
 
         jLabel5.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
@@ -66,6 +68,7 @@ public class RegisterDish extends javax.swing.JPanel {
         jLabel5.setText("Precio:");
 
         txt_price.setBackground(new java.awt.Color(255, 255, 255));
+        txt_price.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         txt_price.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 180, 216)));
 
         jLabel6.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
@@ -73,6 +76,7 @@ public class RegisterDish extends javax.swing.JPanel {
         jLabel6.setText("Descripcion:");
 
         txt_description.setBackground(new java.awt.Color(255, 255, 255));
+        txt_description.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         txt_description.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 180, 216)));
 
         btn_register.setBackground(new java.awt.Color(100, 181, 246));
@@ -157,7 +161,7 @@ public class RegisterDish extends javax.swing.JPanel {
                     .addComponent(txt_description, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(68, 68, 68)
                 .addComponent(btn_register, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(208, Short.MAX_VALUE))
+                .addContainerGap(203, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

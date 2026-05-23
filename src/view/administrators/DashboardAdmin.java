@@ -36,7 +36,7 @@ public class DashboardAdmin extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("Z003", 3, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("SansSerif", 3, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(21, 101, 192));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("La Casa Del Sabor");

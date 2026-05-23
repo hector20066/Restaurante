@@ -98,6 +98,7 @@ public class ChineseFood extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(33, 37, 41));
         jLabel2.setText("Por favor ingrese toda la informacion solicitada");
 
+        jtbl_order.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jtbl_order.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -120,6 +121,7 @@ public class ChineseFood extends javax.swing.JPanel {
         jLabel4.setText("Nombre:");
 
         txt_customerName.setBackground(new java.awt.Color(255, 255, 255));
+        txt_customerName.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         txt_customerName.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 180, 216)));
 
         jLabel5.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
@@ -127,6 +129,7 @@ public class ChineseFood extends javax.swing.JPanel {
         jLabel5.setText("Cedula:");
 
         txt_customerId.setBackground(new java.awt.Color(255, 255, 255));
+        txt_customerId.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         txt_customerId.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 180, 216)));
 
         jLabel6.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
@@ -134,6 +137,7 @@ public class ChineseFood extends javax.swing.JPanel {
         jLabel6.setText("Direccion:");
 
         txt_customerAddress.setBackground(new java.awt.Color(255, 255, 255));
+        txt_customerAddress.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         txt_customerAddress.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 180, 216)));
 
         jLabel7.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
@@ -141,6 +145,7 @@ public class ChineseFood extends javax.swing.JPanel {
         jLabel7.setText("Correo:");
 
         txt_customerEmail.setBackground(new java.awt.Color(255, 255, 255));
+        txt_customerEmail.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         txt_customerEmail.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 180, 216)));
 
         jSeparator1.setBackground(new java.awt.Color(153, 153, 153));
@@ -154,6 +159,7 @@ public class ChineseFood extends javax.swing.JPanel {
         jLabel9.setForeground(new java.awt.Color(33, 37, 41));
         jLabel9.setText("Plato:");
 
+        cbo_dish.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         cbo_dish.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione el plato" }));
 
         jLabel10.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
@@ -162,6 +168,7 @@ public class ChineseFood extends javax.swing.JPanel {
 
         txt_descriptionDish.setEditable(false);
         txt_descriptionDish.setBackground(new java.awt.Color(255, 255, 255));
+        txt_descriptionDish.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         txt_descriptionDish.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 180, 216)));
 
         jLabel11.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
@@ -169,6 +176,7 @@ public class ChineseFood extends javax.swing.JPanel {
         jLabel11.setText("Cantidad:");
 
         txt_amountDish.setBackground(new java.awt.Color(255, 255, 255));
+        txt_amountDish.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         txt_amountDish.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 180, 216)));
 
         jLabel12.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
@@ -177,6 +185,7 @@ public class ChineseFood extends javax.swing.JPanel {
 
         txt_priceDish.setEditable(false);
         txt_priceDish.setBackground(new java.awt.Color(255, 255, 255));
+        txt_priceDish.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         txt_priceDish.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 180, 216)));
 
         jLabel13.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
@@ -187,6 +196,7 @@ public class ChineseFood extends javax.swing.JPanel {
         jLabel14.setForeground(new java.awt.Color(33, 37, 41));
         jLabel14.setText("Bebida:");
 
+        cbo_drink.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         cbo_drink.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione la bebida" }));
 
         jLabel15.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
@@ -195,6 +205,7 @@ public class ChineseFood extends javax.swing.JPanel {
 
         txt_descriptionDrink.setEditable(false);
         txt_descriptionDrink.setBackground(new java.awt.Color(255, 255, 255));
+        txt_descriptionDrink.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         txt_descriptionDrink.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 180, 216)));
 
         jLabel16.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
@@ -202,6 +213,7 @@ public class ChineseFood extends javax.swing.JPanel {
         jLabel16.setText("Cantidad:");
 
         txt_amountDrink.setBackground(new java.awt.Color(255, 255, 255));
+        txt_amountDrink.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         txt_amountDrink.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 180, 216)));
 
         jLabel17.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
@@ -210,12 +222,13 @@ public class ChineseFood extends javax.swing.JPanel {
 
         txt_priceDrink.setEditable(false);
         txt_priceDrink.setBackground(new java.awt.Color(255, 255, 255));
+        txt_priceDrink.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         txt_priceDrink.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 180, 216)));
 
         btn_addOrder.setBackground(new java.awt.Color(100, 181, 246));
         btn_addOrder.setForeground(new java.awt.Color(10, 17, 40));
         btn_addOrder.setText("AGREGAR AL PEDIDO");
-        btn_addOrder.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        btn_addOrder.setFont(new java.awt.Font("SansSerif", 1, 15)); // NOI18N
         btn_addOrder.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         jLabel18.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
@@ -225,7 +238,7 @@ public class ChineseFood extends javax.swing.JPanel {
         btn_registerSale.setBackground(new java.awt.Color(100, 181, 246));
         btn_registerSale.setForeground(new java.awt.Color(10, 17, 40));
         btn_registerSale.setText("REALIZAR COMPRA");
-        btn_registerSale.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        btn_registerSale.setFont(new java.awt.Font("SansSerif", 1, 15)); // NOI18N
         btn_registerSale.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         jLabel19.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
@@ -234,6 +247,7 @@ public class ChineseFood extends javax.swing.JPanel {
 
         txt_totalSale.setEditable(false);
         txt_totalSale.setBackground(new java.awt.Color(255, 255, 255));
+        txt_totalSale.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         txt_totalSale.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 180, 216)));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

@@ -111,6 +111,7 @@ public class RatingsPanel extends javax.swing.JPanel {
         btn_qualificationDish.setBackground(new java.awt.Color(100, 181, 246));
         btn_qualificationDish.setForeground(new java.awt.Color(10, 17, 40));
         btn_qualificationDish.setText("CALIFICAR");
+        btn_qualificationDish.setFont(new java.awt.Font("SansSerif", 1, 15)); // NOI18N
         btn_qualificationDish.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         jLabel8.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
@@ -196,7 +197,7 @@ public class RatingsPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
                 .addComponent(btn_qualificationDish, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         jtbp_content.addTab("Calificar Platos", jPanel1);
@@ -246,6 +247,7 @@ public class RatingsPanel extends javax.swing.JPanel {
         btn_qualificationDrink.setBackground(new java.awt.Color(100, 181, 246));
         btn_qualificationDrink.setForeground(new java.awt.Color(10, 17, 40));
         btn_qualificationDrink.setText("CALIFICAR");
+        btn_qualificationDrink.setFont(new java.awt.Font("SansSerif", 1, 15)); // NOI18N
         btn_qualificationDrink.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -322,7 +324,7 @@ public class RatingsPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
                 .addComponent(btn_qualificationDrink, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);

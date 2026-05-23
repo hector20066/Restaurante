@@ -81,6 +81,7 @@ public class SalesReport extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        jtbl_salesReport.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jtbl_salesReport.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},

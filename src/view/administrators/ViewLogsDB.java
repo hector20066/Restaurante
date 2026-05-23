@@ -96,6 +96,7 @@ public class ViewLogsDB extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jtbl_dishes.setBackground(new java.awt.Color(255, 255, 255));
+        jtbl_dishes.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jtbl_dishes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -118,6 +119,7 @@ public class ViewLogsDB extends javax.swing.JPanel {
         jLabel3.setText("Bebidas registradas:");
 
         jtbl_drinks.setBackground(new java.awt.Color(255, 255, 255));
+        jtbl_drinks.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jtbl_drinks.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},

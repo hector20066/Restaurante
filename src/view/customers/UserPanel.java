@@ -99,7 +99,7 @@ public class UserPanel extends javax.swing.JFrame {
         btn_colombianFood.setText("  COMIDA COLOMBIANA");
         btn_colombianFood.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
 
-        jlb_subtitle.setFont(new java.awt.Font("Liberation Sans", 1, 16)); // NOI18N
+        jlb_subtitle.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
         jlb_subtitle.setForeground(new java.awt.Color(0, 119, 182));
         jlb_subtitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlb_subtitle.setText("Realizar Compras");
