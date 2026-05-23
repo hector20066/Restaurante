@@ -323,7 +323,6 @@ public class ControllerViewLogs implements Observer {
 
             export(listDishes, compileReport, path);
         } catch (Exception e) {
-            e.printStackTrace();
             JOptionPane.showMessageDialog(viewLogs, "Ha ocurrido un error al exportar el reporte.", null, JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -336,7 +335,6 @@ public class ControllerViewLogs implements Observer {
 
             export(listDrinks, compileReport, path);
         } catch (Exception e) {
-            e.printStackTrace();
             JOptionPane.showMessageDialog(viewLogs, "Ha ocurrido un error al exportar el reporte.", null, JOptionPane.ERROR_MESSAGE);
         }
     }
