@@ -1,12 +1,15 @@
 package view.administrators;
 
-import view.swing.ButtonAction;
-import view.swing.WinButton;
-
-import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
+import view.swing.ButtonAction;
+import view.swing.WinButton;
 
 /**
  *
