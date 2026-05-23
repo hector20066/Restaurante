@@ -13,52 +13,54 @@
 		</conditionalStyle>
 	</style>
 	<dataset name="PieChartDataset" uuid="21b70311-b650-4678-a39c-887917366bf0"/>
+	<parameter name="bestSellingDish" class="java.lang.String"/>
+	<parameter name="quantityDishes" class="java.lang.Integer"/>
+	<parameter name="bestSellingDrink" class="java.lang.String"/>
+	<parameter name="quantityDrinks" class="java.lang.Integer"/>
 	<query language="sql"><![CDATA[]]></query>
-	<field name="bestSellingDish" class="java.lang.String"/>
-	<field name="quantityDishes" class="java.lang.Integer"/>
 	<field name="numSale" class="java.lang.Integer"/>
 	<field name="customer" class="java.lang.String"/>
 	<field name="dish" class="java.lang.String"/>
 	<field name="amountDish" class="java.lang.Integer"/>
 	<field name="drink" class="java.lang.String"/>
 	<field name="amountDrink" class="java.lang.Integer"/>
-	<field name="date" class="java.util.Date"/>
-	<field name="totalSale" class="java.math.BigDecimal"/>
+	<field name="date" class="java.time.LocalDate"/>
+	<field name="totalSale" class="java.lang.Float"/>
 	<title height="280" splitType="Stretch">
-		<element kind="staticText" uuid="0dae0af3-dd1d-4b42-b346-386af21f0689" x="336" y="65" width="449" height="29" fontSize="22.0" bold="false" hTextAlign="Right" style="SubTitle">
+		<element kind="staticText" uuid="0dae0af3-dd1d-4b42-b346-386af21f0689" x="336" y="65" width="449" height="29" fontName="SansSerif" fontSize="22.0" bold="false" hTextAlign="Right" style="SubTitle">
 			<text><![CDATA[Reporte de Ventas]]></text>
 		</element>
 		<element kind="frame" uuid="83f5e806-cc04-4161-87a9-07633f604bc1" mode="Opaque" x="-20" y="0" width="822" height="65" forecolor="#006699" backcolor="#006699">
-			<element kind="staticText" uuid="f5cd9ee0-5caa-4e48-8946-c7e84d82a845" x="231" y="0" width="578" height="65" fontSize="54.0" bold="false" hTextAlign="Right" style="Title">
+			<element kind="staticText" uuid="f5cd9ee0-5caa-4e48-8946-c7e84d82a845" x="231" y="0" width="578" height="65" fontName="SansSerif" fontSize="54.0" bold="false" hTextAlign="Right" style="Title">
 				<text><![CDATA[La Casa Del Sabor]]></text>
 			</element>
 		</element>
 		<element kind="frame" uuid="37b379ec-c168-4b6b-8832-699686e3b029" mode="Opaque" x="20" y="120" width="230" height="130" forecolor="#C77DFF" backcolor="#C77DFF">
-			<element kind="staticText" uuid="f7427ae1-048f-4bb5-8092-6ba37194a250" x="10" y="10" width="181" height="22" forecolor="#FFFFFF" fontSize="16.0" bold="true" vTextAlign="Middle">
+			<element kind="staticText" uuid="f7427ae1-048f-4bb5-8092-6ba37194a250" x="10" y="10" width="210" height="30" forecolor="#FFFFFF" fontSize="19.0" bold="true" vTextAlign="Middle">
 				<text><![CDATA[Plato Mas Vendido]]></text>
 			</element>
-			<element kind="textField" uuid="6788dd76-7fb2-4a72-bb33-c8c89bc613de" x="10" y="80" width="160" height="30" forecolor="#FFFFFF" fontSize="14.0" vTextAlign="Middle">
-				<expression><![CDATA[$F{quantityDishes}]]></expression>
+			<element kind="textField" uuid="3b028eeb-df17-4d9d-ace9-6d24e45a2b38" x="10" y="50" width="210" height="30" forecolor="#FFFFFF" fontSize="15.0" bold="true" vTextAlign="Middle">
+				<expression><![CDATA[$P{bestSellingDish}]]></expression>
 			</element>
-			<element kind="textField" uuid="928c2a51-be75-4acf-a291-80a2bc8b2ff1" x="10" y="40" width="210" height="30" forecolor="#FFFFFF" fontSize="14.0" vTextAlign="Middle">
-				<expression><![CDATA[$F{bestSellingDish}]]></expression>
+			<element kind="textField" uuid="7f469130-caa4-42f8-8653-918432df7d51" x="10" y="90" width="210" height="30" forecolor="#FFFFFF" fontSize="14.0">
+				<expression><![CDATA[$P{quantityDishes}]]></expression>
 			</element>
 			<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0"/>
 		</element>
 		<element kind="frame" uuid="b7624a47-1954-4629-9995-dfb1bbc2c335" mode="Opaque" x="280" y="120" width="230" height="130" forecolor="#42A5F5" backcolor="#42A5F5">
-			<element kind="staticText" uuid="6e0a02d9-5697-42bc-8d9d-feec6847a37f" x="10" y="10" width="141" height="22" forecolor="#FFFFFF" fontSize="16.0" bold="true" vTextAlign="Middle">
-				<text><![CDATA[Plato Mas Vendido]]></text>
+			<element kind="staticText" uuid="6e0a02d9-5697-42bc-8d9d-feec6847a37f" x="10" y="10" width="210" height="30" forecolor="#FFFFFF" fontSize="19.0" bold="true" vTextAlign="Middle">
+				<text><![CDATA[Bebida mas Vendida]]></text>
 			</element>
-			<element kind="textField" uuid="aecacafc-c6a9-4b2f-954a-5c3c386bc35e" x="10" y="80" width="160" height="30" forecolor="#FFFFFF" fontSize="14.0" vTextAlign="Middle">
-				<expression><![CDATA[$F{quantityDishes}]]></expression>
+			<element kind="textField" uuid="01fa5e33-76c7-43aa-8a9c-644e2374affb" x="10" y="50" width="210" height="30" forecolor="#FFFFFF" fontSize="15.0" bold="true" vTextAlign="Middle">
+				<expression><![CDATA[$P{bestSellingDrink}]]></expression>
 			</element>
-			<element kind="textField" uuid="9b45914b-e891-426b-8eb5-5d1e049bce50" x="10" y="40" width="210" height="30" forecolor="#FFFFFF" fontSize="14.0" vTextAlign="Middle">
-				<expression><![CDATA[$F{bestSellingDish}]]></expression>
+			<element kind="textField" uuid="b90c92b1-c386-4956-b75a-06b09dda45ff" x="10" y="90" width="210" height="30" forecolor="#FFFFFF" fontSize="14.0">
+				<expression><![CDATA[$P{quantityDrinks}]]></expression>
 			</element>
 			<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0"/>
 		</element>
 		<element kind="image" uuid="211b569b-3081-4669-87af-e977bf4c642f" x="540" y="110" width="240" height="160" onErrorType="Icon">
-			<expression><![CDATA["image/foodDashboard.png"]]></expression>
+			<expression><![CDATA["view/image/foodDashboard.png"]]></expression>
 		</element>
 	</title>
 	<pageHeader splitType="Stretch"/>
@@ -137,13 +139,13 @@
 	</columnFooter>
 	<pageFooter height="16" splitType="Stretch">
 		<element kind="frame" uuid="6f4fe8ef-88ca-4d5d-b46a-054826bb7893" mode="Opaque" x="-10" y="0" width="819" height="16" forecolor="#D0B48E" backcolor="#006699">
-			<element kind="textField" uuid="970781d6-87a0-4d3d-a07b-5ae173a1317a" x="753" y="0" width="40" height="16" forecolor="#FFFFFF" fontName="Arial" fontSize="12.0" evaluationTime="Report" bold="false" vTextAlign="Middle" style="Column header">
+			<element kind="textField" uuid="970781d6-87a0-4d3d-a07b-5ae173a1317a" x="753" y="0" width="40" height="16" forecolor="#FFFFFF" fontName="SansSerif" fontSize="12.0" evaluationTime="Report" bold="false" vTextAlign="Middle" style="Column header">
 				<expression><![CDATA[" " + $V{PAGE_NUMBER}]]></expression>
 			</element>
-			<element kind="textField" uuid="42664b34-c87b-42f8-911b-bd9c2ab9111e" x="673" y="0" width="80" height="16" forecolor="#FFFFFF" fontName="Arial" fontSize="12.0" bold="false" hTextAlign="Right" vTextAlign="Middle" style="Column header">
+			<element kind="textField" uuid="42664b34-c87b-42f8-911b-bd9c2ab9111e" x="673" y="0" width="80" height="16" forecolor="#FFFFFF" fontName="SansSerif" fontSize="12.0" bold="false" hTextAlign="Right" vTextAlign="Middle" style="Column header">
 				<expression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></expression>
 			</element>
-			<element kind="textField" uuid="06b3d6e8-b4a5-4251-b1fb-f640689933e8" x="2" y="0" width="197" height="16" forecolor="#FFFFFF" fontName="Arial" fontSize="12.0" pattern="EEEEE dd MMMMM yyyy" bold="false" vTextAlign="Middle" style="Column header">
+			<element kind="textField" uuid="06b3d6e8-b4a5-4251-b1fb-f640689933e8" x="2" y="0" width="197" height="16" forecolor="#FFFFFF" fontName="SansSerif" fontSize="12.0" pattern="EEEEE dd MMMMM yyyy" bold="false" vTextAlign="Middle" style="Column header">
 				<expression><![CDATA[new java.util.Date()]]></expression>
 			</element>
 		</element>
