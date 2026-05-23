@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model.dao;
 
 import java.time.LocalDate;
@@ -16,8 +12,8 @@ public class SaleDetailsDTO {
     private String customer;
     private String dish;
     private String drink;
-    private int quantityDishesSold;
-    private int quantityDrinksSold;
+    private int amountDish;
+    private int amountDrink;
     private LocalDate date;
     private float totalSale;
 
@@ -57,20 +53,20 @@ public class SaleDetailsDTO {
         this.drink = drink;
     }
 
-    public int getQuantityDishesSold() {
-        return quantityDishesSold;
+    public int getAmountDish() {
+        return amountDish;
     }
 
-    public void setQuantityDishesSold(int quantityDishesSold) {
-        this.quantityDishesSold = quantityDishesSold;
+    public void setAmountDish(int amountDish) {
+        this.amountDish = amountDish;
     }
 
-    public int getQuantityDrinksSold() {
-        return quantityDrinksSold;
+    public int getAmountDrink() {
+        return amountDrink;
     }
 
-    public void setQuantityDrinksSold(int quantityDrinksSold) {
-        this.quantityDrinksSold = quantityDrinksSold;
+    public void setAmountDrink(int amountDrink) {
+        this.amountDrink = amountDrink;
     }
 
     public LocalDate getDate() {

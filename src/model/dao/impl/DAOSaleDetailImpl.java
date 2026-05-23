@@ -138,9 +138,9 @@ public class DAOSaleDetailImpl extends DataBase implements IDAOSalesDetails {
                     sale.setNumSale(rs.getInt("num_venta"));
                     sale.setCustomer(rs.getString("cliente"));
                     sale.setDish(rs.getString("plato"));
-                    sale.setQuantityDishesSold(rs.getInt("cantPlato"));
+                    sale.setAmountDish(rs.getInt("cantPlato"));
                     sale.setDrink(rs.getString("bebida"));
-                    sale.setQuantityDrinksSold(rs.getInt("cantBebida"));
+                    sale.setAmountDrink(rs.getInt("cantBebida"));
                     sale.setDate(rs.getDate("fecha").toLocalDate());
                     sale.setTotalSale(rs.getFloat("total"));
                     list.add(sale);
