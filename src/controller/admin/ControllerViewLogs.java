@@ -319,9 +319,8 @@ public class ControllerViewLogs implements Observer {
         try {
             List<Dish> listDishes = daoDish.getData();
             String compileReport = "/reports/PlatosDisponibles.jrxml";
-            String path = System.getProperty("user.home") + File.separator + "Downloads" + File.separator + "PlatosDisponibles.pdf";
 
-            export(listDishes, compileReport, path);
+            export(listDishes, compileReport);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(viewLogs, "Ha ocurrido un error al exportar el reporte.", null, JOptionPane.ERROR_MESSAGE);
         }
@@ -331,15 +330,14 @@ public class ControllerViewLogs implements Observer {
         try {
             List<Drink> listDrinks = daoDrink.getData();
             String compileReport = "/reports/BebidasDisponibles.jrxml";
-            String path = System.getProperty("user.home") + File.separator + "Downloads" + File.separator + "BebidasDisponibles.pdf";
 
-            export(listDrinks, compileReport, path);
+            export(listDrinks, compileReport);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(viewLogs, "Ha ocurrido un error al exportar el reporte.", null, JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    private <T> void export(List<T> list, String compileReport, String path) throws Exception {
+    private <T> void export(List<T> list, String compileReport) throws Exception {
         JasperReport report = JasperCompileManager.compileReport(getClass().getResourceAsStream(compileReport));
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(list);
         Map<String, Object> parameters = new HashMap<>();
@@ -348,8 +346,7 @@ public class ControllerViewLogs implements Observer {
         JasperViewer viewer = new JasperViewer(jasperPrint, false);
         viewer.setVisible(true);
 
-        JasperExportManager.exportReportToPdfFile(jasperPrint, path);
-        JOptionPane.showMessageDialog(viewLogs, "Se ha exportado el reporte completo de ventas.\nUbicacion: " + path, null, JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(viewLogs, "Se ha exportado el reporte completo de ventas.", null, JOptionPane.INFORMATION_MESSAGE);
     }
 
     private boolean verifySelectedRows(JTable table) {
