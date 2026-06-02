@@ -345,8 +345,6 @@ public class ControllerViewLogs implements Observer {
         JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, dataSource);
         JasperViewer viewer = new JasperViewer(jasperPrint, false);
         viewer.setVisible(true);
-
-        JOptionPane.showMessageDialog(viewLogs, "Se ha exportado el reporte completo de ventas.", null, JOptionPane.INFORMATION_MESSAGE);
     }
 
     private boolean verifySelectedRows(JTable table) {

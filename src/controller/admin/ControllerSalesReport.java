@@ -19,7 +19,6 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -125,8 +124,6 @@ public class ControllerSalesReport implements Observer {
             JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, dataSource);
             JasperViewer viewer = new JasperViewer(jasperPrint, false);
             viewer.setVisible(true);
-
-            JOptionPane.showMessageDialog(salesReport, "Se ha exportado el reporte completo de ventas.", null, JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(salesReport, "Ha ocurrido un error al exportar el reporte.", null, JOptionPane.ERROR_MESSAGE);
         }
