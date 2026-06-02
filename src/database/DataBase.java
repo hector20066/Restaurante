@@ -15,7 +15,7 @@ public class DataBase {
     protected final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     protected final String DB_URL = "jdbc:mysql://localhost:3306/restaurante?serverTimezone=America/Bogota&useSSL=false&allowPublicKeyRetrieval=true";
     private final String user = "root";
-    private final String pass = "272006";
+    private final String pass = "";
     protected Connection connection;
 
     public void connect() {
